@@ -1,0 +1,24 @@
+<div class="inner-content order-view">
+    <div class="block">
+        <div class="inside">
+            <h1><?php echo $this->__('My Tags') ?></h1>
+
+
+<?php if($this->getTags()): ?>
+    <p><?php echo $this->__('Click on a tag to view your corresponding products.') ?></p>
+    <ul class="tags-list">
+        <?php foreach ($this->getTags() as $_tag): ?>
+            <li><a href="<?php echo $this->getUrl('tag/customer/view', array('tagId' => $_tag->getTagId())) ?>"><?php echo $this->htmlEscape($_tag->getName()) ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+<?php else: ?>
+    <p><?php echo $this->__('You have not tagged any products yet.') ?></p>
+<?php endif; ?>
+<div class="buttons-set">
+    <a class="button-link weiter-link fl" href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" title="<?php echo $this->__('Back') ?>"><span><?php echo $this->__('Back') ?></span></a>
+
+</div>
+
+            </div>
+        </div>
+    </div>

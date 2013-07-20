@@ -1,0 +1,440 @@
+
+#feedback-button{
+position: fixed;
+top: 50%;
+right: 0;
+width: 26px;
+height: 135px;
+margin-top: -68px;
+}
+
+#feedback-button a{
+display: block;
+width: 26px;
+height: 135px;
+text-indent: -9000px;
+background: url(../images/feedback-img.png) no-repeat 0 0;
+}
+#feedback-button a:hover{
+background: url(../images/feedback-img.png) no-repeat -30px 0;
+}
+*html #feedback-button{ 
+	position: absolute;
+	top: expression(((document.documentElement.scrollTop || document.body.scrollTop) + ((((document.documentElement.clientHeight || document.body.clientHeight) + (!this.offsetHeight && 0)) / 2) >> 0)) + "px");
+}
+
+
+#feedback-box{
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+margin-top: -151px;
+margin-left: -151px;
+width: 302px;
+height: 302px;
+background: url(../images/feedback-top.png) no-repeat 0 0;
+padding: 5px 0 0 0;
+z-index: 500001;
+}
+*html #feedback-box{ 
+	position: absolute;
+	top: expression(((document.documentElement.scrollTop || document.body.scrollTop) + ((((document.documentElement.clientHeight || document.body.clientHeight) + (!this.offsetHeight && 0)) / 2) >> 0)) + "px");
+}
+
+
+
+.feedback-box-bg{
+padding: 0 0 4px;
+width: 302px;
+height: 291px;
+background: url(../images/feedback-bot.png) no-repeat left bottom;
+}
+.feedback-box-content{
+position: relative;
+width: 300px;
+height: 291px;
+border-left: 1px solid #666;
+border-right: 1px solid #666;
+background: #9a9a9a url(../images/feedback-bg.png) repeat-x 0 0;
+}
+
+.feedback-title{
+width: 320px;
+height: 60px;
+top: 4px;
+left: -21px;
+position: absolute;
+background: url(../images/feedback-title-left.png) no-repeat 0 0
+}
+.feedback-title-r{
+width: 320px;
+height: 60px;
+position: absolute;
+background: url(../images/feedback-title-right.png) no-repeat top right
+}
+.feedback-title-bg{
+width: 287px;
+height: 60px;
+position: absolute;
+margin: 0 8px 0 25px;
+background: url(../images/feedback-title-bg.png) repeat-x
+}
+.feedback-title-text{
+margin: 12px 0 0 -16px;
+display: block;
+width: 223px;
+height: 28px;
+background: url(../images/feedback-img.png) no-repeat -83px 0;
+text-indent: -9000px;
+}
+.fehler-title{
+background: url(../images/feedback-img.png) no-repeat -83px -32px;
+}
+.meinung-title{
+background: url(../images/feedback-img.png) no-repeat -83px -64px;
+}
+
+#close-btn{
+position: absolute; 
+right: 7px; 
+top: 12px;
+display: block;
+width: 18px;
+height: 18px;
+background: url(../images/feedback-img.png) no-repeat -60px 0;
+text-indent: -9000px;
+}
+#close-btn:hover{
+background: url(../images/feedback-img.png) no-repeat -60px -21px;
+}
+
+.feedback-text{
+top: 57px;
+position: relative;
+padding: 0 7px;
+}
+.feedback-text-box{
+color: #333;
+font: 13px/16px 'Trebuchet MS','Nimbus Sans L', Helvetica, sans-serif; 
+padding: 14px 13px 0 24px;
+border: 1px solid #999;
+background: url(../images/feedback-bg.png) repeat-x 0 -335px;
+height: 124px;
+}
+.feedback-link{
+margin: 4px 0 0 0;
+display: block;
+width: 284px;
+height: 40px;
+border: 1px solid #999;
+color: #333;
+text-decoration: none;
+font: 15px/40px 'Trebuchet MS','Nimbus Sans L', Helvetica, sans-serif; 
+background: url(../images/feedback-bg.png) repeat-x 0 -293px;
+}
+.feedback-link span{
+display: block;
+width: 268px;
+height: 40px;
+padding: 0 0 0 11px;
+cursor: pointer;
+background: url(../images/feedback-link-ar.png) no-repeat right 5px;
+}
+.feedback-link:hover span{
+color: #333;
+background: url(../images/feedback-link-ar-h.png) no-repeat right 5px;
+}
+
+
+
+
+/*--PAGES---*/
+.fb{
+font: 12px/14px 'Trebuchet MS','Nimbus Sans L', Helvetica, sans-serif; 
+background: #9e9e9e url(../images/feedback-bg.png) repeat-x 0 -897px;
+min-height: 100%;
+height: auto !important;
+height: 100%;
+color: #333;
+}
+.fb-page{
+width: 620px;
+margin: 0 auto;
+padding: 17px 0 0 0;
+}
+
+.fb-container{
+width: 586px;
+margin: 0 auto;
+position: relative;
+padding: 40px 0 0 0;
+}
+
+.fb-container .feedback-title{
+top: 0;
+width: 620px;
+}
+.fb-container .feedback-title-bg{
+width: 587px;
+}
+
+.fb-container .feedback-title-r{
+width: 620px;
+}
+
+.small-box{
+width: 248px;
+} 
+.feedback-text-box p{
+margin-bottom: 0;
+}
+
+.feedback-text-box .feedback-phone{
+margin: 0 0 18px;
+}
+.feedback-phone span{
+color: #990000;
+font: italic 17px 'Trebuchet MS','Nimbus Sans L', Helvetica, sans-serif; 
+display: block;
+}
+
+.clearfix{
+overflow: hidden;
+zoom:1
+}
+
+.meinung-bg{
+height: 124px;
+padding: 0 90px 0 0;
+background: url(../images/q-bg.png) no-repeat  right 7px;
+}
+
+
+/*----FORM----*/
+.fb-form{
+overflow: hidden;
+margin: 11px 0 0 0;
+padding: 10px 17px 12px;
+height: 197px;
+border: 1px solid #999;
+background: url(../images/feedback-bg.png) repeat-x 0 -643px;
+zoom: 1
+}
+
+
+.fb-form-left{
+width: 342px;
+float: left;
+}
+.fb-form-right{
+width: 196px;
+float: right;
+}
+
+.fb-form-left textarea{
+width: 336px;
+height: 164px;
+border: 1px solid #999;
+padding: 0 0 0 4px;
+background: url(../images/feedback-bg.png) repeat-x 0 -475px;
+}
+.fb-form-right input.fb-txt{
+width: 190px;
+height: 29px;
+padding: 0 0 0 4px;
+border: 1px solid #999;
+margin: 0 0 14px;
+font: 12px/29px 'Trebuchet MS','Nimbus Sans L', Helvetica, sans-serif; 
+}
+.fb-form label{
+display: block;
+font-size: 11px;
+margin: 0 0 6px;
+}
+
+
+.type-file { 
+position: relative;
+height: 31px;
+margin: 0 0 9px;
+}
+.inputFile { 
+position: absolute;
+top: 0;
+left: 0;
+z-index: 2; 
+filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); 
+-moz-opacity: 0;
+-khtml-opacity: 0;
+opacity: 0;
+width: 194px;
+cursor: pointer!important
+}
+.fonTypeFile {
+width: 194px;
+height: 31px;
+background: url(../images/feedback-img.png) no-repeat -316px 0; 
+position: absolute;
+top: 0;
+left: 0;
+z-index: 1;
+cursor: pointer
+}
+.inputFileVal { 
+position: absolute;
+top: 5px;
+left: 5px;
+z-index: 2;
+width: 154px;
+background: none;
+border: none;
+}
+
+.type-file:hover .fonTypeFile, .fonTypeFile-hover{
+background: url(../images/feedback-img.png) no-repeat -316px -36px; 
+}
+
+
+.fb-submit{
+width: 192px;
+height: 40px;
+border: 1px solid #999;
+color: #333;
+font: 15px/40px 'Trebuchet MS';
+background: url(../images/feedback-bg.png) repeat-x 0 -293px;
+}
+.fb-submit input{
+border: none;
+width: 192px;
+height: 40px;
+cursor: pointer;
+text-align: left;
+padding: 0 0 0 25px;
+font-weight: bold;
+background: url(../images/feedback-link-ar.png) no-repeat 144px 5px;
+}
+.fb-submit input:hover, .fb-submit input.fb-submit-hover{
+background: url(../images/feedback-link-ar-h.png) no-repeat 144px 5px;
+}
+
+
+/*---rating---*/
+.rating-box{
+background: url(../images/feedback-bg.png) repeat-x 0 -864px;
+height: 31px;
+margin: 0 0 11px;
+}
+.rating-box div{
+height: 23px;
+padding: 6px 3px 0 9px;
+border-left: 1px solid #cdcdcd;
+border-right: 1px solid #cdcdcd;
+overflow: hidden;
+zoom: 1
+}
+.rating-box p{
+font-size: 13px;
+line-height: 15px;
+}
+
+.rating{ 
+width: 100px; 
+height: 18px; 
+position: relative; 
+background: url(../images/rating.png);
+margin: 0;
+padding: 0;
+} 
+.rating li { 
+list-style: none;
+float: left;
+height: 18px; 
+margin: 0;
+padding: 0;
+} 
+.rating li span { 
+display: block; 
+width: 20px; 
+height: 18px; 
+text-indent: -9999px; 
+position: absolute; 
+text-decoration: none; 
+z-index: 10; 
+cursor: pointer;
+} 
+.rating li span:hover, .rating li span.hover { 
+background: url(../images/rating.png) left bottom; 
+left: 0; 
+z-index: 2; 
+} 
+span.star1 { 
+left: 0; 
+}
+span.star1:hover { 
+width: 20px; 
+} 
+span.star2 { 
+left: 20px; 
+}
+span.star2:hover, .star2-h{ 
+width: 40px!important; 
+} 
+span.star3 { 
+left: 40px; 
+}
+span.star3:hover , .star3-h{ 
+width: 60px!important; 
+} 
+span.star4 { 
+left: 60px; 
+}
+span.star4:hover, .star4-h { 
+width: 80px!important;  
+} 
+span.star5 { 
+left: 80px; 
+}
+span.star5:hover, .star5-h { 
+width: 100px!important;  
+} 
+.rating li.current { 
+background: url(../images/rating.png) left bottom; 
+z-index: 1; 
+} 
+
+
+
+
+#overlay {
+background:#000;
+position: absolute; 
+top: 0; 
+left: 0; 
+z-index: 500000;
+display: none; 
+overflow: hidden;
+}
+
+#popup {
+background: #fff; 
+border: 1px solid #333; 
+display: none; 
+position: absolute; 
+top: 50%; 
+left: 50%;
+z-index: 1000; 
+padding: 0 80px 60px;
+}
+#close{
+display: block;
+width: 23px;
+height: 23px;
+position: absolute;
+top: 10px;
+right: 13px;
+/*background: url(../images/site-graphics.png) no-repeat -900px -321px;*/
+}
+#close:hover{
+/*background: url(../images/site-graphics.png) no-repeat -928px -321px;*/
+}

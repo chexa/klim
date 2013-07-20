@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Jewellery>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Jewellery>
+
+        <Jewellery_Shipping>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Shipping>
+
+        <Jewellery_Cms>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Cms>
+
+        <Jewellery_Checkout>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Checkout>
+
+        <Jewellery_Adminhtml>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Adminhtml>
+        
+        <Jewellery_Customer>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Customer>
+
+        <Jewellery_CatalogSearch>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_CatalogSearch>
+
+        <Jewellery_Catalog>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Catalog>
+
+        <Jewellery_Contacts>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Contacts>
+
+        <Jewellery_Sales>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Sales>
+
+        <Jewellery_Tax>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Tax>
+
+        <Jewellery_Wishlist>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Wishlist>
+
+        <Jewellery_Clickheat>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jewellery_Clickheat>
+    </modules>
+</config>

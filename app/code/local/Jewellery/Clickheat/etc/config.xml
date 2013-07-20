@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Clickheat>
+            <version>0.0.1</version>
+        </Jewellery_Clickheat>
+    </modules>
+
+    <global>
+        <blocks>
+            <jewellery_clickheat>
+                <class>Jewellery_Clickheat_Block</class>
+            </jewellery_clickheat>
+        </blocks>
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <jewellery_clickheat>
+                    <file>jewellery_clickheat.xml</file>
+                </jewellery_clickheat>
+            </updates>
+        </layout>
+
+    </frontend>
+
+</config>

@@ -1,0 +1,15 @@
+<?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="inner-content">
+<div class="block">
+	<div class="inside text-box">
+        <h1><?php echo $this->__('Shopping Cart is Empty') ?></h1>
+        <p><?php echo $this->__('You have no items in your shopping cart.') ?></p>
+        <p><?php echo $this->__('Click <a href="%s">here</a> to continue shopping.', $this->getContinueShoppingUrl()) ?></p>
+    </div>
+</div>
+</div>
+    <script>
+    //<![CDATA[
+        $j("#content").addClass("inner-page");
+    //]]>
+    </script>

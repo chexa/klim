@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+      <AuIt_Ppager>
+        <active>true</active>
+        <codePool>community</codePool>
+      </AuIt_Ppager>
+    </modules>
+</config>

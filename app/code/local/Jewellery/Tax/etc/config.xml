@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Tax>
+            <version>0.0.1</version>
+        </Jewellery_Tax>
+    </modules>
+
+
+    <global>
+        <blocks>
+            <jewellery_tax>
+                <class>Jewellery_Tax_Block</class>
+            </jewellery_tax>
+        </blocks>
+    </global>
+
+</config>

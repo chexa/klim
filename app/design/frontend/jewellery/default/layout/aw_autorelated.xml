@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>aw_autorelated/css/category.css</stylesheet>
+            </action>    
+            <action method="addCss">
+                <stylesheet>aw_autorelated/css/product.css</stylesheet>
+            </action>  
+            <action method="addItem" ifconfig="sales/msrp/enabled">
+                <type>skin_js</type>
+                <name>js/msrp.js</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" template="catalog/msrp/popup.phtml" name="product.tooltip"></block>
+        </reference>
+    </default>
+    <catalog_category_default>
+        <reference name="content">
+            <block type="awautorelated/blocks" name="awarp.content.top.category" before="-" />
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="content">
+            <block type="awautorelated/blocks" name="awarp.content.top.category" before="-" />
+        </reference>
+    </catalog_category_layered>
+    <catalog_product_view>
+        <reference name="content">
+            <block type="awautorelated/blocks" name="awarp.content.top.product" before="-" />
+        </reference>
+        <!--<reference name="product.info">-->
+            <!--<block type="awautorelated/blocks" name="awarp.content.inside.product" as="additional" before="-"/>-->
+        <!--</reference>-->
+        <reference name="right">
+            <block type="awautorelated/blocks" name="awarp.content.instead.native" before="-">
+                <remove name="catalog.product.related" />
+                <block type="catalog/product_list_related" name="catalog-product-related" template="catalog/product/list/related.phtml"/>
+            </block>
+            <block type="core/template" name="awarp.content.native.block" before="-" template="aw_autorelated/blocks/product/native.phtml">
+                <block type="catalog/product_list_related" name="catalog-product-related" template="catalog/product/list/related.phtml"/>
+            </block>
+            <block type="awautorelated/blocks" name="awarp.content.under.native" after="awarp.content.instead.native"/>
+        </reference>
+    </catalog_product_view>
+</layout>

@@ -1,0 +1,9 @@
+<ul class="product-type">
+    <li<?php if ($this->getSelectedFilterValue() == 'all') : ?> class="current"<?php endif; ?>><a href="<?php echo $this->getFilterUrl(); ?>" id="alle"><?php echo $this->__('All'); ?></a></li>
+
+    <?php foreach ($this->getMaterialFilter() as $item) : ?>
+        <li<?php if ($this->getSelectedFilterValue() == $item['value']) : ?> class="current"<?php endif; ?>><a href="<?php echo $this->getFilterUrl($item['value']); ?>" id="<?php echo strtolower($item['label']); ?>"><?php echo $item['label']; ?></a></li>
+    <?php endforeach; ?>
+</ul>
+
+<?php // http://www.magentocommerce.com/wiki/5_-_modules_and_development/reference/geturl_function_parameters ; ?>

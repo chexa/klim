@@ -1,0 +1,54 @@
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+
+    $columns = array(
+        array(
+            'material' => '',
+            'kettenmuster' => '',
+            'motiv' => '',
+            'bearbeitungsart' => '',
+            'breite_mm' => 'mm',
+            'laenge_cm' => 'cm',
+            'hoehe_mm' => 'mm',
+            'durchmesser_mm' => 'mm',
+            'ansatzband_bandendbreite_mm' => 'mm',
+            'ansatzband_anstossbreite_mm' => 'mm',
+            'armreifen_innenmass_breite_mm' => 'mm',
+            'armreifen_innenmass_hoehe_mm' => 'mm',
+            'muenzfassung_innenmass_mm' => 'mm',
+            'muenzfassung_innenmass_hoehe_mm' => 'mm',
+            'ringweite' => '',
+            'staerke_mm' => 'mm',
+            'draht_mm' => '1/100 mm',
+            'form' => '',
+        ),
+        array(
+            'besatz' => '',
+            'diamant_anzahl' => '',
+            'besatz_mass_eins_mm' => 'mm',
+            'besatz_mass_zwei_mm' => 'mm',
+            'diamant_gewicht_ct' => 'ct',
+            'diamant_qualitaet' => '',
+            'fassungsart' => '',
+            'verschluss_art' => '',
+            'verschluss_legierung' => '',
+        ),
+    );
+
+?>
+<?php if($_additional = $this->getAdditionalData()): ?>
+<div class="prod-detail">
+    <?php foreach ($columns as $column) : ?>
+    <dl>
+        <?php foreach ($column as $attrCode => $attrPostfix) : ?>
+            <?php if (isset($_additional[$attrCode])) : ?>
+                <?php $data = $_additional[$attrCode]; ?>
+                <dt><?php echo $this->htmlEscape($this->__($data['label'])) ?>:</dt>
+                <dd><?php echo $data['value']; ?> <?php echo $attrPostfix; ?></dd>
+            <?php endif; ?>
+        <?php endforeach; ?>
+	</dl>
+    <?php endforeach; ?>
+</div>
+<?php endif;?>

@@ -1,0 +1,75 @@
+<!--@subject Anfrage über www.standard-schmuck.de@-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"var data.name":"Sender Name",
+"var data.email":"Sender Email",
+"var data.telephone":"Sender Telephone",
+"var data.comment":"Comment"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+  <div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+    <table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+      <tr>
+        <td align="center" valign="top" style="padding:20px 0 20px 0">
+          <!-- [ header starts here] -->
+          <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+            <tr>
+                <td>
+                  <table  width="100%">
+                    <tr>
+                      <td valign="top" width="70%"><a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/></a></td>
+                      <td valign="top"  width="30%">
+                        <p><strong>E-Mail:</strong> 
+                          <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a>
+                        <br />
+                          <strong>Telefon:</strong> {{config path='general/store_information/phone'}}
+                        </p>
+                     {{customVar code=office_hours}}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <!-- [ middle starts here] -->
+            <tr>
+              <td valign="top">
+                <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">Liebes Max Fröhlich Team,</p>
+                <p style="font-size:12px; line-height:16px; margin:0 0 16px 0;">über www.standard-schmuck.de wurde eine Anfrage gestellt. Bitte bearbeiten Sie diese!</p>
+                <div style="border:1px solid #E0E0E0; padding:15px; background:#F9F9F9;">
+                  <h1>Anfrage:</h1>
+                  <table>
+                   <tr>
+                    <td>Name: </td>
+                    <td>{{var data.name}}</td>
+                   </tr>
+                   <tr>
+                    <td>E-Mail: </td>
+                    <td>{{var data.email}}</td>
+                   </tr>
+                   <tr>
+                    <td>Telefon: </td>
+                    <td>{{var data.telephone}}</td>
+                   </tr>
+                   <tr>
+                    <td>Nachricht: </td>
+                    <td>{{var data.comment}}</td>
+                   </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;">
+                <center><p style="font-size:12px; margin:0;">Vielen Dank!</p></center>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>

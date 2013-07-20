@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Customer>
+            <version>0.0.1</version>
+        </Jewellery_Customer>
+    </modules>
+    
+	<default>
+    </default>
+	
+    <global>
+
+        <models>
+            <customer>
+                <rewrite>
+                    <address_abstract>Jewellery_Customer_Model_Address_Abstract</address_abstract>
+                </rewrite>
+            </customer>
+        </models>
+    </global>
+
+</config>

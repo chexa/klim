@@ -1,0 +1,103 @@
+<?php
+/**
+ * Product:     Advanced Permissions
+ * Package:     Aitoc_Aitpermissions_2.2.4_2.0.3_90233
+ * Purchase ID: xFF945pgbyDre0fKeBvM8FAv6R2a0C65GbaW0cwEpD
+ * Generated:   2011-07-05 15:42:56
+ * File path:   app/design/adminhtml/default/default/template/aitpermissions/catalog_category_tree.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<script type="text/javascript">
+
+categoryMoveUrl        = '<?php echo $this->getMoveUrl() ?>';
+categoryMoveUrlPattern = '<?php echo $this->getMoveUrlPattern() ?>';
+
+categoryMove = function(obj)
+{
+    var data = {id: obj.dropNode.id, form_key: FORM_KEY};
+
+    data.point = obj.point;
+    switch (obj.point) {
+        case 'above' :
+            data.pid = obj.target.parentNode.id;
+            data.paid = obj.dropNode.parentNode.id;
+            if (obj.target.previousSibling) {
+                data.aid = obj.target.previousSibling.id;
+            } else {
+                data.aid = 0;
+            }
+            break;
+        case 'below' :
+            data.pid = obj.target.parentNode.id;
+            data.aid = obj.target.id;
+        break;
+        case 'append' :
+            data.pid = obj.target.id;
+            data.paid = obj.dropNode.parentNode.id;
+            if (obj.target.lastChild) {
+                data.aid = obj.target.lastChild.id;
+            } else {
+                data.aid = 0;
+            }
+        break;
+        default :
+            obj.cancel = true;
+            return obj;
+    }
+
+    var success = function(o) {
+        try {
+            if(o.responseText){
+                if(o.responseText==='SUCCESS'){
+                    categoryForm.refreshPath();
+                } else {
+                    alert(o.responseText);
+                    location.reload();
+                }
+            }
+        }
+        catch(e) {
+        }
+    };
+
+    var failure = function(o) {
+        try {
+            console.log(o.statusText);
+        } catch (e2) {
+            alert(o.statusText);
+        }
+        location.reload();
+    };
+
+    var pd = [];
+    for(var key in data) {
+        pd.push(encodeURIComponent(key), "=", encodeURIComponent(data[key]), "&");
+    }
+    pd.splice(pd.length-1,1);
+    /**
+     * START AITOC CHANGES COMPARING TO ORIGINAL VERSION
+     */
+    new Ajax.Request(categoryMoveUrl,
+    /**
+     * FINISH AITOC CHANGES COMPARING TO ORIGINAL VERSION
+     */
+        {
+            method:     'POST',
+            parameters: pd.join(""),
+            onSuccess : success,
+            onFailure : failure
+        }
+    );
+}
+
+Event.observe(document, 'dom:loaded', function()
+{
+    $('store_switcher').observe('change', function(event)
+    {
+        categoryMoveUrl = categoryMoveUrlPattern.replace(':store', this.value);
+    });
+});
+
+
+</script>

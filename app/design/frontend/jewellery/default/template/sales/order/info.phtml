@@ -1,0 +1,53 @@
+<?php  $_order = $this->getOrder() ?>
+
+<div class="inner-content order-view">
+    <div class="block">
+        <div class="inside">
+
+            <h1><?php echo $this->__('Order #%s', $_order->getRealOrderId()) ?></h1>
+
+            <p>
+                <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+                    <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+                    <span class="separator">|</span>
+                <?php endif ?>
+                <a href="<?php echo $this->getPrintUrl($_order) ?>" class="link-print" target="_blank"><?php echo $this->__('Print Order') ?></a>
+            </p>
+
+            <p class="order-date"><?php echo $this->__('Order Date: %s', $this->formatDate($_order->getCreatedAtStoreDate(), 'long')) ?></p>
+
+            <?php if (!$_order->getIsVirtual()): ?>
+                <div class="info-block fl">
+                    <h4><?php echo $this->__('Shipping Address') ?></h4>
+
+                    <address><?php echo $_order->getShippingAddress()->format('html') ?></address>
+                </div>
+
+                <div class="info-block fr">
+                    <h4><?php echo $this->__('Shipping Method') ?></h4>
+
+                    <?php if ($_order->getShippingDescription()): ?>
+                        <?php echo $_order->getShippingDescription() ?>
+                    <?php else: ?>
+                        <p><?php echo $this->helper('sales')->__('No shipping information available'); ?></p>
+                    <?php endif; ?>
+                </div>
+
+                 <br class="clear" />
+            <?php endif; ?>
+
+
+            <div class="info-block fl">
+                <h4><?php echo $this->__('Billing Address') ?></h4>
+
+                <address><?php echo $_order->getBillingAddress()->format('html') ?></address>
+            </div>
+
+            <div class="info-block fr">
+                <h4><?php echo $this->__('Payment Method') ?></h4>
+
+                <?php echo $this->getPaymentInfoHtml() ?>
+            </div>
+
+             <br class="clear" />
+

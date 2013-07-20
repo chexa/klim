@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<layout version="0.0.1">
+    <default>
+        <reference name="head">
+            <action method="addJs"><script>../clickheat/js/clickheat.js</script></action>
+        </reference>
+
+    </default>
+    <cms_page translate="label">
+        <reference name="footer">
+            <block type="jewellery_clickheat/clickheat" name="clickheat">
+                <action method="setClickheatSite"><site>standard-schmuck.de</site></action>
+                <action method="setClickheatGroup"><group>CMS-Seite</group></action>
+            </block>
+        </reference>
+    </cms_page>
+
+    <catalog_product_view translate="label">
+        <reference name="footer">
+            <block type="jewellery_clickheat/clickheat" name="clickheat">
+                <action method="setClickheatSite"><site>standard-schmuck.de</site></action>
+                <action method="setClickheatGroup"><group>Produkt-Detailansicht</group></action>
+            </block>
+        </reference>
+    </catalog_product_view>
+
+    <catalogsearch_result_index>
+        <reference name="footer">
+            <block type="jewellery_clickheat/clickheat" name="clickheat">
+                <action method="setClickheatSite"><site>standard-schmuck.de</site></action>
+                <action method="setClickheatGroup"><group>Produktsuche</group></action>
+            </block>
+        </reference>
+    </catalogsearch_result_index>
+
+    <customer_account_index>
+        <reference name="footer">
+            <block type="jewellery_clickheat/clickheat" name="clickheat">
+                <action method="setClickheatSite"><site>standard-schmuck.de</site></action>
+                <action method="setClickheatGroup"><group>Mein-Konto</group></action>
+            </block>
+        </reference>
+    </customer_account_index>
+
+    <checkout_cart_index>
+        <reference name="footer">
+            <block type="jewellery_clickheat/clickheat" name="clickheat">
+                <action method="setClickheatSite"><site>standard-schmuck.de</site></action>
+                <action method="setClickheatGroup"><group>Warenkorb</group></action>
+            </block>
+        </reference>
+
+    </checkout_cart_index>
+
+    <checkout_onepage_index>
+        <reference name="footer">
+            <block type="jewellery_clickheat/clickheat" name="clickheat">
+                <action method="setClickheatSite"><site>standard-schmuck.de</site></action>
+                <action method="setClickheatGroup"><group>Kasse</group></action>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+
+    <checkout_onepage_success>
+        <reference name="footer">
+            <block type="jewellery_clickheat/clickheat" name="clickheat">
+                <action method="setClickheatSite"><site>standard-schmuck.de</site></action>
+                <action method="setClickheatGroup"><group>Bestellbestaetigung</group></action>
+            </block>
+        </reference>
+    </checkout_onepage_success>
+
+    <wishlist_index_index>
+        <reference name="footer">
+            <block type="jewellery_clickheat/clickheat" name="clickheat">
+                <action method="setClickheatSite"><site>standard-schmuck.de</site></action>
+                <action method="setClickheatGroup"><group>Wunschliste</group></action>
+            </block>
+        </reference>
+    </wishlist_index_index>
+
+    <catalog_category_default>
+        <reference name="footer">
+            <block type="jewellery_clickheat/clickheat" name="clickheat">
+                <action method="setClickheatSite"><site>standard-schmuck.de</site></action>
+                <action method="setClickheatGroup"><group>Kategorie-Uebersicht</group></action>
+            </block>
+        </reference>
+    </catalog_category_default>
+
+
+</layout>

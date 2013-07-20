@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Catalog>
+            <version>0.0.1</version>
+        </Jewellery_Catalog>
+    </modules>
+
+    <global>
+        <events>
+            <catalog_product_is_salable_after>
+                <observers>
+                    <jewellery_catalog_model_observer>
+                        <type>singleton</type>
+                        <class>Jewellery_Catalog_Model_Observer</class>
+                        <method>catalog_product_is_salable_after</method>
+                    </jewellery_catalog_model_observer>
+                </observers>
+            </catalog_product_is_salable_after>
+
+            <catalog_product_save_before>
+                <observers>
+                    <jewellery_catalog_model_observer>
+                        <type>singleton</type>
+                        <class>Jewellery_Catalog_Model_Observer</class>
+                        <method>catalog_product_save_before</method>
+                    </jewellery_catalog_model_observer>
+                 </observers>
+            </catalog_product_save_before>
+
+        </events>
+
+        <helpers>
+            <jewellery_catalog>
+                <class>Jewellery_Catalog_Helper</class>
+            </jewellery_catalog>
+
+            <catalog>
+                <rewrite>
+                    <product>Jewellery_Catalog_Helper_Product</product>
+                </rewrite>
+            </catalog>
+        </helpers>
+
+        <models>
+            <catalog>
+                <rewrite>
+                    <product>Jewellery_Catalog_Model_Product</product>
+                    <product_type_configurable>Jewellery_Catalog_Model_Product_Type_Configurable</product_type_configurable>
+					<product_attribute_backend_media>Jewellery_Catalog_Model_Product_Attribute_Backend_Media</product_attribute_backend_media>
+                </rewrite>
+            </catalog>
+        </models>
+
+        <blocks>
+            <jewellery_catalog>
+                <class>Jewellery_Catalog_Block</class>
+            </jewellery_catalog>
+        </blocks>
+
+    </global>
+</config>

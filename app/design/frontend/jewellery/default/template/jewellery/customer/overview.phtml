@@ -1,0 +1,83 @@
+<?php
+    $customer = $this->getCustomer();
+    //$addresses = $customer->getAddresses();
+    //$address = $addresses[0];
+    $address = $customer->getAddress();
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="block">
+	<div class="inside">
+		<h1 class="title-h3"><?php echo $this->__('Complete registration'); ?></h1>
+		<div class="reg-box fl">
+			<div class="info-block">
+				<form action="<?php echo Mage::helper('jewellery')->getOverviewPostUrl(); ?>" method="post" id="register_overview_form">
+					<span class="title-h4"><?php echo $this->__('Please check your entries'); ?></span>
+					<table class="overview-table">
+						<tr class="odd">
+							<td class="bold"><?php echo $this->__('Company'); ?></td>
+							<td class="bold"><?php echo $this->htmlEscape($address->getCompany()); ?></td>
+						</tr>
+						<tr class="even">
+							<td class="bold"><?php echo $this->__('Address'); ?></td>
+							<td>
+								<ul>
+									<li><?php echo $this->htmlEscape($address->getData('street')); ?></li>
+									<li><?php echo $this->htmlEscape($address->getStreetAdditional()); ?></li>
+									<li><?php echo $this->htmlEscape($address->getPostcode()); ?> <?php echo $this->htmlEscape($address->getCity()); ?></li>
+									<li><?php echo $this->htmlEscape($address->getRegion()); ?></li>
+                                    <li><?php echo Mage::getModel('directory/country')->load($address->getCountry())->getName(); ?></li>
+								</ul>
+							</td>
+						</tr>
+						<tr class="odd">
+							<td class="bold"><?php echo $this->__('Contact'); ?></td>
+							<td><?php echo $this->htmlEscape($customer->getName()); ?></td>
+						</tr>
+						<tr class="even">
+							<td class="bold"><?php echo $this->__('E-Mail'); ?></td>
+							<td><a href="#"><?php echo $this->htmlEscape($customer->getEmail()); ?></a></td>
+						</tr>
+						<tr class="odd">
+							<td class="bold"><?php echo $this->__('Telephone'); ?></td>
+							<td><?php echo $this->htmlEscape($address->getTelephone()); ?></td>
+						</tr>
+						<tr class="even">
+							<td class="bold"><?php echo $this->__('License'); ?></td>
+							<td>
+                            <?php if ($this->getLicenseFilename()) : ?>
+                                <?php echo $this->htmlEscape($this->getLicenseFilename()); ?>
+                            <?php else : ?>
+                                <span><?php echo $this->__('I will send my license by fax. Fax number: %s', '+49 (0)201 234 154'); ?></span>
+                            <?php endif; ?>
+                            </td>
+						</tr>
+						<tr class="odd">
+							<td class="bold"><?php echo $this->__('Your Message'); ?></td>
+							<td><?php echo $this->htmlEscape($customer->getCustomerMessage()); ?></td>
+						</tr>
+					</table>
+					<p class="checkbox-row"><input type="checkbox" id="req1"/><span>Ich stimme der <a href="/ueber-uns/datenschutz/" target="_blank">Datenschutzerklärung</a> zu.</span></p>
+					<p class="checkbox-row"><input type="checkbox" id="req2"/><span>Ich stimme den <a href="/ueber-uns/agb/" target="_blank">Allgemeinen Geschäftsbedingungen</a> zu.</span></p>
+					<a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="link-prev2 fl"><?php echo $this->__('Change Data'); ?></a>
+					<div class="weiter-btn fr"><input type="submit" value="" id="register-overview-submit"/><?php echo $this->__('Complete registration'); ?><span></span></div>
+				</form>
+			</div>
+		</div>
+
+        <div class="firm-box fr">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('register_right_col')->toHtml() ?>
+        </div>
+	</div>
+</div>
+
+<script type="text/javascript">//<![CDATA[
+    $j("#content").addClass("register-page").addClass("reg-steps");
+
+        $j("#register-overview-submit").click(function(){
+            if (!$j("a#req1").hasClass("checked") || !$j("a#req2").hasClass("checked")) {
+                alert('<?php echo $this->__('Please agree with Terms and Conditions') ?>');
+                return false;
+            }
+            return true;
+        });
+//]]></script>

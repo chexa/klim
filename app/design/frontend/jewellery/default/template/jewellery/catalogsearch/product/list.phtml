@@ -1,0 +1,68 @@
+<?php
+$_productCollection=$this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+
+$isLoggedIn = Mage::helper('customer')->isLoggedIn();
+
+?>
+
+<div class="section-title">
+    <h1><span><?php echo $this->__('Jewelry Search') ?></span></h1>
+</div>
+
+<div class="top-cat-title">
+    <h2><?php echo $this->__("Search results for '%s'", $this->helper('catalogsearch')->getEscapedQueryText()) ?></h2>
+</div>
+
+<div class="inner-content subcategory">
+
+    <?php //echo $this->getToolbarHtml() ?>
+
+    <?php if(!$_productCollection->count()): ?>
+        <div class="block">
+            <div class="inside text-box">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('no_search_results')->toHtml(); ?>
+            </div>
+        </div>
+        <?php else: ?>
+
+
+
+        <?php // Grid Mode ?>
+
+        <?php $_collectionSize = $_productCollection->count() ?>
+        <?php //$_columnCount = $this->getColumnCount(); ?>
+        <?php $_columnCount = 4; ?>
+
+        <ul class="prod-items">
+            <?php foreach ($_productCollection as $_product): ?>
+                <?php echo $this->getLayout()->createBlock('jewellery_catalog/product_single')
+                            ->setTemplate('catalog/product/list_single.phtml')
+                            ->setProduct($_product)
+                            ->toHtml();
+                ?>
+            <?php endforeach ?>
+        </ul>
+
+
+        <?php endif; // End collection count ?>
+
+    <?php if($_productCollection->count()): ?>
+        <div class="page-nav">
+            <?php
+            // manually get the toolbar block so we can do the page navigation
+            $toolbar = $this->getToolbarBlock();
+            $toolbar->setCollection($_productCollection);
+            //$toolbar->setCustomShowAmounts(false);
+            if($toolbar->getCollection()->getSize() > 0) {
+                echo $toolbar->getPagerHtml();
+            }
+            ?>
+        </div>
+        <?php endif; ?>
+
+</div> <!-- end of inner-content block -->
+
+
+
+<script>$j("#content").addClass("inner-page");</script>

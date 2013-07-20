@@ -1,0 +1,186 @@
+<?php
+    /** @var $_currentProduct Mage_Catalog_Model_Product */
+    $_currentProduct = $this->getProduct();
+
+    $tableFormat = $_currentProduct->getAttributeText('price_table_format');
+
+    $_helper = $this->helper('catalog/output');
+   // echo get_class($this); die;
+    $_products = $this->getChildProducts();
+    $_attributes = $this->getConfigurableAttributes();
+?>
+
+<?php if (count($_products)) : ?>
+
+<table class="product-table <?php echo $tableFormat; ?>" id="pricetable">
+    <thead>
+        <tr>
+            <td class="config-parameter"><?php echo $this->__('Quality'); ?></td>
+
+
+            <?php if ($tableFormat == 'medaille_creole') : ?>
+                <td class="config-parameter"><?php echo $this->__('Design'); ?></td>
+            <?php endif; ?>
+
+            <?php if (in_array($tableFormat, array('kette'))) : ?>
+                <td class="config-parameter"><?php echo $this->__('Length'); ?></td>
+            <?php endif; ?>
+
+            <?php if ($tableFormat == 'ring') : ?>
+                <td class="config-parameter"><?php echo $this->__('Ring width'); ?></td>
+            <?php endif; ?>
+
+            <?php if ($tableFormat == 'ansatzband') : ?>
+                <td class="config-parameter"><?php echo $this->__('Bandwidth'); ?></td>
+                <td class="config-parameter"><?php echo $this->__('Of width'); ?></td>
+                <?php /* ?><td class="config-parameter"><?php echo $this->__('Strip form'); ?></td><?php */ ?>
+            <?php endif; ?>
+
+            <?php if ($tableFormat == 'muenzfassung') : ?>
+                <td class="config-parameter"><?php echo $this->__('Dimension'); ?></td>
+            <?php endif; ?>
+
+            <?php if ($tableFormat == 'sternzeichen') : ?>
+                <td class="config-parameter"><?php echo $this->__('Sign'); ?></td>
+            <?php endif; ?>
+
+            <?php if ($tableFormat == 'buchstabe') : ?>
+                <td class="config-parameter"><?php echo $this->__('Character'); ?></td>
+            <?php endif; ?>
+
+            <?php if ($tableFormat == 'armreifen') : ?>
+                <td class="config-parameter"><?php echo $this->__('Width'); ?></td>
+            <?php endif; ?>
+
+            <?php if ($tableFormat == 'farbsteinband') : ?>
+                <td class="config-parameter"><?php echo $this->__('Trimming'); ?></td>
+            <?php endif; ?>
+
+
+            <td><?php echo $this->__('Weight'); ?></td>
+            <td class="sku"><?php echo $this->__('Child Sku'); ?></td>
+            <td class="uvp"><?php echo $this->__('Price per Unit'); ?></td>
+            <td class="price"><?php echo $this->__('Child Price'); ?></td>
+            <td class="vpe"><?php echo $this->__('Unit'); ?></td>
+            <td class="availability"><?php echo $this->__('Availability'); ?></td>
+            <td class="quantity"><?php echo $this->__('Quantity'); ?></td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php $odd = 0; ?>
+        <?php /** @var $_product Mage_Core_Model_Product */ ?>
+        <?php foreach ($_products as $_product) : ?>
+            <?php
+                $invData = Mage::helper('jewellery_catalog')->getInventoryData($_product);
+             ?>
+
+            <tr class="<?php echo ($odd++ % 2 === 0) ? 'odd' : 'even' ?>">
+
+                <?php
+                    $attrMaterial = $tmpMaterial = $_helper->productAttribute($_product, $_product->getMaterial(), 'material');
+                    $attrMaterial = ($attrMaterial) ? strtolower($attrMaterial) : '';
+                ?>
+
+                <td class="config-parameter <?php echo $attrMaterial; ?>"><?php
+                    // print either legierung or material
+                    $cellValue = $_product->getAttributeText('legierung');
+                    if (!$cellValue) $cellValue = $tmpMaterial; //$_product->getAttributeText('material');
+                    echo $cellValue;
+                ?></td>
+
+
+                <?php if ($tableFormat == 'medaille_creole') : ?>
+                    <td class="config-parameter"><?php
+                        $cellValue = array();
+                        $cellValue[] = $_product->getAttributeText('breite_mm'); //$_helper->productAttribute($_product, $_product->getBreiteMm(), 'breite_mm');
+                        $cellValue[] = $_product->getAttributeText('hoehe_mm'); //$_helper->productAttribute($_product, $_product->getHoeheMm(), 'hoehe_mm');
+                        $cellValue[] = $_product->getAttributeText('durchmesser_mm'); //$_helper->productAttribute($_product, $_product->getDurchmesserMm(), 'durchmesser_mm');
+
+                        echo implode(' x ', array_diff($cellValue, array(''))) . ' mm';
+                    ?></td>
+                <?php endif; ?>
+
+                <?php if (in_array($tableFormat, array('kette'))) : ?>
+                    <td class="config-parameter"><?php echo $_product->getAttributeText('laenge_cm'); //$_helper->productAttribute($_product, $_product->getLaengeCm(), 'laenge_cm'); // $_helper->productAttribute($_product, $_product->getLaengeCm(), 'laenge_cm') ?> cm</td>
+                <?php endif; ?>
+
+                <?php if ($tableFormat == 'ring') : ?>
+                    <td><?php echo $_product->getAttributeText('ringweite'); ?></td>
+                <?php endif; ?>
+
+                <?php if ($tableFormat == 'ansatzband') : ?>
+                    <td class="config-parameter"><?php echo $_product->getAttributeText('ansatzband_bandendbreite_mm'); //$_helper->productAttribute($_product, $_product->getAnsatzbandBandendbreiteMm(), 'ansatzband_bandendbreite_mm'); ?> mm</td>
+                    <td class="config-parameter"><?php echo $_helper->productAttribute($_product, $_product->getAnsatzbandAnstossbreiteMm(), 'ansatzband_anstossbreite_mm'); ?> mm</td>
+                    <?php /* ?><td class="config-parameter"><?php echo $_helper->productAttribute($_product, $_product->getForm(), 'form'); ?></td><?php */ ?>
+                <?php endif; ?>
+
+                <?php if ($tableFormat == 'muenzfassung') : ?>
+                    <td class="config-parameter"><?php echo $_product->getAttributeText('muenzfassung_innenmass_mm'); ?> mm / <?php echo $_helper->productAttribute($_product, $_product->getMuenzfassungInnenmassHoeheMm(), 'muenzfassung_innenmass_hoehe_mm'); ?> mm</td>
+                <?php endif; ?>
+
+                <?php if ($tableFormat == 'sternzeichen') : ?>
+                    <td class="config-parameter"><?php echo $_product->getAttributeText('motiv'); //$_helper->productAttribute($_product, $_product->getMotiv(), 'motiv'); ?></td>
+                <?php endif; ?>
+
+                <?php if ($tableFormat == 'buchstabe') : ?>
+                    <td class="config-parameter"><?php echo $_product->getAttributeText('buchstabenanhaenger'); // $_helper->productAttribute($_product, $_product->getBuchstabenanhaenger(), 'buchstabenanhaenger'); ?></td>
+                <?php endif; ?>
+
+                <?php if ($tableFormat == 'armreifen') : ?>
+                    <td class="config-parameter"><?php echo $_product->getAttributeText('breite_mm'); //$_helper->productAttribute($_product, $_product->getBreiteMm(), 'breite_mm'); ?> mm</td>
+                <?php endif; ?>
+
+                <?php if ($tableFormat == 'farbsteinband') : ?>
+                    <td class="whitespace-normal"><?php echo $_product->getAttributeText('besatz') ?></td>
+                <?php endif; ?>
+
+
+                <td class="config-parameter">
+                <?php if ($weight = $_helper->productAttribute($_product, $_product->getWeight(), 'weight')) : ?>
+                    <span><?php echo $this->formatDecimal($weight, 1) ?> g</span>
+                <?php else : ?>
+                    <span>-</span>
+                <?php endif; ?>
+                </td>
+
+                <td class="sku"><?php echo $_helper->productAttribute($_product, $_product->getSku(), 'sku') ?></td>
+                <td class="uvp"><?php echo $this->formatDecimal($_helper->productAttribute($_product, $_product->getUnverbindlichePreisempfehlung(), 'unverbindliche_preisempfehlung')) ?> &#8364;</td>
+
+                <?php if ($_currentProduct->isSaleable()) : ?>
+
+                    <td class="price"><?php echo $this->formatDecimal($_helper->productAttribute($_product, $_product->getPrice(), 'price')) ?> &#8364;</td>
+                    <td class="vpe"><?php echo $_helper->productAttribute($_product, $_product->getVerpackungseinheitVe(), 'verpackungseinheit_ve') ?></td>
+                    <td class="availability">
+                      <p><?php if ($invData['qty'] > 5) { echo "&gt; 5"; } else {echo $this->formatDecimal($invData['qty'],0);} ?></p>
+                      <span class="lager <?php echo $invData['status']; ?>" title="<?php echo $this->__($invData['status']); ?>"></span>
+                    </td>
+
+                <td class="quantity">
+                                           
+                        <span class="qty-minus" onClick="javascript:del('qty-<?php echo $_product->getId(); ?>')"></span>
+                        <input size="1" value="0"  name="qty[<?php echo $_product->getId(); ?>]" id="qty-<?php echo $_product->getId(); ?>" class="product-qty" />
+                        <span class="qty-plus" onClick="javascript:add('qty-<?php echo $_product->getId(); ?>')"></span>
+                        <?php foreach ($_attributes as $_a) : ?>
+                            <?php $_aFunc = 'get' . ucfirst($_a['code']); ?>
+                            <input class="super-attribute super-attribute-<?php echo $_product->getId(); ?>"  type="hidden" name="super_attribute[<?php echo $_product->getId(); ?>][<?php echo $_a['id']; ?>]" value="<?php echo $_product->$_aFunc(); ?>" id="attribute-<?php echo $_product->getId(); ?>-<?php echo $_a['id']; ?>"/>
+                        <?php endforeach; ?>
+                    </td>
+
+                <?php else : ?>
+
+                    <?php if ($odd == 1) : ?>
+                        <td class="info-for-nologin" rowspan="<?php echo count($_products); ?>" colspan="4">
+                            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_table_not_logged_in')->toHtml() ?>
+                        </td>
+                    <?php endif; ?>
+
+                <?php endif; ?>
+
+
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?php endif; ?>

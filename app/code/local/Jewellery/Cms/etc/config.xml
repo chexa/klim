@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Cms>
+            <version>0.0.1</version>
+        </Jewellery_Cms>
+    </modules>
+
+    <default>
+        <web>
+            <default>
+                <cms_home_page_auth>home</cms_home_page_auth>
+            </default>
+        </web>
+    </default>
+
+    <global>
+        <helpers>
+            <cms>
+                <rewrite>
+                    <page>Jewellery_Cms_Helper_Page</page>
+                </rewrite>
+            </cms>
+        </helpers>
+
+        <!-- rewrite controller -->
+        <!--<rewrite>-->
+            <!--<jewellery_cms_index>-->
+                <!--<from><![CDATA[#^/#]]></from>-->
+                <!--<to>/jewellery/cms_index/</to>-->
+            <!--</jewellery_cms_index>-->
+        <!--</rewrite>-->
+
+        <routers>
+            <cms>
+                <rewrite>
+                    <index>
+                        <to>Jewellery_Cms/index</to>
+                        <override_actions>true</override_actions>
+                        <actions>
+                            <index><to>Jewellery_Cms/index/index</to></index>
+                        </actions>
+                    </index>
+                </rewrite>
+            </cms>
+        </routers>
+
+        <page>
+            <layouts>
+                <cms_two_columns_left module="page" translate="label">
+                    <label>CMS page with left bar</label>
+                    <template>page/cms-2columns-left.phtml</template>
+                    <layout_handle>page_cms_two_columns_left</layout_handle>
+                </cms_two_columns_left>
+            </layouts>
+        </page>
+    </global>
+
+    <frontend>
+        <routers>
+            <jewellery_cms>
+                <use>standard</use>
+                <args>
+                    <module>Jewellery_Cms</module>
+                    <frontName>jewellery_cms</frontName>
+                </args>
+            </jewellery_cms>
+        </routers>
+
+        <layout>
+            <updates>
+                <jewellery_cms>
+                    <file>jewellery_cms.xml</file>
+                </jewellery_cms>
+            </updates>
+        </layout>
+
+    </frontend>
+
+</config>

@@ -1,0 +1,32 @@
+"All Store Views","Alle Winkel Weergaven"
+Root,Root
+Delete,Verwijderen
+"Are you sure?","Bent u zeker?"
+"Change status","Status wijzigen"
+Status,Status
+"Update attributes","Attributen Updaten"
+Website,Website
+"Advanced Permissions","Geavanceerde Toestemmingen"
+"Advanced Permissions Tab","Geavanceerde Toestemmingen Tabblad"
+"Display All Products","Toon Alle Producten"
+"If set to ""No"", user will see only products from categories assigned to him.","Indien ingesteld op ""Nee"", gebruiker ziet alleen de producten van de categorieen aan hem toegewezen."
+"Show All Customers","Toon Alle Klanten"
+"If set to ""No"" user with restricted permissions can view customers from the website of the allowed store only.","Indien ingesteld op ""Nee"" gebruiker met beperkte toestemmingen kunnen alleen klanten bekijken via de website van de toegestane winkel."
+"Allow Deletion (Store-view restriction)","Verwijderen Toelaten (Winkel-overzicht beperking)"
+"If set to ""Yes"" user with restricted permissions per Store-view can delete products, product images and categories.","Indien ingesteld op ""Ja"" gebruiker met beperkte toestemmingen op winkel-overzicht kan producten, productafbeeldingen en categorieen verwijderen."
+"Allow Deletion (Website restriction)","Verwijderen Toelaten (Website beperking)"
+"If set to ""Yes"" user with restricted permissions per Website can delete products, product images and categories.","Indien ingesteld op ""Ja"" gebruiker met beperkte toestemmingen op Website kan producten, productafbeeldingen en categorieen verwijderen."
+"Sorry, you have no permissions to delete this product. For more details please contact site administrator.","Sorry, maar u hebt geen toestemmingen om dit product te verwijderen. Voor meer informatie kunt u contact opnemen met de sitebeheerder."
+"Please, select allowed categories for the following stores: %s","Alsjeblieft, selecteer toegestaan ??categorie?n voor de volgende winkels: %s"
+"Sorry, you have no permissions to edit this product. For more details please contact site administrator.","Sorry, maar u hebt geen toestemmingen om dit product te bewerken. Voor meer informatie kunt u contact opnemen met de sitebeheerder."
+"Review could not be deleted due to insufficent permissions.","Review kon niet worden verwijderd vanwege onvoldoende toestemmingen."
+"Some review(s) could not be deleted due to insufficent permissions.","Sommige recensie(s) konden niet worden verwijderd vanwege onvoldoende toestemmingen."
+Disabled,Uitgeschakeld
+"Limit Access to Store Views/Categories","Beperk de toegang tot het Winkel Overzicht/Categorieen"
+"Limit Access to Websites","Beperk de toegang tot de Websites"
+"No store-views or websites are chosen for the Role. If you proceed the advanced permissions settings will be disabled for the Role. Are you sure?","Geen winkel-overzichten of websites zijn gekozen voor de Role. Als u doorgaat, dan worden de geavanceerde toestemmingen instellingen uitgeschakeld voor de Role. Bent u zeker?"
+"Please, assign at least one category for each checked store.","Alsjeblieft, wijs toe ten minste een categorie voor elke gecontroleerde winkel."
+"Store View","Winkel Overzicht"
+"Collapse All","Alles Inklappen"
+"Expand All","Alles Uitklappen"
+"ctrl+click to select multiple websites","ctrl+klik om meerdere websites te selecteren"

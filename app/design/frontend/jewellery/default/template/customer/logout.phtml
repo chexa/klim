@@ -1,0 +1,12 @@
+<div class="block">
+    <div class="inside text-box">
+        <h1><?php echo Mage::helper('customer')->__('You are now logged out') ?></h1>
+        <p><?php echo Mage::helper('customer')->__('You have logged out and will be redirected to our homepage in 5 seconds.') ?></p>
+    </div>
+</div>
+
+<script>
+    //<![CDATA[
+    setTimeout(function(){ location.href = '<?php echo $this->getUrl() ?>'},5000);
+    //]]>
+</script>

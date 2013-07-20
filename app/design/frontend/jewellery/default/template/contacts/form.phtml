@@ -1,0 +1,26 @@
+<div id="messages_product_view"><?php echo Mage::app()->getLayout()->getMessagesBlock()->setMessages(Mage::getSingleton('customer/session')->getMessages(true)); ?></div>
+<div class="info-block">
+    <h4><?php echo Mage::helper('contacts')->__('Contact Us') ?></h4>
+
+    <form action="<?php echo Mage::getUrl('contacts/index/post'); ?>" id="contactForm" method="post">
+        <input type="hidden" name="cms_identifier" value="<?php echo Mage::getSingleton('cms/page')->getIdentifier(); ?>" />
+
+        <label class="form-row"><?php echo $this->__('Name') ?><span class="mandatory">*</span><input type="text" name="name" id="name" class="input-text form-input-text required-entry" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserName()) ?>" /></label>
+        <br class="clear" />
+        <label class="form-row"><?php echo $this->__('Email Address') ?><span class="mandatory">*</span><input type="text" name="email" id="email" class="input-text form-input-text required-entry validate-email" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" /></label>
+        <br class="clear" />
+        <label class="form-row"><?php echo $this->__('Telephone') ?><input type="text" name="telephone" id="telephone" class="input-text form-input-text" value="" /></label>
+        <br class="clear" />
+        <div style="width: 430px" class="contact-form-textarea">
+            <label><?php echo $this->__("Comment"); ?><span class="mandatory">*</span></label>
+            <textarea name="comment" id="comment" class="required-entry input-text"></textarea>
+        </div>
+        <input type="submit" class="button-link" value="<?php echo $this->__('Submit') ?>" name="send" id="send2"/>
+    </form>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+//]]>
+</script>

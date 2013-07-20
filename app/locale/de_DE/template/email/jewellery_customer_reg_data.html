@@ -1,0 +1,80 @@
+<!--@subject Neue Registrierung über www.standard-schmuck.de @-->
+<!--@vars
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+    <tr>
+        <td align="center" valign="top" style="padding:20px 0 20px 0">
+            <!-- [ header starts here] -->
+            <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                <tr>
+                <td>
+                  <table  width="100%">
+                    <tr>
+                      <td valign="top" width="70%"><a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/></a></td>
+                      <td valign="top"  width="30%">
+                        <p><strong>E-Mail:</strong> 
+                          <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a>
+                        <br />
+                          <strong>Telefon:</strong> {{config path='general/store_information/phone'}}
+                        </p>
+                     {{customVar code=office_hours}}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+                <!-- [ middle starts here] -->
+                <tr>
+                    <td valign="top">
+                        <h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Registrierungsdaten:</h1>
+                        <table>
+                           <tr>
+                            <td>Firma: </td>
+                            <td>{{htmlescape var=$address.company}}</td>
+                           </tr>
+                           <tr>
+                            <td>Name: </td>
+                            <td>{{htmlescape var=$customer.name}}</td>
+                           </tr>
+                           <tr>
+                            <td>Adresse: </td>
+                            <td>{{htmlescape var=$address_street}} {{htmlescape var=$address.street_additional}}<br />
+                                {{htmlescape var=$address.postcode}} {{htmlescape var=$address.city}}<br />
+                                {{htmlescape var=$address.region}}<br />
+                                {{htmlescape var=$address.country}}
+                            </td>
+                           </tr>
+                           <tr>
+                            <td>E-Mail: </td>
+                            <td>{{htmlescape var=$customer.email}}</td>
+                           </tr>
+                           <tr>
+                            <td>Telefon: </td>
+                            <td>{{htmlescape var=$address.telephone_area_code}} {{htmlescape var=$address.telephone}}</td>
+                           </tr>
+                           <tr>
+                            <td>Nachricht: </td>
+                            <td>{{htmlescape var=$customer.customer_message}}</td>
+                           </tr>
+                          </table>
+                          <p>{{htmlescape var=$license_info}}</p>
+                          <p>&nbsp;</p>
+                        <p>Bitte prüfen Sie die Anmeldung und geben Sie diese ggf. im Administrationsbereich frei.</p>
+                    </td>
+                </tr>
+                 <tr>
+                <td>
+                  {{customVar code=signature}}
+                </td>
+            </tr>
+             </table>
+        </td>
+    </tr>
+</table>
+</div>
+</body>

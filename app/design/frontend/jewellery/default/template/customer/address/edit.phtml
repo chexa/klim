@@ -1,0 +1,108 @@
+<?php
+/**
+ * Edit customer address template
+ *
+ * @see Mage_Customer_Block_Address_Edit
+ */
+?>
+<div class="inner-content">
+    <div class="block">
+        <div class="inside">
+            <?php if($this->getTitle()): ?>
+                <h1 class="title-h3"><?php echo $this->getTitle() ?></h1>
+            <?php endif; ?>
+
+            <div id="account_additional_address_message">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('account_additional_address_message')->toHtml() ?>
+            </div>
+
+            <div class="reg-box">
+                <div class="info-block-t">
+
+                    <form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate">
+                        <?php echo $this->getBlockHtml('formkey')?>
+                        <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+                        <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+
+
+                        <span class="title-h5 dark-title"><?php echo $this->__('Personal Information') ?></span>
+
+                        <div class="reg-box-inside">
+                        <?php echo $this->getNameBlockHtml() ?>
+                            <label class="form-row"><?php echo $this->__('Telephone') ?><span class="mandatory">*</span><input type="text" name="telephone" id="telephone" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text form-input-text required-entry" /></label>
+                        </div>
+
+                        <span class="title-h5 dark-title"><?php echo $this->__('Address') ?></span>
+
+                        <div class="reg-box-inside">
+                            <label class="form-row"><?php echo $this->__('Company') ?><span class="mandatory">*</span><input type="text" class="input-text form-input-text required-entry" name="company" id="company" value="<?php echo $this->htmlEscape($this->getAddress()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>"/></label>
+                            <br class="clear" />
+                            <label class="form-row"><?php echo $this->__('Street and house number') ?><span class="mandatory">*</span><input type="text" class="form-input-text input-text required-entry" name="street[]" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1"/></label>
+                            <label class="form-row"><?php echo $this->__('Additional Information') ?><input type="text" class="form-input-text" name="street_additional" id="street_additional" value="<?php echo $this->htmlEscape($this->getAddress()->getStreetAdditional()) ?>"/></label>
+                            <label class="form-row"><?php echo $this->__('Zip/Postal Code') ?><span class="mandatory">*</span><input type="text" name="postcode" value="<?php echo $this->htmlEscape($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text form-input-text validate-zip-international required-entry" /></label>
+                            <label class="form-row"><?php echo $this->__('City') ?><span class="mandatory">*</span><input type="text" name="city" value="<?php echo $this->htmlEscape($this->getAddress()->getCity()) ?>" title="<?php echo $this->__('City') ?>" class="input-text form-input-text required-entry" id="city" /></label>
+                            <p class="form-row">
+                                <label><?php echo $this->__('Country') ?><span class="mandatory">*</span></label>
+                                <?php echo $this->getCountryHtmlSelect() ?>
+                            </p>
+                            <p class="form-row">
+                                <label><?php echo $this->__('State/Province') ?><span class="mandatory">*</span></label>
+                                <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select form-input-select" style="display:none;">
+                                    <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                                </select>
+                                <script type="text/javascript">
+                                //<![CDATA[
+                                    $('region_id').setAttribute('defaultValue', "<?php echo $this->getAddress()->getRegionId() ?>");
+                                //]]>
+                                </script>
+                                <input type="text" id="region" name="region" value="<?php echo $this->htmlEscape($this->getAddress()->getRegion()) ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+                            </p>
+                        </div>
+
+                        <span class="title-h5 dark-title"></span>
+
+                        <div class="reg-box-inside">
+                            <?php if($this->isDefaultBilling()): ?>
+                                <strong><?php echo $this->__('Default Billing Address') ?></strong></br>
+                            <?php elseif($this->canSetAsDefaultBilling()): ?>
+                                <label class="checkbox-row" for="primary_billing"><input type="checkbox" id="primary_billing" name="default_billing" value="1" title="<?php echo $this->__('Use as My Default Billing Address') ?>" class="checkbox" /><?php echo $this->__('Use as my default billing address') ?></label>
+                            <?php else: ?>
+                                <input type="hidden" name="default_billing" value="1" />
+                            <?php endif; ?>
+
+                            <?php if($this->isDefaultShipping()): ?>
+                                <strong><?php echo $this->__('Default Shipping Address') ?></strong>
+                            <?php elseif($this->canSetAsDefaultShipping()): ?>
+                                <label class="checkbox-row" for="primary_shipping"><input type="checkbox" id="primary_shipping" name="default_shipping" value="1" title="<?php echo $this->__('Use as My Default Shipping Address') ?>" class="checkbox" /><?php echo $this->__('Use as my default shipping address') ?></label>
+                            <?php else: ?>
+                                <input type="hidden" name="default_shipping" value="1" />
+                            <?php endif; ?>
+                        </div>
+
+                        <p class="required mandatory"><?php echo $this->__('* Required Fields') ?></p>
+
+
+                        <div class="buttons-set">
+                            <a class="button-link weiter-link fl" href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" title="<?php echo $this->__('Back') ?>"><span><?php echo $this->__('Back') ?></span></a>
+
+                            <div class="weiter-btn fr">
+                                <input type="submit" value="" /><?php echo $this->__("Save Address"); ?><span></span>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    $j("#country").addClass("form-input-select");
+
+    var dataForm = new VarienForm('form-validate', true);
+    new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+//]]>
+</script>

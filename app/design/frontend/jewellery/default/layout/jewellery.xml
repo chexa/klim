@@ -1,0 +1,349 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+
+    <default>
+        <reference name="left">
+            <remove name="left.newsletter" />
+            <remove name="left.permanent.callout" />
+            <remove name="tags_popular" />
+            <remove name="catalog.compare.sidebar" />
+            <remove name="sale.reorder.sidebar"/>
+        </reference>
+
+        <reference name="top.links">
+            <remove name="checkout_cart_link" />
+            <action method="removeLinkByUrl"><url helper="customer/getAccountUrl"/></action>
+            <action method="addLink" translate="label title"><label>Contacts</label><url>/ueber-uns/kontakt/</url><title>Contacts</title><prepare/><urlParams/><position>1</position></action>
+            <action method="addLink" translate="label title"><label>Request Catalog</label><url>/service/info-katalog-anfordern/</url><title>Request Catalog</title><prepare/><urlParams/><position>2</position></action>
+            <action method="addLink" translate="label title"><label>Help</label><url>/information/hilfe/</url><title>Help</title><prepare/><urlParams/><position>3</position></action>
+        </reference>
+
+        <reference name="footer">
+            <remove name="footer_links" />
+        </reference>
+    </default>
+
+    <customer_logged_in>
+        <reference name="top.links">
+            <action method="removeLinkByUrl"><url helper="customer/getLogoutUrl"/></action>
+        </reference>
+    </customer_logged_in>
+
+    <customer_logged_out>
+        <reference name="top.links">
+            <action method="removeLinkByUrl"><url helper="customer/getLoginUrl"/></action>
+
+            <reference name="wishlist_link">
+                <action method="setTemplate"><template>blank-link.phtml</template></action>
+            </reference>
+
+        </reference>
+    </customer_logged_out>
+
+
+
+    <catalog_category_default translate="label">
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/formstyle.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/jquery.ad-gallery.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.magnify-1.0.2.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.imageZoom.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.bgiframe.min.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/quickview.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/custom.js</name></action>
+        </reference>
+
+        <reference name="product_list_toolbar">
+            <action method="setPlacement"><value>top</value></action>
+            <block type="jewellery/catalog_materialfilter" name="jewellery.catalog.materialnav" as="materialnav" template="jewellery/catalog/product/materialfilter.phtml"/>
+        </reference>
+
+        <reference name="left">
+            <block type="cms/block" name="frelich_sidebar_contact_small">
+                <action method="setBlockId"><block_id>frelich_sidebar_contact_small</block_id></action>
+            </block>
+        </reference>
+
+    </catalog_category_default>
+
+    <catalog_product_view translate="label">
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/formstyle.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/jquery.ad-gallery.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.magnify-1.0.2.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.imageZoom.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.bgiframe.min.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/quickview.js</name></action>
+        </reference>
+
+        <reference name="left">
+            <!-- <block type="catalog/navigation" name="catalog.leftnav" template="catalog/navigation/left.phtml"/> -->
+            <block type="cms/block" name="cart_sidebar">
+                <action method="setBlockId"><block_id>cart_sidebar</block_id></action>
+            </block>
+            <block type="tag/product_list" name="product_tag_list" after="catalog.leftnav" template="tag/list.phtml">
+                <block type="page/html_wrapper" name="product.tag.list.list.before" as="list_before" translate="label">
+                    <label>Tags List Before</label>
+                    <action method="setMayBeInvisible"><value>1</value></action>
+                </block>
+            </block>
+        </reference>
+
+        <reference name="product.info">
+            <block type="jewellery/catalog_product_view_producttable" name="product.info.producttable" template="jewellery/catalog/product/view/producttable.phtml" />
+        </reference>
+
+    </catalog_product_view>
+
+    <customer_account_login>
+        <reference name="root">
+            <remove name="top.menu" />
+        </reference>
+
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/formstyle.css</stylesheet></action>
+        </reference>
+    </customer_account_login>
+
+    <customer_account_create>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/formstyle.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/jquery.ad-gallery.css</stylesheet></action>
+        </reference>
+
+        <reference name="root">
+            <remove name="top.menu" />
+        </reference>
+
+        <reference name="customer_form_register">
+            <action method="setShowAddressFields"><show>1</show></action>
+        </reference>
+
+        <reference name="content">
+            <block type="jewellery/customer_breadcrumb" name="customer_breadcrumb" template="jewellery/customer/breadcrumb.phtml" />
+        </reference>
+    </customer_account_create>
+
+    <customer_account_license>
+        <label>Customer Account Registration Form: License</label>
+        <!-- Mage_Customer -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <remove name="top.menu" />
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/formstyle.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/jquery.ad-gallery.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="jewellery/customer_breadcrumb" name="customer_breadcrumb" template="jewellery/customer/breadcrumb.phtml" />
+            <block type="jewellery/customer_form_license" name="customer_form_license" template="jewellery/customer/form/license.phtml" />
+        </reference>
+    </customer_account_license>
+
+    <customer_account_success>
+        <label>Customer Account Registration Form: Success Page</label>
+        <!-- Mage_Customer -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <remove name="top.menu" />
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/formstyle.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/jquery.ad-gallery.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="jewellery/customer_breadcrumb" name="customer_breadcrumb" template="jewellery/customer/breadcrumb.phtml" />
+            <block type="jewellery/customer_success" name="customer_success" template="jewellery/customer/success.phtml" />
+        </reference>
+    </customer_account_success>
+
+    <customer_account_overview>
+        <label>Customer Account Registration Form: Overview Page</label>
+        <!-- Mage_Customer -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <remove name="top.menu" />
+        </reference>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/formstyle.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/jquery.ad-gallery.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="jewellery/customer_breadcrumb" name="customer_breadcrumb" template="jewellery/customer/breadcrumb.phtml" />
+            <block type="jewellery/customer_overview" name="customer_overview" template="jewellery/customer/overview.phtml" />
+        </reference>
+    </customer_account_overview>
+
+    <customer_account_firmlogin>
+        <label>Customer Forgot Password Form</label>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Password forgotten</title></action>
+        </reference>
+        <reference name="content">
+            <block type="jewellery/customer_firmlogin" name="customer_firmlogin" template="customer/form/firmLogin.phtml"/>
+        </reference>
+    </customer_account_firmlogin>
+
+    <customer_account>
+        <!--reference name="customer_account_dashboard">
+            <remove name="customer_account_dashboard_top" />
+            <remove name="customer_account_dashboard_newsletter" />
+            <remove name="customer_account_dashboard_address" />
+            <remove name="customer_account_dashboard_info1" />
+            <remove name="customer_account_dashboard_info2" />
+        </reference-->
+        <reference name="customer_account_navigation">
+            <!--<action method="removeLink"><name>address_book</name></action>-->
+            <action method="removeLink"><name>downloadable_products</name></action>
+            <action method="removeLink"><name>newsletter</name></action>
+            <action method="removeLink"><name>reviews</name></action>
+            <!--<action method="removeLink"><name>orders</name></action>-->
+            <!--<action method="removeLink"><name>tags</name></action>-->
+            <action method="removeLink"><name>billing_agreements</name></action>
+            <action method="removeLink"><name>recurring_profiles</name></action>
+            <!--<action method="removeLink"><name>wishlist</name></action>-->
+        </reference>
+
+        <reference name="left">
+            <block type="cms/block" name="frelich_sidebar_contact_small">
+                <action method="setBlockId"><block_id>frelich_sidebar_contact_small</block_id></action>
+            </block>
+        </reference>
+
+    </customer_account>
+
+    <customer_account_index>
+        <reference name="content">
+            <block type="customer/account_dashboard" name="customer_account_header" before="customer_account_dashboard" template="customer/account/header.phtml" />
+            <block type="core/template" name="customer_account_footer" after="customer_account_dashboard" template="customer/account/footer.phtml" />
+        </reference>
+    </customer_account_index>
+
+    <customer_account_edit>
+        <reference name="head">
+            <action method="removeItem"><type>skin_js</type><name>js/jquery.formstyle-0.1.0.js</name><params/></action>
+        </reference>
+    </customer_account_edit>
+
+    <customer_address_form translate="label">
+        <reference name="head">
+            <action method="removeItem"><type>skin_js</type><name>js/jquery.formstyle-0.1.0.js</name><params/></action>
+        </reference>
+    </customer_address_form>
+
+
+
+    <checkout_cart_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+
+            <block type="core/text_list" name="cart.left" as="left" translate="label">
+                <label>Left Column</label>
+            </block>
+        </reference>
+
+        <reference name="head">
+            <action method="removeItem"><type>skin_js</type><name>js/jquery.formstyle-0.1.0.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/form.js</name><params/></action>
+        </reference>
+
+        <reference name="cart.left">
+            <block type="cms/block" name="cart_sidebar">
+                <action method="setBlockId"><block_id>cart_sidebar</block_id></action>
+            </block>
+        </reference>
+
+        <reference name="breadcrumbs" translate="label">
+            <action method="addCrumb">
+                <crumbName>home</crumbName>
+                <crumbInfo><label>Startseite</label><title>Zur Startseite</title><link>/</link></crumbInfo>
+            </action>
+            <action method="addCrumb">
+                <crumbName>shopping-cart</crumbName>
+                <crumbInfo><label>Warenkorb</label><title>Warenkorb</title></crumbInfo>
+            </action>
+        </reference>
+    </checkout_cart_index>
+
+
+    <checkout_onepage_index translate="label">
+        <label>One Page Checkout</label>
+        <!-- Mage_Checkout -->
+
+        <reference name="root">
+            <remove name="top.menu" />
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+
+            <block type="core/text_list" name="cart.left" as="left" translate="label">
+                <label>Left Column</label>
+            </block>
+        </reference>
+
+        <reference name="header">
+            <remove name="top.links" />
+        </reference>
+
+        <reference name="cart.left">
+            <block type="cms/block" name="cart_sidebar">
+                <action method="setBlockId"><block_id>cart_sidebar</block_id></action>
+            </block>
+        </reference>
+
+        <reference name="head">
+            <action method="removeItem"><type>skin_js</type><name>js/jquery.formstyle-0.1.0.js</name><params/></action>
+        </reference>
+    </checkout_onepage_index>
+
+
+    <checkout_onepage_success translate="label">
+        <label>One Page Checkout Success</label>
+        <reference name="root">
+            <remove name="top.menu" />
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+
+        <reference name="header">
+            <remove name="top.links" />
+        </reference>
+    </checkout_onepage_success>
+
+
+    <tag_product_list>
+
+        <reference name="search_result_list">
+            <action method="setTemplate"><template>jewellery/tag/product/list.phtml</template></action>
+        </reference>
+
+        <reference name="left">
+            <block type="cms/block" name="frelich_sidebar_contact_small">
+                <action method="setBlockId"><block_id>frelich_sidebar_contact_small</block_id></action>
+            </block>
+        </reference>
+    </tag_product_list>
+
+    <wishlist_index_configure>
+        <reference name="product.info">
+            <remove name="product.info.addto" />
+        </reference>
+    </wishlist_index_configure>
+
+</layout>

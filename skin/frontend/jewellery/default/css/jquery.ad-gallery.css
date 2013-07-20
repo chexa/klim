@@ -1,0 +1,119 @@
+.ad-gallery {
+  width: 325px;
+  height: 292px;
+  float: left;
+  margin: 0 0 7px;
+}
+
+.ad-image-main{
+    width: 245px;
+    height: 290px;
+	border: 1px solid #9a9a9a;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+	float:left;
+}
+
+  .ad-gallery .ad-image-wrapper, .ad-gallery .ad-image-wrapper-empty {
+    width: 233px;
+    height: 278px;
+	background: #fff;
+	border: 6px solid #d9e4ec
+  }
+
+    .ad-gallery .ad-image-wrapper .ad-image {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0px;
+      z-index: 9;
+    }
+
+	
+.ad-gallery .ad-nav {
+width: 71px;
+height: 291px;
+position: relative;
+float: right;
+}
+
+.ad-btn-on{
+padding: 36px 0 36px;
+height: 220px!important;
+}
+.ad-btn-on .ad-thumbs, .ad-btn-on .ad-thumb-list {
+height: 220px!important;
+}
+
+
+	 .ad-forward,  .ad-back {
+	position: absolute;
+	height: 23px;
+	z-index: 10;
+	cursor: pointer;
+	display: block;
+	width: 71px;
+	}
+
+	.ad-gallery .ad-forward, .ad-gallery .ad-back {
+	position: absolute;
+	height: 23px;
+	z-index: 10;
+	cursor: pointer;
+	display: block;
+	width: 71px;
+	}
+    
+   .ad-back {
+	top: -7px;
+	background: url(../images/graphic2.png) -105px  -77px no-repeat;
+	}
+	 .ad-forward {
+	bottom: -284px;
+	background: url(../images/graphic2.png) -26px -77px no-repeat;
+	}
+	.ad-gallery .ad-nav .ad-thumbs {
+	overflow: hidden;
+	width: 100%;
+	height: 291px;
+	}
+		.ad-gallery .ad-thumbs .ad-thumb-list {
+		width: 70px;
+		margin: 0 0 0 1px!important;
+		list-style: none;
+		height: 291px;
+      }
+        .ad-gallery .ad-thumbs li {
+          padding: 0 0 5px;
+		  margin: 0!important;
+		  *display: inline;
+		  zoom: 1;
+        }
+          .ad-gallery .ad-thumbs li a {
+            display: block;
+			width: 67px;
+			border: 1px solid #9a9a9a
+          }
+            .ad-gallery .ad-thumbs li a img {
+              border: 2px solid #d9e4ec;
+              display: block;
+            }
+            .ad-gallery .ad-thumbs li a.ad-active img {
+              border: 2px solid #cae3f3;
+            }
+/* Can't do display none, since Opera won't load the images then */
+.ad-preloads {
+  position: absolute;
+  left: -9000px;
+  top: -9000px;
+}
+
+
+
+
+
+
+
+
+

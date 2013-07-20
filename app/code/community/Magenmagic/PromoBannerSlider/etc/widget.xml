@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Mage
+ * @package     Mage_Catalog
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<widgets>
+   <promobannerslider_list type="promobannerslider/list">
+       <name>Promo Banner Slider</name>
+       <description type="desc">Slide Show</description>
+       <parameters>
+           <category>
+               <label>Category</label>
+               <visible>1</visible>
+               <required>1</required>
+               <type>select</type>
+               <source_model>promobannerslider/promobannerslider</source_model>
+           </category>
+           <autoscroll>
+               <label>Auto Scrolling (For "Slide" type)</label>
+               <visible>1</visible>
+               <required>1</required>
+               <type>select</type>
+               <values>
+                  <auto1 translate="label">
+                       <label>Yes</label>
+                       <value>1</value>
+                  </auto1>
+                   <auto2 translate="label">
+                       <label>No</label>
+                       <value>0</value>
+                  </auto2>
+               </values>
+           </autoscroll>
+		   <random>
+               <label>Random</label>
+               <visible>1</visible>
+               <required>1</required>
+               <type>select</type>
+               <values>
+                  <rand1 translate="label">
+                       <label>Yes</label>
+                       <value>1</value>
+                  </rand1>
+                   <rand2 translate="label">
+                       <label>No</label>
+                       <value>0</value>
+                  </rand2>
+               </values>
+           </random>
+           <speed>
+               <label>Speed</label>
+               <visible>1</visible>
+               <required>1</required>
+               <type>select</type>
+               <values>
+                  <speed translate="label">
+                       <value>1</value>
+                       <label>x1</label>
+                  </speed>
+                  <speed2 translate="label">
+                       <value>2</value>
+                       <label>x2</label>
+                  </speed2>
+                   <speed3 translate="label">
+                       <value>3</value>
+                       <label>x3</label>
+                  </speed3>
+                   <speed4 translate="label">
+                       <value>4</value>
+                       <label>x4</label>
+                  </speed4>
+                   <speed5 translate="label">
+                       <value>5</value>
+                       <label>x5</label>
+                  </speed5>
+              </values>
+           </speed>
+           <direction>
+               <label>Direction (For "Slide" type)</label>
+               <visible>1</visible>
+               <required>0</required>
+               <type>select</type>
+               <values>
+                   <left translate="label">
+                        <value>0</value>
+                        <label>Left</label>
+                   </left>
+                   <right translate="label">
+                        <value>1</value>
+                        <label>Right</label>
+                   </right>
+               </values>
+           </direction>
+           <template translate="label">
+               <label>Type</label>
+               <visible>1</visible>
+               <required>1</required>
+               <type>select</type>
+               <values>
+                   <list translate="label">
+                       <value>magenmagic/promobannerslider/list.phtml</value>
+                       <label>Slide</label>
+                   </list>
+               </values>
+               <values>
+                   <fade translate="label">
+                       <value>magenmagic/promobannerslider/fade.phtml</value>
+                       <label>Fade In / Fade Out</label>
+                   </fade>
+               </values>
+           </template>
+       </parameters>
+   </promobannerslider_list>
+</widgets>

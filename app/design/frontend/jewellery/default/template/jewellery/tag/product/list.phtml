@@ -1,0 +1,58 @@
+<?php
+$_productCollection=$this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+
+$isLoggedIn = Mage::helper('customer')->isLoggedIn();
+
+?>
+
+<div class="section-title">
+    <h1><span><?php echo $this->__('Jewelry Wholesale') ?></span></h1>
+</div>
+
+<div class="top-cat-title">
+    <h2><?php echo $this->__("Products tagged with '%s'", $this->htmlEscape(Mage::registry('current_tag')->getName())); ?></h2>
+</div>
+
+<div class="inner-content subcategory">
+
+    <?php if(!$_productCollection->count()): ?>
+        <div class="block">
+            <div class="inside text-box">
+                <p><?php echo $this->__('Your search returns no results.') ?></p>
+            </div>
+        </div>
+        <?php else: ?>
+
+        <?php $_collectionSize = $_productCollection->count() ?>
+        <?php $_columnCount = 4; ?>
+
+        <ul class="prod-items">
+            <?php foreach ($_productCollection as $_product): ?>
+                <?php echo $this->getLayout()->createBlock('catalog/product_list')
+                            ->setTemplate('catalog/product/list_single.phtml')
+                            ->setProduct($_product)
+                            ->toHtml();
+                ?>
+            <?php endforeach ?>
+        </ul>
+
+
+    <?php endif; // End collection count ?>
+
+    <?php if($_productCollection->count()): ?>
+        <div class="page-nav">
+            <?php
+            // manually get the toolbar block so we can do the page navigation
+            $toolbar = $this->getToolbarBlock();
+            $toolbar->setCollection($_productCollection);
+            //$toolbar->setCustomShowAmounts(false);
+            if($toolbar->getCollection()->getSize() > 0) {
+                echo $toolbar->getPagerHtml();
+            }
+            ?>
+        </div>
+        <?php endif; ?>
+
+</div> <!-- end of inner-content block -->
+

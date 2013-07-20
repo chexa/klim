@@ -1,0 +1,291 @@
+<?php
+/**
+ * Product:     Advanced Permissions
+ * Package:     Aitoc_Aitpermissions_2.2.4_2.0.3_90233
+ * Purchase ID: xFF945pgbyDre0fKeBvM8FAv6R2a0C65GbaW0cwEpD
+ * Generated:   2011-07-05 15:42:56
+ * File path:   app/design/adminhtml/default/default/template/aitpermissions/store_switcher.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<?php if ($websites = $this->getWebsites()): ?>
+<span class="field-row"><label for="stores"><?php echo $this->__('Store View') ?> <span class="required">*</span></label></span>
+
+<div id="store_switcher">
+<?php if ($this->hasDefaultOption()): ?>
+    <input type="checkbox" name="store_switcher[0][]" value="0" id="store_switcher_DefaultStore"><label for="store_switcher_DefaultStore"><?php echo $this->getDefaultStoreName() ?></label><br>
+<?php endif; ?>
+    <?php foreach ($websites as $website): ?>
+        <b><?php echo $website->getName() ?></b><br>
+        <?php foreach ($website->getGroups() as $group): ?>
+            <?php $_stores = $this->getStores($group) ?>
+            <?php if (count($_stores)) : ?>
+            <div id="store_block_<?php echo $group->getId() ?>" style="background-color: #F5F5F5; overflow:hidden;">
+                
+                <div class="storeview-select" style="float: left;">
+                    <input type="checkbox" id="storetoggler<?php echo $group->getId() ?>" class="storetoggler"> <label for="togglestoreviews<?php echo $group->getId() ?>"><b><?php echo $group->getName() ?></b></label><br>
+                    <?php foreach ($_stores as $store): ?>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="checkbox" name="store_switcher[<?php echo $group->getId() ?>][]" value="<?php echo $store->getId() ?>"<?php if($this->getStoreIds() == $store->getId() || in_array($store->getId(), $this->getStoreIds())): ?> 
+                        checked="checked"<?php endif; ?> 
+                        id="store_switcher_<?php echo $store->getId() ?>"
+                        class="store_switcher_<?php echo $group->getId() ?>">
+                        <label for="store_switcher_<?php echo $store->getId() ?>"><?php echo $store->getName() ?></label><br>
+                    <?php endforeach; ?>
+                </div>
+                
+                <!-- STORE CATEGORIES TREE -->
+                <div id="store_<?php echo $group->getId() ?>_categories_tree" style="float: left; padding: 0px 10px; margin-left: 50px; background-color: #F1F1F1;">
+                    <div class="tree-actions">
+                        <span class="field-row"><label for=""><b>Categories</b></label></span>
+                        <a href="#" onclick="xtrees[<?php echo $group->getId() ?>].collapseAll(); return false;"><?php echo Mage::helper('catalog')->__('Collapse All') ?></a> 
+                        <span class="separator">|</span> 
+                        <a href="#" onclick="xtrees[<?php echo $group->getId() ?>].expandAll(); return false;"><?php echo Mage::helper('catalog')->__('Expand All') ?></a>
+                    </div>
+                    <input type="hidden" name="store_category_ids[<?php echo $group->getId() ?>]" id="store<?php echo $group->getId() ?>_categories" value="<?php echo $this->getIdsString($group->getId()) ?>">
+                    <div id="store<?php echo $group->getId(); ?>-categories" class="store-categories-tree" rel="<?php echo $group->getId() ?>" class="tree" style="display: block;"></div>
+                </div>
+                <!-- STORE CATEGORIES TREE END -->
+                
+            </div>
+            <?php endif ?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+</div>
+<?php endif; ?>
+
+<?php if($this->getRootNode() && $this->getRootNode()->hasChildren()): ?>
+<script type="text/javascript">
+
+_initTree = function(store) 
+{
+    var categoryLoader = new Ext.tree.TreeLoader({
+       dataUrl: '<?php echo $this->getLoadTreeUrl()?>&store='+store
+    });
+
+    categoryLoader.createNode = function(config) {
+        config.uiProvider = Ext.tree.CheckboxNodeUI;
+        var node;
+        if (config.children && !config.children.length) {
+            delete(config.children);
+            node = new Ext.tree.AsyncTreeNode(config);
+
+        } else {
+            node = new Ext.tree.TreeNode(config);
+        }
+        return node;
+    };
+
+    categoryLoader.on("beforeload", function(treeLoader, node) {
+        treeLoader.baseParams.category = node.attributes.id;
+    });
+
+    categoryLoader.on("load", function(treeLoader, node, config) {
+        varienWindowOnload();
+    });
+
+    tree = new Ext.tree.TreePanel('store'+store+'-categories', 
+    {
+        animate:false,
+        loader: categoryLoader,
+        enableDD:false,
+        containerScroll: true,
+        rootUIProvider: Ext.tree.CheckboxNodeUI,
+        selModel: new Ext.tree.CheckNodeMultiSelectionModel(),
+        rootVisible: '<?php echo $this->getRootNode()->getIsVisible() ?>'
+    });
+
+    tree.on('check', function(node) 
+    {
+        if(node.attributes.checked) 
+        {
+            categoryAdd(node.id, store);
+            var parentNode = node.parentNode;
+            if (!parentNode.disabled && parentNode != this.getRootNode().id && !parentNode.attributes.checked)
+            {
+                parentNode.getUI().check(!parentNode.getUI().checked())
+            }
+        } 
+        else 
+        {
+            categoryRemove(node.id, store);
+            if (node.childNodes.length) 
+            {
+                for( var i = 0; i < node.childNodes.length; i++ ) 
+                {
+                    var childNode = node.childNodes[i];
+                    if (childNode.attributes.checked)
+                    {
+                        childNode.getUI().check(!childNode.getUI().checked())
+                    }
+                }
+            }
+        }
+    }, tree);
+    
+    var root = new Ext.tree.TreeNode(treeNodes['store'+store])
+
+    tree.setRootNode(root);
+    bildCategoryTree(root, trees['store'+store]);
+    tree.addListener('click', categoryClick.createDelegate(this));
+    // render the tree
+    tree.render();
+    root.expand();
+    return tree;
+}
+
+function bildCategoryTree(parent, config)
+{
+    if (!config) return null;
+
+    if (parent && config && config.length)
+    {
+        for (var i = 0; i < config.length; i++)
+        {
+            config[i].uiProvider = Ext.tree.CheckboxNodeUI;
+            var node;
+            var _node = Object.clone(config[i]);
+            if (_node.children && !_node.children.length) 
+            {
+                delete(_node.children);
+                node = new Ext.tree.AsyncTreeNode(_node);
+
+            } else {
+                node = new Ext.tree.TreeNode(config[i]);
+            }
+            parent.appendChild(node);
+            node.loader = node.getOwnerTree().loader;
+            if(config[i].children)
+            {
+                bildCategoryTree(node, config[i].children);
+            }
+        }
+    }
+}
+
+function categoryClick(node, e)
+{
+    if (node.disabled) 
+    {
+        return;
+    }
+    node.getUI().check(!node.getUI().checked())
+    varienElementMethods.setHasChanges(Event.element(e), e);
+};
+function categoryAdd(id, store) 
+{
+    var ids = $('store'+store+'_categories').value.split(',');
+    ids.push(id);
+    $('store'+store+'_categories').value = ids.join(',');
+}
+function categoryRemove(id, store) 
+{
+    var ids = $('store'+store+'_categories').value.split(',');
+    // bug #7654 fixed
+    while (-1 != ids.indexOf(id)) 
+    {
+        ids.splice(ids.indexOf(id), 1);
+    }
+    $('store'+store+'_categories').value = ids.join(',');
+}
+
+Ext.EventManager.onDocumentReady(function()
+{
+    xtrees = new Array();
+	trees = {
+    <?php foreach ($this->getAllStores() as $store): ?>
+        <?php $_defaultStore = $store->getDefaultStore() ?>
+        <?php if ($_defaultStore) : ?>
+        store<?php echo $store->getId() ?> : <?php echo $this->getTreeJson($store['RootCategory'], $_defaultStore->getId()); ?>,
+        <?php endif ?>
+    <?php endforeach ?>
+        anull : []
+    };
+	treeNodes = {
+    <?php foreach ($this->getAllStores() as $store): ?>
+        <?php $_defaultStore = $store->getDefaultStore() ?>
+        <?php if ($_defaultStore) : ?>
+        store<?php echo $store->getId() ?> : {
+            text: '<?php echo $this->jsQuoteEscape($this->getRootNode($_defaultStore->getId())->getName()) ?>',
+            draggable:false,
+            checked:'<?php echo $this->getRootNode($_defaultStore->getId())->getChecked() ?>',
+            id:'<?php echo $this->getRootNode($_defaultStore->getId())->getId() ?>',
+            disabled: <?php echo ($this->getRootNode($_defaultStore->getId())->getDisabled() ? 'true' : 'false') ?>,
+            uiProvider: Ext.tree.CheckboxNodeUI
+        },
+        <?php endif ?>
+    <?php endforeach ?>
+        anull : []
+    };
+    <?php foreach ($this->getAllStores() as $store): ?>
+    <?php $_defaultStore = $store->getDefaultStore() ?>
+    <?php if ($_defaultStore) : ?>
+    xtrees[<?php echo $store->getId()?>] = _initTree(<?php echo $store->getId()?>);
+    <?php endif ?>
+    <?php endforeach ?>
+});
+
+<?php foreach ($this->getAllStores() as $store): ?>
+<?php $_defaultStore = $store->getDefaultStore() ?>
+<?php if ($_defaultStore) : ?>
+
+$('store<?php echo $store->getId()?>-categories').show();
+
+var showtree = false;
+$$('input.store_switcher_<?php echo $store->getId()?>').each(function(checkbox)
+{
+    showtree = (showtree || checkbox.checked);
+});
+$('storetoggler<?php echo $store->getId() ?>').checked = showtree;
+if (showtree)
+{
+    $('store_<?php echo $store->getId() ?>_categories_tree').show();
+}
+else
+{
+    $('store_<?php echo $store->getId() ?>_categories_tree').hide();
+}
+
+$('storetoggler<?php echo $store->getId() ?>').observe('click', function(event)
+{
+    $$('input.store_switcher_<?php echo $store->getId() ?>').each(function(checkbox)
+    {
+        checkbox.checked = ($('storetoggler<?php echo $store->getId() ?>').checked);
+    });
+    if ($('storetoggler<?php echo $store->getId() ?>').checked)
+    {
+        $('store_<?php echo $store->getId() ?>_categories_tree').show();
+    }
+    else
+    {
+        $('store_<?php echo $store->getId() ?>_categories_tree').hide();
+    }
+});
+
+$$('input.store_switcher_<?php echo $store->getId() ?>').each(function(checkbox)
+{
+    checkbox.observe('click', function(event)
+    {
+        var showtree = false;
+        $$('input.store_switcher_<?php echo $store->getId() ?>').each(function(checkbox)
+        {
+            showtree = (showtree || checkbox.checked);
+        });
+        if (showtree)
+        {
+            $('storetoggler<?php echo $store->getId() ?>').checked = 'checked';
+            $('store_<?php echo $store->getId() ?>_categories_tree').show();
+        }
+        else
+        {
+            $('storetoggler<?php echo $store->getId() ?>').checked = false;
+            $('store_<?php echo $store->getId() ?>_categories_tree').hide();
+        }
+    });
+});
+
+    <?php endif ?>
+<?php endforeach ?>
+
+</script>
+<?php endif; ?>

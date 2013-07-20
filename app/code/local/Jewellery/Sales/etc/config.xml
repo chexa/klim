@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Sales>
+            <version>0.0.1</version>
+        </Jewellery_Sales>
+    </modules>
+
+
+    <global>
+        <blocks>
+            <jewellery_sales>
+                <class>Jewellery_Sales_Block</class>
+            </jewellery_sales>
+        </blocks>
+
+        <models>
+            <sales>
+                <rewrite>
+                    <quote_address_total_shipping>Jewellery_Sales_Model_Quote_Address_Total_Shipping</quote_address_total_shipping>
+                    <quote_address>Jewellery_Sales_Model_Quote_Address</quote_address>
+                </rewrite>
+            </sales>
+        </models>
+
+        <events>
+            <sales_quote_item_qty_set_after>
+                <observers>
+                    <jewellery_sales_model_observer>
+                        <type>singleton</type>
+                        <class>Jewellery_Sales_Model_Observer</class>
+                        <method>checkQuoteItemQty</method>
+                    </jewellery_sales_model_observer>
+                </observers>
+            </sales_quote_item_qty_set_after>
+        </events>
+
+
+        <sales>
+            <quote>
+                <totals>
+                     <netto>
+                        <class>Jewellery_Sales_Model_Quote_Address_Total_Netto</class>
+                         <after>subtotal,shipping</after>
+                         <before>tax,discount,grand_total</before>
+                        <renderer>jewellery_tax/checkout_netto</renderer>
+                    </netto>
+
+                    <tax>
+                        <after>subtotal,shipping,netto</after>
+                    </tax>
+                </totals>
+            </quote>
+        </sales>
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <jewellery_sales>
+                    <file>jewellery_sales.xml</file>
+                </jewellery_sales>
+            </updates>
+        </layout>
+
+    </frontend>
+
+</config>

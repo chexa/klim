@@ -1,0 +1,6 @@
+.fadeL { position: relative; height:200px; width:100%; overflow: hidden}
+.fadeL .itemFade { position: absolute; left:0; top:0; z-index: 1; }
+.fadeL .itemFade img { width:100%}
+.fadeL .currFade { z-index: 3}
+.itemFade {}
+.fadeSlD {}

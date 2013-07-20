@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <cms_page translate="label">
+        <reference name="left">
+            <block type="catalog/navigation" name="cms.leftnav" template="catalog/navigation/cms_menu.phtml"/>
+            <block type="cms/block" name="frelich_sidebar_contact_small">
+                <action method="setBlockId"><block_id>frelich_sidebar_contact_small</block_id></action>
+            </block>
+        </reference>
+
+        <reference name="content">
+            <remove name="page_content_heading" />
+        </reference>
+    </cms_page>
+</layout>

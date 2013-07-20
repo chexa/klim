@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <magenmagic_promosliderbanner>
+            <label>Promo Banner Slider</label>
+            <tab>magenmagic</tab>
+            <sort_order>11</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                 <inform_content translate="label">
+                     <label>Promo Banner Slider description</label>
+                     <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                     <expanded>1</expanded>
+                     <fields>
+                          <infosection>
+                            <comment></comment>
+                            <label>YouTube Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </infosection>
+                     </fields>
+                </inform_content>
+            </groups>
+        </magenmagic_promosliderbanner>
+    </sections>
+</config>

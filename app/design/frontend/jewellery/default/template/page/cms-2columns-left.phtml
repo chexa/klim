@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+
+<div id="wrap">
+    <?php echo $this->getChildHtml('global_notices') ?>
+    
+    <div id="content" class="inner-page">
+
+        <div class="section-title">
+            <?php
+                $sectionTitle = Mage::getSingleton('cms/page')->getTitle();
+
+                if (Mage::helper('cms/page')->hasParent()) {
+                    $sectionTitle = Mage::getSingleton('cms/page')->getParentPage()->getTitle();
+                }
+            ?>
+            <h1><span><?php echo $sectionTitle ?></span></h1>
+        </div>
+
+       <div class="top-cat-title">
+            <h2><?php echo Mage::getSingleton('cms/page')->getTitle() ?></h2> <?php //TODO: fix this; ?>
+        </div>
+
+        <div class="inner-content subcategory">
+            <?php if (Mage::helper('cms/page')->hasParent()) : ?>
+            <div class="block">
+                <div class="inside text-box">
+                    <div><?php echo $this->getChildHtml('content') ?></div>
+                </div>
+            </div>
+            <?php else : ?>
+                <?php $children = Mage::getSingleton('cms/page')->getChildren(); ?>
+                <?php if ($children->getSize()) : ?>
+                <ul class="prod-cat">
+                    <?php foreach($children as $child) : ?>
+                    <?php if ( ! $child->getIsActive() ) continue; ?>
+                    <li>
+                        <h3><a href="<?php echo $child->getUrl(); ?>"><?php echo $this->escapeHtml($child->getTitle()); ?></a></h3>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+
+        <div class="currentdate"><?php echo Mage::app()->getLocale()->date(time())->toString('EEEE, FFFF'); ?></div>
+
+        <div class="inner-side"><?php echo $this->getChildHtml('left') ?></div>
+        <?php echo $this->getChildHtml('breadcrumbs') ?>
+        <?php echo $this->getChildHtml('topMenu') ?>
+    </div><!-- end content -->
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('header') ?>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+
+</body>
+</html>

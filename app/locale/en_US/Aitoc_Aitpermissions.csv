@@ -1,0 +1,32 @@
+"All Store Views","All Store Views"
+Root,Root
+Delete,Delete
+"Are you sure?","Are you sure?"
+"Change status","Change status"
+Status,Status
+"Update attributes","Update attributes"
+Website,Website
+"Advanced Permissions","Advanced Permissions"
+"Advanced Permissions Tab","Advanced Permissions Tab"
+"Display All Products","Display All Products"
+"If set to ""No"", user will see only products from categories assigned to him.","If set to ""No"", user will see only products from categories assigned to him."
+"Show All Customers","Show All Customers"
+"If set to ""No"" user with restricted permissions can view customers from the website of the allowed store only.","If set to ""No"" user with restricted permissions can view customers from the website of the allowed store only."
+"Allow Deletion (Store-view restriction)","Allow Deletion (Store-view restriction)"
+"If set to ""Yes"" user with restricted permissions per Store-view can delete products, product images and categories.","If set to ""Yes"" user with restricted permissions per Store-view can delete products, product images and categories."
+"Allow Deletion (Website restriction)","Allow Deletion (Website restriction)"
+"If set to ""Yes"" user with restricted permissions per Website can delete products, product images and categories.","If set to ""Yes"" user with restricted permissions per Website can delete products, product images and categories."
+"Sorry, you have no permissions to delete this product. For more details please contact site administrator.","Sorry, you have no permissions to delete this product. For more details please contact site administrator."
+"Please, select allowed categories for the following stores: %s","Please, select allowed categories for the following stores: %s"
+"Sorry, you have no permissions to edit this product. For more details please contact site administrator.","Sorry, you have no permissions to edit this product. For more details please contact site administrator."
+"Review could not be deleted due to insufficent permissions.","Review could not be deleted due to insufficent permissions."
+"Some review(s) could not be deleted due to insufficent permissions.","Some review(s) could not be deleted due to insufficent permissions."
+Disabled,Disabled
+"Limit Access to Store Views/Categories","Limit Access to Store Views/Categories"
+"Limit Access to Websites","Limit Access to Websites"
+"No store-views or websites are chosen for the Role. If you proceed the advanced permissions settings will be disabled for the Role. Are you sure?","No store-views or websites are chosen for the Role. If you proceed the advanced permissions settings will be disabled for the Role. Are you sure?"
+"Please, assign at least one category for each checked store.","Please, assign at least one category for each checked store."
+"Store View","Store View"
+"Collapse All","Collapse All"
+"Expand All","Expand All"
+"ctrl+click to select multiple websites","ctrl+click to select multiple websites"

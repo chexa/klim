@@ -1,0 +1,89 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ *
+ * @category   AW
+ * @package    AW_Autorelated
+ * @copyright  Copyright (c) 2011 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ */
+?>
+<?php
+$abstractBlock = $this->helper('awautorelated')->getAbstractProductBlock();
+$collection = $this->getCollection();
+
+if ($this->getPosition() == AW_Autorelated_Model_Source_Position::INSTEAD_NATIVE_RELATED_BLOCK) {
+
+    $this->iterateBlock();
+
+    if ($collection && $collection->getSize()) {
+        $this->markAsShowed();
+    } elseif ($this->showNativeBlock()) {
+        echo $this->getParent()->getChildHtml('catalog-product-related');
+    }
+}
+
+
+/**
+ * We should merge 2 collections to show both autorelated and manually related products
+ */
+
+$relatedObject = new Jewellery_Catalog_Block_Product_Related();
+$relatedCollection = $relatedObject->getItems();
+
+$mergedCollection = new Varien_Data_Collection();
+
+if ($collection && $collection->getSize()) {
+    foreach($collection as $product) {
+        try {
+            $mergedCollection->addItem($product);
+        } catch (Exception $e) {
+            continue;
+        }
+    }
+}
+
+if ($relatedCollection && $relatedCollection->getSize()) {
+    foreach ($relatedCollection as $product) {
+        try {
+            $mergedCollection->addItem($product);
+        } catch (Exception $e) {
+            continue;
+        }
+    }
+}
+
+?>
+<?php if ($mergedCollection && $mergedCollection->getSize()) : ?>
+    <?php if (Mage::helper('awautorelated')->checkVersion('1.4')): ?>
+        <div class="block-related aw-arp-block aw-arp-block-<?php echo $this->getData('id') ?>">
+            <div class="block-title">
+                <strong><span><?php echo $this->getData('name') ?></span></strong>
+            </div>
+            <div class="subcategory">
+            <?php else: ?>
+                <div class="box base-mini mini-related-items aw-arp-block aw-arp-block-<?php echo $this->getData('id') ?>">
+                    <div class="head">
+                        <h4><?php echo $this->getData('name') ?></h4>
+                    </div>
+                    <div class="subcategory">
+                    <?php endif; ?>
+                    <ul class="prod-items">
+                        <?php foreach ($mergedCollection as $product) : ?>
+                            <?php echo $this->getLayout()->createBlock('jewellery_catalog/product_single')
+                                ->setTemplate('catalog/product/list_single.phtml')
+                                ->setProduct($product)
+                                ->toHtml();
+                            ?>
+                        <?php endforeach ?>
+                    </ul>
+                </div>
+            </div>
+        <?php endif; ?>

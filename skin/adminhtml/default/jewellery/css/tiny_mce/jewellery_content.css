@@ -1,0 +1,71 @@
+body, td, pre { color:#2f2f2f; font-family:Arial, Helvetica, sans-serif; font-size:12px; margin:8px; }
+body { background:#fff; }
+body.mceForceColors { background:#fff; color:#2f2f2f; }
+h1 {font-size: 2em}
+h2 {font-size: 1.5em}
+h3 {font-size: 1.17em}
+h4 {font-size: 1em}
+h5 {font-size: .83em}
+h6 {font-size: .75em}
+.mceItemTable, .mceItemTable td, .mceItemTable th, .mceItemTable caption, .mceItemVisualAid {border: 1px dashed #BBB;}
+img {border:0; vertical-align:middle; }
+table {cursor:default}
+table td, table th {cursor:text}
+ins {border-bottom:1px solid green; text-decoration: none; color:green}
+del {color:red; text-decoration:line-through}
+cite {border-bottom:1px dashed blue}
+acronym {border-bottom:1px dotted #CCC; cursor:help}
+abbr, html\:abbr {border-bottom:1px dashed #CCC; cursor:help}
+
+/* IE */
+* html body {
+scrollbar-3dlight-color:#F0F0EE;
+scrollbar-arrow-color:#676662;
+scrollbar-base-color:#F0F0EE;
+scrollbar-darkshadow-color:#DDD;
+scrollbar-face-color:#E0E0DD;
+scrollbar-highlight-color:#F0F0EE;
+scrollbar-shadow-color:#F0F0EE;
+scrollbar-track-color:#F5F5F5;
+}
+
+.title-h1, .title-h2, .title-h3, .title-h5, .title-h4, .title-h6{
+display: block;
+color: #0069ad;
+margin: 0 0 10px;
+}
+
+.title-h1{
+font: 26px 'M1pmedium', Arial, sans-serif;
+}
+.title-h2{
+font: 24px 'M1pmedium', Arial, sans-serif;
+}
+.title-h3{
+font: 22px 'M1pmedium', Arial, sans-serif;
+}
+.title-h4{
+font: 17px 'M1pmedium', Arial, sans-serif;
+margin: 0 0 5px;
+}
+.title-h5{
+font: 15px 'M1pregular', Arial, sans-serif;
+margin: 0 0 5px;
+}
+.title-h6{
+font: 13px 'M1pmedium', Arial, sans-serif;
+margin: 0 0 5px;
+}
+
+.benefit{
+margin: 0;
+}
+
+.benefit li{
+margin: 0;
+color: #3b3b3b;
+font-size: 14px;
+padding: 0 0 0 19px;
+list-style: none;
+background: url(../images/graphic.png) no-repeat 0 -439px
+}

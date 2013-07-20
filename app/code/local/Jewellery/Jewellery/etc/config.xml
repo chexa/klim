@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Jewellery>
+            <version>0.0.6</version>
+        </Jewellery_Jewellery>
+    </modules>
+    <stores>
+        <admin>
+            <design>
+                <package>
+                    <name>default</name>
+                </package>
+                <theme>
+                    <default>jewellery</default>
+                </theme>
+            </design>
+        </admin>
+    </stores>
+	<global>
+        <models>
+
+            <jewellery>
+                <class>Jewellery_Jewellery_Model</class>
+            </jewellery>
+
+            <core>
+                <rewrite>
+                    <translate>Jewellery_Jewellery_Model_Rewrite_CoreTranslate</translate>
+                </rewrite>
+            </core>
+
+			<cms>
+				<rewrite>
+					<wysiwyg_config>Jewellery_Jewellery_Model_Wysiwyg_Config</wysiwyg_config>
+				</rewrite>
+			</cms>
+            <catalog>
+                <rewrite>
+                    <category>Jewellery_Jewellery_Model_Rewrite_CatalogCategory</category>
+                </rewrite>
+            </catalog>
+            <customer>
+                <rewrite>
+                    <customer>Jewellery_Jewellery_Model_Rewrite_Customer</customer>
+                    <entity_setup>Jewellery_Jewellery_Model_Rewrite_CustomerEntitySetup</entity_setup>
+                    <form>Jewellery_Jewellery_Model_Rewrite_CustomerForm</form>
+                </rewrite>
+            </customer>
+            <customer_entity>
+                <rewrite>
+                    <customer>Jewellery_Jewellery_Model_Rewrite_CustomerEntityCustomer</customer>
+                </rewrite>
+            </customer_entity>
+		</models>
+
+        <blocks>
+            <jewellery>
+                <class>Jewellery_Jewellery_Block</class>
+            </jewellery>
+
+            <page>
+                <rewrite>
+                    <html_head>Jewellery_Jewellery_Block_Rewrite_PageHtmlHead</html_head>
+                </rewrite>
+            </page>
+
+            <catalog>
+                <rewrite>
+                    <product_view_attributes>Jewellery_Jewellery_Block_Rewrite_CatalogProductViewAttributes</product_view_attributes>
+                    <product_list>Jewellery_Jewellery_Block_Rewrite_CatalogProductList</product_list>
+                    <product_list_toolbar>Jewellery_Jewellery_Block_Rewrite_CatalogProductListToolbar</product_list_toolbar>
+                    <navigation>Jewellery_Jewellery_Block_Rewrite_CatalogNavigation</navigation>
+                </rewrite>
+            </catalog>
+
+
+            <customer>
+                <rewrite>
+                    <account_navigation>Jewellery_Jewellery_Block_Rewrite_AccountNavigation</account_navigation>
+                </rewrite>
+            </customer>
+        </blocks>
+
+        <helpers>
+            <jewellery>
+                <class>Jewellery_Jewellery_Helper</class>
+            </jewellery>
+        </helpers>
+
+        <!-- rewrite controller -->
+        <rewrite>
+            <jewellery_customer_account>
+                <from><![CDATA[#^/customer/account/#]]></from>
+                <to>/jewellery/customer_account/</to>
+            </jewellery_customer_account>
+        </rewrite>
+
+        <resources>
+             <jewellery_setup>
+                <setup>
+                    <module>Jewellery_Jewellery</module>
+                    <class>Jewellery_Jewellery_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </jewellery_setup>
+            <jewellery_write>
+                <connection><use>core_write</use></connection>
+            </jewellery_write>
+            <jewellery_read>
+                <connection><use>core_read</use></connection>
+            </jewellery_read>
+        </resources>
+
+        <events>
+            <customer_load_after>
+                <observers>
+                    <jewellery_jewellery_model_observer>
+                        <type>singleton</type>
+                        <class>Jewellery_Jewellery_Model_Observer</class>
+                        <method>customer_load_after</method>
+                    </jewellery_jewellery_model_observer>
+                </observers>
+            </customer_load_after>
+        </events>
+
+        <template>
+            <email>
+                <customer_sendregistrationdata_email_template translate="label" module="jewellery">
+                    <label>Jewellery: send customer registration data</label>
+                    <file>jewellery_customer_reg_data.html</file>
+                    <type>html</type>
+                </customer_sendregistrationdata_email_template>
+            </email>
+        </template>
+
+        <fieldsets>
+            <customer_address>
+                <street_additional><to_quote_address>*</to_quote_address></street_additional>
+                <telephone_area_code><to_quote_address>*</to_quote_address></telephone_area_code>
+            </customer_address>
+        </fieldsets>
+	</global>
+
+    <frontend>
+        <routers>
+            <jewellery>
+                <use>standard</use>
+                <args>
+                    <module>Jewellery_Jewellery</module>
+                    <frontName>jewellery</frontName>
+                </args>
+            </jewellery>
+        </routers>
+
+
+        <layout>
+            <updates>
+                <jewellery>
+                    <file>jewellery.xml</file>
+                </jewellery>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Jewellery_Jewellery>
+                    <files>
+                        <default>Jewellery_Jewellery.csv</default>
+                    </files>
+                </Jewellery_Jewellery>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Jewellery_Jewellery>
+                    <files>
+                        <default>Jewellery_Jewellery.csv</default>
+                    </files>
+                </Jewellery_Jewellery>
+            </modules>
+        </translate>
+		<layout>
+			<updates>
+				<shop>
+					<file>jewellery.xml</file>
+				</shop>
+			</updates>
+		</layout>
+    </adminhtml>
+
+    <default>
+        <jewellery>
+            <registration>
+                <sendregistrationdata_email_identity>general</sendregistrationdata_email_identity>
+                <sendregistrationdata_email_template>customer_sendregistrationdata_email_template</sendregistrationdata_email_template>
+            </registration>
+        </jewellery>
+
+
+        <url>
+         <convert>
+           <char0228><from>ä</from><to>ae</to></char0228>
+           <char0246><from>ö</from><to>oe</to></char0246>
+           <char0252><from>ü</from><to>ue</to></char0252>
+         </convert>
+       </url>
+
+    </default>
+</config>

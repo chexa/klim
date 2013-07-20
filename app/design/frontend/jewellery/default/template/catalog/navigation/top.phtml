@@ -1,0 +1,37 @@
+<?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
+<?php if($_menu): ?>
+<?php /* *************************************** ?>
+<div class="nav-container">
+    <ul id="nav">
+        <?php echo $_menu ?>
+    </ul>
+</div>
+<?php *************************************** */ ?> 
+<div id="main-nav">
+    <ul class="menu">
+      <li class="main-nav-homepage<?php if (Mage::helper('core/url')->getCurrentUrl() === Mage::helper('core/url')->getHomeUrl()):?> active<?php endif;?>">
+        <a title="Zur Startseite" href="<?php echo $this->getUrl('')?>">
+          <span><?php echo $this->__('Jewelry Wholesale') ?></span>
+          <span class="home-icon"></span>
+        </a>
+      </li>
+        <?php echo $_menu ?>
+    </ul>
+
+    <?php $queryText = $this->helper('catalogsearch')->getEscapedQueryText() ? $this->helper('catalogsearch')->getEscapedQueryText() : $this->__('Produktsuche'); ?>
+
+
+    <form id="search_mini_form" class="search-form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+        <div class="input-text"><input type="text" id="search" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo $queryText ?>"  onblur="if (this.value == '') {this.value = '<?php echo $this->__('Produktsuche') ?>';}" onfocus="if (this.value == '<?php echo $this->__('Produktsuche') ?>') {this.value = '';}" /></div>
+        <div class="input-btn"><input type="submit" value="<?php echo $this->__('Search') ?>" /></div>
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+        <script type="text/javascript">
+        //<![CDATA[
+            var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Produktsuche') ?>');
+            searchForm.initAutocomplete('<?php echo $this->helper('catalogsearch')->getSuggestUrl() ?>', 'search_autocomplete');
+        //]]>
+        </script>
+    </form>
+
+</div>
+<?php endif ?>

@@ -1,0 +1,52 @@
+<?php
+/**
+ * @see Mage_Checkout_Block_Cart_Shipping
+ */
+?>
+
+<?php if (($_shippingRateGroups = $this->getEstimateRates())): ?>
+
+<div class="info-block versand">
+    <?php $odd = 0; foreach ($_shippingRateGroups as $code => $_rates): ?>
+
+    <?php
+        $blockClass = !$odd++ ? 'versand-left' : 'versand-right';
+    ?>
+    <div class="<?php echo $blockClass; ?>">
+        <div class="versand-title">
+            <span class="title-h5"><?php echo $this->getCarrierName($code) ?></span>
+            <?php if ($carrierDescription = Mage::helper('jeshipping')->getCarrierDescription($code)) : ?><p><?php echo $carrierDescription; ?></p><?php endif; ?>
+        </div>
+		
+        <?php foreach ($_rates as $_rate): ?>
+            <?php if ($_rate->getErrorMessage()): ?>
+                <?php echo $_rate->getErrorMessage() ?>
+            <?php else: ?>
+                <label for="s_method_<?php echo $_rate->getCode() ?>">
+                    <input onclick="updateCartForm.submit(); return true;" name="estimate_method" type="radio" value="<?php echo $this->htmlEscape($_rate->getCode()) ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio" />                     <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                    <span class="versand-name"><?php echo $_rate->getMethodTitle() ?> 
+                    </span>
+                    <span class="versand-price">
+                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                        <?php echo $_excl; ?>
+                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                        <?php endif; ?>
+                    </span>
+                </label>
+                <span class="versand-ensurance">
+                    <?php if ($_rate->getMethodDescription()) : ?>
+                    Versichert bis <?php echo $_rate->getMethodDescription(); ?> €
+                    <?php else : ?>
+                        <?php echo $this->__('not insured'); ?>
+                    <?php endif; ?>
+                </span>
+             <?php endif ?>
+        <?php endforeach; ?>
+    </div>
+
+    <?php endforeach; ?>
+
+</div>
+
+<?php endif ?>

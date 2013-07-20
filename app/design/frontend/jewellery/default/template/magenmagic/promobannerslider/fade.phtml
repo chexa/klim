@@ -1,0 +1,55 @@
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl("js") ?>magenmagic/promobannerslider/fade/css/fade.css" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl("js") ?>magenmagic/promobannerslider/fade/fade.js"></script>
+
+    <style type="text/css">
+		.itemFade { width:100%}
+		.hideP { display:none}
+		.fadeSlD { margin-bottom:3px}
+    </style>
+
+<?php $iterator = 0; ?>
+
+<div class="fadeSlD">
+    <div class="fadeL" id="fadeL<?php echo $this->uniqID; ?>">
+        <?php foreach ( $this->imageList as $image ): ?>
+
+            <?php $link = $image->link; ?>
+            <?php if ( $link && $link != "" ): ?>
+                <a class="itemFade" rel="<?php echo Mage::getBaseUrl("media") . $image->path; ?>" href="<?php echo $link; ?>" target="_blank">
+            <?php else : ?>
+                <span class="itemFade" rel="<?php echo Mage::getBaseUrl("media") . $image->path; ?>" >
+            <?php endif; ?>
+
+                <?php if ( $iterator < 3 ) : ?>
+
+                    <img style="width:100%" src='<?php echo Mage::getBaseUrl("media") . $image->path; ?>' />
+
+                <?php endif; ?>
+
+            <?php if ( $link && $link != "" ): ?>
+                </a>
+            <?php else : ?>
+                 </span>
+            <?php endif; ?>
+
+            <?php $iterator++; ?>
+
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<?php $speed =  6 - $this->speed; ?>
+
+<script type="text/javascript">
+    (function ($) {
+        $(document).ready(function() {
+            $("#fadeL<?php echo $this->uniqID; ?>").fadeGallery({
+                speed : <?php echo $speed; ?>
+            });
+			
+			$("#fadeL<?php echo $this->uniqID; ?>").parent().prev("p").addClass("hideP");
+			$("#fadeL<?php echo $this->uniqID; ?>").parent().next().next("p").addClass("hideP");
+			
+        });
+    }) (jQuery);
+</script>

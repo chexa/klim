@@ -1,0 +1,60 @@
+<link rel="stylesheet" type="text/css" href="<?php echo Mage::getBaseUrl("js") ?>magenmagic/promobannerslider/carusel/css/smoothDivScroll-ex.css" />
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl("js") ?>magenmagic/promobannerslider/carusel/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="<?php echo Mage::getBaseUrl("js") ?>magenmagic/promobannerslider/carusel/jquery.smoothDivScroll-1.2-ex.js"></script>
+
+    <style type="text/css">
+        .crDM img { height:256px }
+		.hideP { display:none}
+    </style>
+
+<div class="crDM">
+    <div class="carousel-demo" id="carouselPromoBanner<?php echo $this->uniqID; ?>">
+        <?php foreach ( $this->imageList as $image ): ?>
+            <?php $link = $image->link; ?>
+            <?php if ( $link && $link != "" ): ?>
+                <a href="<?php echo $link; ?>" target="_blank_">
+            <?php endif; ?>
+            <img style="height:256px" src='<?php echo Mage::getBaseUrl("media") . $image->path; ?>' />
+            <?php if ( $link && $link != "" ): ?>
+                </a>
+            <?php endif; ?>
+        <?php endforeach; ?>
+		
+		<?php if ( sizeof ( $this->imageList ) < 5 ) : ?>
+		
+			<?php foreach ( $this->imageList as $image ): ?>
+				<?php $link = $image->link; ?>
+				<?php if ( $link && $link != "" ): ?>
+					<a href="<?php echo $link; ?>" target="_blank_">
+				<?php endif; ?>
+				<img style="height:256px" src='<?php echo Mage::getBaseUrl("media") . $image->path; ?>' />
+				<?php if ( $link && $link != "" ): ?>
+					</a>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		
+		<?php endif; ?>
+		
+    </div>
+</div>
+
+<?php $speed = 60 - $this->speed * 10; ?>
+
+<script type="text/javascript">
+    (function ($) {
+        $(document).ready(function() {
+            $("#carouselPromoBanner<?php echo $this->uniqID; ?>").smoothDivScroll({
+                mousewheelScrolling: false,
+                autoScrollingDirection: "<?php echo $this->direction; ?>",
+                manualContinuousScrolling: true,
+                visibleHotSpotBackgrounds: "",
+                autoScrollingMode: "<?php echo $this->auto; ?>",
+                autoScrollingInterval : <?php echo $speed; ?>
+            });
+			
+			$("#carouselPromoBanner<?php echo $this->uniqID; ?>").parent().prev("p").addClass("hideP");
+			$("#carouselPromoBanner<?php echo $this->uniqID; ?>").parent().next().next("p").addClass("hideP");
+			
+        });
+    }) (jQuery);
+</script>

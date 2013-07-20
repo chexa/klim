@@ -1,0 +1,91 @@
+<?php if ( $success = Mage::getSingleton('core/session')->getBannersMessage() ) : ?>
+    <div id="messages"><ul class="messages"><li class="success-msg"><ul><li><?php echo $success; ?></li></ul></li></ul></div>
+    <?php  Mage::getSingleton('core/session')->unsBannersMessage(); ?>
+    <br />
+<?php endif; ?>
+
+<style>
+    .imagesListB li { float:left; background: #DFDFDF; padding: 5px 10px 3px 10px; margin: 0 10px 10px 0}
+    .wrpM { display: block; overflow: hidden; position: relative; width:150px; height:130px;}
+    .wrpM img { display: block; position: relative;  margin: 0 auto; max-width: 150px;}
+    #moreLinkBanners {background: #DFDFDF; padding:6px 0; color:#000; display: block; text-align: center; font-size: 14px; margin-bottom: 20px}
+    .ms { padding: 2px 0 5px}
+    .chkItemlabel { position: relative; left:2px; top:2px;}
+    #imagesForm { margin-top: 15px;}
+</style>
+
+<?php if ( count ( $this->current_collection ) ) : ?>
+    <div id="imagesFormCurrent">
+
+        <h2>Current Collection Of This Category</h2>
+
+         <ul class="imagesListB clearfix">
+             <?php foreach ( $this->current_collection as $image ) : ?>
+                     <li><span class="wrpM">
+                         <a target="_blank" href="<?php echo Mage::getBaseUrl("media").$image->path; ?>"><img src="<?php echo Mage::getBaseUrl("media") . $image->thumb; ?>" alt="" /></a>
+                     </span>
+
+                         <div class="msq" style="text-align: center">
+                             <a href="javascript:void(0)" class="removeOne" rel="<?php echo $image->links_id; ?>">Remove From Collection</a>
+                         </div>
+
+                     </li>
+             <?php endforeach; ?>
+         </ul>
+
+     </div>
+
+       <br clear="all" />
+       <br />
+       <hr />
+       <br />
+       <br />
+
+<?php endif; ?>
+
+<?php if ( count ( $this->images ) ) : ?>
+<button id="UnCheckAllImages" type="button" class="scalable"  style=""><span>Uncheck All</span></button> &nbsp;
+<button id="CheckAllImages" type="button" class="scalable"  style=""><span>Check All</span></button>
+   &nbsp;
+   &nbsp;
+   &nbsp;
+
+<button id="deleteCurrent" type="button" class="scalable"  style=""><span>Delete Current</span></button> &nbsp;
+<button id="moveTo" type="button" class="scalable"  style=""><span>Save Current to this gallery</span></button>&nbsp;
+<button id="saveLinks" type="button" class="scalable"  style=""><span>Save Images Links</span></button>
+
+    <br />
+    <br />
+
+<?php endif; ?>
+
+<div id="imagesForm">
+
+    <ul class="imagesListB clearfix">
+        <?php foreach ( $this->images as $image ) : ?>
+                <li><span class="wrpM">
+                     <a target="_blank" href="<?php echo Mage::getBaseUrl("media").$image->path; ?>">
+                        <img src="<?php echo Mage::getBaseUrl("media") . $image->thumb; ?>" alt="" />
+                    </a>
+                    </span>
+
+                    <div class="ms">
+                        <input style="width:148px;" type="text" placeholder="Place For Link" value="<?php echo $image->getLink(); ?>" name="link[<?php echo $image->getId() ?>]" />
+                        <br clear="all" />
+                        <input type="checkbox" name="chkItem[]" class="chkItemInput" id="chkItem<?php echo $image->getId() ?>" value="<?php echo $image->getId() ?>" />
+                        <label class="chkItemlabel" for="chkItem<?php echo $image->getId() ?>">Check</label>
+                    </div>
+
+                </li>
+        <?php endforeach; ?>
+    </ul>
+
+</div>
+
+    <br clear="all" />
+
+    <?php if ( count ( $this->images ) < $this->size ) : ?>
+
+        <a href="javascript:void(0)" id="moreLinkBanners" rel="<?php echo ($this->currpage) + 1; ?>" >Show More</a>
+
+    <?php endif; ?>

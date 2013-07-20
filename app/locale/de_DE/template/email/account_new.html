@@ -1,0 +1,81 @@
+<!--@subject Standard-Schmuck.de - Ihre Registrierung @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$customer.name":"Customer Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var customer.customer_number":"Customer Number",
+var customer.email":"Customer Email",
+"htmlescape var=$customer.password":"Customer Password"}
+@-->
+
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+        <tr>
+            <td align="center" valign="top" style="padding:20px 0 20px 0">
+                <!-- [ header starts here] -->
+                <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                    <tr>
+                <td>
+                  <table  width="100%">
+                    <tr>
+                      <td valign="top" width="70%"><a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/></a></td>
+                      <td valign="top"  width="30%">
+                        <p><strong>E-Mail:</strong> 
+                          <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a>
+                        <br />
+                          <strong>Telefon:</strong> {{config path='general/store_information/phone'}}
+                        </p>
+                     {{customVar code=office_hours}}
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+                <!-- [ middle starts here] -->
+                    <tr>
+                        <td valign="top">
+                            <h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;"">Sehr geehrte(r) {{htmlescape var=$customer.name}},</h1>
+                            herzlich willkommen in unserem Shop. Um sich bei Ihrem nächsten Besuch in unserem Shop einzuloggen, geben Sie einfach im oberen Bereich einer Seite Ihre Kundennummer und Passwort ein und klicken Sie auf <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;">Anmelden</a>.</p>
+
+                            <p style="border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; margin: 0 20px">
+                                Mit folgenden <b>Zugangsdaten</b> können Sie sich unter <a href="{{store url=""}}">www.standard-schmuck.de</a> anmelden:<br/>
+                                <b>Kundennummer</b>: {{var customer.customer_number}}<br/>
+                                <b>Passwort</b>: {{htmlescape var=$customer.password}}</p>
+
+                            <p>Nach erfolgreichem Login auf unserer Seite haben Sie die folgenden Möglichkeiten:</p>
+
+                            <ul>
+                                <li>EK-Preise einsehen und Bestellungen auslösen</li>
+                                <li>Alle laufenden Bestellungen im Auge behalten</li>
+                                <li>Verlauf der vergangenen Bestellungen einsehen</li>
+                                <li>Kundenkonto-Einstellungen verwalten</li>
+                                <li>Ihr Passwort ändern</li>
+                                <li>Verschiedene Adressen für den Versand an verschiedene Filialen sowie Rechnungsadressen speichern</li>
+                            </ul>
+                            <p style="border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; margin: 0 20px">
+                                Bitte beachten Sie, dass wir Ihre <b>Lieferung per Nachnahme</b> versenden, wenn nicht anders vereinbart.
+                            </p>
+                            <p>Sollten Sie Fragen zu Ihrem Kundenkonto oder andere Anfragen haben, senden Sie uns eine E-Mail an <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a> oder rufen Sie uns von Montag bis Freitag von 8.00 bis 16.30 Uhr unter {{config path='general/store_information/phone'}} an.</p>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;"><center><p style="font-size:12px; margin:0;">Vielen Dank, Ihr <strong>{{var store.getFrontendName()}}</strong> Team</p></center></td>
+                    </tr>
+                    <tr>
+                <td>
+                  {{customVar code=signature}}
+                </td>
+            </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>

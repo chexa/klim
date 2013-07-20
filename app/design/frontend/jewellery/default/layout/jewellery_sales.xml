@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <sales_order_view>
+        <reference name="order_totals">
+            <block type="jewellery_sales/order_netto" name="netto"/>
+        </reference>
+    </sales_order_view>
+
+    <sales_order_print>
+        <reference name="order_totals">
+            <block type="jewellery_sales/order_netto" name="netto"/>
+            <action method="setLabelProperties"><value>colspan="5" class="a-right"</value></action>
+        </reference>
+    </sales_order_print>
+
+    <sales_email_order_items>
+        <reference name="order_totals">
+            <block type="jewellery_sales/order_netto" name="netto"/>
+            <action method="setLabelProperties"><value>colspan="4" align="right" style="padding:0px 9px"</value></action>
+            <action method="setValueProperties"><value>align="right" style="padding:0px 9px"</value></action>
+        </reference>
+    </sales_email_order_items>
+
+    <sales_order_history translate="label">
+        <reference name="my.account.wrapper">
+            <remove name="customer.account.link.back" />
+        </reference>
+    </sales_order_history>
+
+    <sales_order_view>
+        <reference name="order_totals">
+            <action method="setLabelProperties"><value>colspan="5" class="align-right"</value></action>
+            <action method="setValueProperties"><value>class="last align-right"</value></action>
+        </reference>
+    </sales_order_view>
+</layout>

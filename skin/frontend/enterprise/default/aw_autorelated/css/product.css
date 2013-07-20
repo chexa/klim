@@ -1,0 +1,20 @@
+.aw-arp-block-content {
+    padding: 5px 0px 0px 5px;
+}
+.aw-arp-item {
+    text-align: center;
+    width: 100px;
+    min-height: 100px;
+    display: -moz-inline-stack;
+    display: inline-block !important;
+    vertical-align: top;
+    margin: 5px;
+    zoom: 1;
+    *display: inline;
+    _height: 250px;
+    margin-bottom:20px;
+}
+
+
+.footer .aw-arp-block{clear:both;}
+.footer .aw-arp-block ul {width: 100%;}

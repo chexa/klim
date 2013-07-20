@@ -1,0 +1,18 @@
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Clever_Catalog_Block_Navigation
+ */
+?>
+<?php
+    /** @var $this Clever_Catalog_Block_Navigation */
+    $_menu = $this->renderCmsMenuHtml();
+?>
+<?php if ($_menu): ?>
+<div class="nav-container">
+    <ul id="left-nav">
+        <?php echo $_menu ?>
+    </ul>
+</div>
+<?php endif ?>

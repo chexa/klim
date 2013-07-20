@@ -1,0 +1,71 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<div class="block">
+    <div class="inside">
+        <h1 class="title-h3"><?php echo $this->__('Trade Certificate'); ?></h1>
+
+        <div class="reg-box fl">
+            <div class="block">
+                <div class="inside">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('register_trade_certificate_message')->toHtml() ?>
+                </div>
+            </div>
+            <div class="info-block">
+                <form enctype="multipart/form-data" action="<?php echo Mage::helper('jewellery')->getLicensePostUrl(); ?>" method="post" class="gewerbeschein-form" id="license-form">
+
+                    <p class="checkbox-row">
+                        <input type="checkbox" class="fl" id="datei" name="license_upload" checked/>
+                        <span>Ich lade den Gewerbeschein als Datei hoch</span>
+                    </p>
+
+                    <div id="als-datei">
+                        <div class="file-button"><input name="license-file" type="file" value="Durchsuchen" onchange='document.getElementById("fileName").value=this.value' class="file-input" /><input type="text" class="file-val" readonly="readonly" id="fileName" /></div>
+                        <p class="verysmall-text none-indent">Hier können Sie Ihren Gewerbeschein im Format .jpg .pdf hochladen.</p>
+                        <input type="submit" value="" class="hochladen-button" name="license_submit"/>
+                        <span><?php echo $this->getLicenseFilename(); ?></span>
+                    </div>
+
+                    <p class="checkbox-row">
+                        <input type="checkbox" class="fl" id="fax" name="license_send"/>
+                        <span>Ich schicke den Gewerbeschein per Fax zu.<br />Faxnummer: +49 (0)201 234 154</span>
+                    </p>
+
+                    <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="link-prev2 fl"><?php echo $this->__('back'); ?></a>
+
+                    <div class="weiter-btn fr"><input type="submit" value="" name="submit" id="license-form-submit"/><?php echo $this->__('Next'); ?><span></span></div>
+                </form>
+            </div>
+        </div>
+        <div class="firm-box fr">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('register_right_col')->toHtml() ?>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">//<![CDATA[
+
+    $j(document).ready(function(){
+
+        $j("#content")
+            .addClass("register-page")
+            .addClass("reg-steps");
+
+        $j('#license-form-submit').click(function(){
+            $j('#license-form a.checkbox').each(function(){
+                var $id = $j(this).attr('id');
+                if ($j(this).hasClass('checked')) {
+                    $j('input#' + $id).attr('checked', 'checked');
+                } else {
+                    $j('input#' + $id).removeAttr('checked');
+                }
+            });
+        });
+
+        <?php if (Mage::getSingleton('jewellery/session')->getCustomerLicenseUploadType() == 'send') : ?>
+        clickFaxCheckbox();
+        <?php else : ?>
+        clickFileCheckbox();
+        <?php endif; ?>
+    });
+//]]></script>

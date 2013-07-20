@@ -1,0 +1,44 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="block">
+	<div class="inside">
+		<h1 class="title-h3"><?php echo $this->__('Forgot Your Password?') ?></h1>
+
+		<div class="reg-box fl">
+			<div class="info-block">
+				<h4>Autorisierung als Bestandskunde von Max Fröhlich</h4>
+				<p>Sie sind bereits Kunde von Max Fröhlich haben aber noch keine
+					Zugangsdaten für den Shop?</p>
+				<p>Zur Autorisierung benötigen wir von Ihnen folgende Daten:</p>
+
+				<form action="<?php echo $this->getUrl('*/*/firmloginpost') ?>" method="post" id="form-validate">
+					<label class="form-row">Ihre Firma<span class="mandatory">*</span><input type="text" name="firm_name" alt="firm_name" id="firm_name" class="input-text form-input-text required-entry" value="" /></label>
+					<br class="clear" />
+
+					<label class="form-row">Ihre Kunden-Nr.<span class="mandatory">*</span><input type="text" name="customer_number" alt="customer_number" id="customer_number" class="input-text form-input-text required-entry" value="" /></label>
+					<br class="clear" />
+
+					<label class="form-row">Postleitzahl<span class="mandatory">*</span><input type="text" name="zip" alt="zip" id="zip" class="input-text form-input-text required-entry" value="" /></label>
+					<br class="clear" />
+
+					<label class="form-row">Ort<span class="mandatory">*</span><input type="text" name="city" alt="city" id="city" class="input-text form-input-text required-entry" value="" /></label>
+					<br class="clear" />
+
+					<label class="form-row">E-Mail<span class="mandatory">*</span> (für die Zusendung der Zugangsdaten) <input type="text" name="email" alt="email" id="email_address" class="input-text form-input-text validate-email required-entry" value="" /></label>
+					<br class="clear" />
+					<br class="clear" />
+					<input type="submit" class="button-link" value="Autorisieren" name="send" id="send2"/>
+				</form>
+			</div>
+		</div>
+		<div class="firm-box fr">
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('register_right_col')->toHtml() ?>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	//<![CDATA[
+	var dataForm = new VarienForm('form-validate', true);
+	//]]>
+</script>

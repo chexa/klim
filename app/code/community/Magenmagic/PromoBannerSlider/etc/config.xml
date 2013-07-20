@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magenmagic_PromoBannerSlider>
+            <version>0.1.0</version>
+        </Magenmagic_PromoBannerSlider>
+    </modules>
+
+    <frontend>
+        <routers>
+            <promobannerslider>
+                <use>standard</use>
+                <args>
+                    <module>Magenmagic_PromoBannerSlider</module>
+                    <frontName>promobannerslider</frontName>
+                </args>
+            </promobannerslider>
+        </routers>
+        <layout>
+            <updates>
+                <promobannerslider>
+                    <file>promobannerslider.xml</file>
+                </promobannerslider>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<promobannerslider>
+				<use>admin</use>
+				<args>
+					<module>Magenmagic_PromoBannerSlider</module>
+					<frontName>promobannerslider</frontName>
+				</args>
+			</promobannerslider>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<cms><children>
+				<promobannerslider module="promobannerslider">
+					<title>Promo Slider Banner</title>
+					<sort_order>71</sort_order>
+                    <action>promobannerslider/adminhtml_promobannerslider</action>
+				</promobannerslider>
+			</children></cms>
+		</menu>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <magenmagic_promosliderbanner>
+                                            <title>Promo Slider Banner</title>
+                                        </magenmagic_promosliderbanner>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<promobannerslider>
+					<file>promobannerslider.xml</file>
+				</promobannerslider>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+	
+	   <blocks>
+            <promobannerslider>
+				<class>Magenmagic_PromoBannerSlider_Block</class>
+			</promobannerslider>
+        </blocks>
+        <helpers>
+            <promobannerslider>
+				<class>Magenmagic_PromoBannerSlider_Helper</class>
+			</promobannerslider>
+        </helpers>
+	
+        <models>
+            <promobannerslider>
+                <class>Magenmagic_PromoBannerSlider_Model</class>
+                <resourceModel>promobannerslider_mysql4</resourceModel>
+            </promobannerslider>
+            <promobannerslider_mysql4>
+                <class>Magenmagic_PromoBannerSlider_Model_Mysql4</class>
+                <entities>
+                    <promobannerslider>
+                        <table>magenmagic_promobannerslider</table>
+                    </promobannerslider>
+                    <bannersimages>
+                        <table>magenmagic_promobannerslider_images</table>
+                    </bannersimages>
+                    <links>
+                        <table>magenmagic_promobannerslider_links</table>
+                    </links>
+                </entities>
+            </promobannerslider_mysql4>
+
+            <!-- Images Model -->
+            <bannersimages>
+                <class>Magenmagic_BannersImages_Model</class>
+                <resourceModel>bannersimages_mysql4</resourceModel>
+            </bannersimages>
+
+
+        </models>
+        <resources>
+            <promobannerslider_setup>
+                <setup>
+                    <module>Magenmagic_PromoBannerSlider</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </promobannerslider_setup>
+            <promobannerslider_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </promobannerslider_write>
+            <promobannerslider_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </promobannerslider_read>
+        </resources>
+     
+    </global>
+</config>

@@ -1,0 +1,71 @@
+<?php
+    $_product = $this->getProduct();
+    $_loggedin = Mage::helper('customer')->isLoggedIn();
+    $_helper = $this->helper('catalog/output');
+
+    $attrMaterial = $_helper->productAttribute($_product, $_product->getMaterial(), 'material');
+    $attrMaterial = ($attrMaterial) ? strtolower($attrMaterial) : '';
+
+    $attrBearbeitungsart = $_helper->productAttribute($_product, $_product->getBearbeitungsart(), 'bearbeitungsart');
+    $attrBesatz = $_product->getAttributeText('besatz'); //$_helper->productAttribute($_product, $_product->getBesatz(), 'besatz');
+
+    $attrName = $_helper->productAttribute($_product, $_product->getName(), 'name');
+    $attrNameLong = $_helper->productAttribute($_product, $_product->getNameLong(), 'name_long');
+
+    $attrDrahtValue = $_helper->productAttribute($_product, $_product->getDrahtMm(), 'draht_mm');
+    $attrBreiteValue = $_product->getAttributeText('breite_mm');//$_helper->productAttribute($_product, $_product->getBreiteMm(), 'breite_mm');
+    $attrStaerkeValue = $_helper->productAttribute($_product, $_product->getStaerkeMm(), 'staerke_mm');
+
+    $attrDrahtLabel = $this->__('Wire');
+    $attrBreiteLabel = $this->__('Width');
+    $attrStaerkeLabel = $this->__('Strength');
+
+    $attrWidthLabel = '';
+    $attrWidthValue = '';
+
+    if ($attrBreiteValue && $attrStaerkeValue && $attrDrahtValue) {
+        $attrWidthValue = $attrDrahtValue . '/' . $attrBreiteValue . ' x ' . $attrStaerkeValue . '  mm';
+        $attrWidthLabel = $attrDrahtLabel . '/' . $attrBreiteLabel . ' x ' . $attrStaerkeLabel;
+    } elseif ($attrBreiteValue && $attrStaerkeValue) {
+        $attrWidthValue =  $attrBreiteValue . ' x ' . $attrStaerkeValue . '  mm';
+        $attrWidthLabel =  $attrBreiteLabel . ' x ' . $attrStaerkeLabel;
+    } elseif ($attrBreiteValue && $attrDrahtValue) {
+        $attrWidthValue = $attrDrahtValue . '/' . $attrBreiteValue . '  mm';
+        $attrWidthLabel = $attrDrahtLabel . '/' . $attrBreiteLabel;
+    }
+    else {
+        if ($attrDrahtValue) {
+            $attrWidthValue = $attrDrahtValue;
+            $attrWidthLabel = $attrDrahtLabel;
+        }
+        if ($attrBreiteValue) {
+            $attrWidthValue = $attrBreiteValue . '  mm';
+            $attrWidthLabel = $attrBreiteLabel;
+        }
+        if ($attrStaerkeValue) {
+            $attrWidthValue = $attrStaerkeValue . '  mm';
+            $attrWidthLabel = $attrStaerkeLabel;
+        }
+    }
+
+?>
+<li>
+    <h3><a href="<?php echo $_product->getProductUrl() ?>"><?php echo $attrName ?></a></h3>
+    <ul class="prod-descr">
+        <li class="descr-left">
+            <span><?php echo $attrWidthLabel; ?></span>
+            <span><strong><?php if ($attrWidthValue) : ?><?php echo $attrWidthValue; ?><?php endif; ?></strong></span>
+        </li>
+        <li class="descr-mid">
+            <span><?php echo $this->__('Quality'); ?></span>
+            <span class="mark-text <?php echo $attrMaterial; ?> material-wide"><?php echo $_helper->productAttribute($_product, $_product->getMaterialListview(), 'material_listview'); ?></span>
+            <span class="mark-text"><?php if ($attrBearbeitungsart) echo $attrBearbeitungsart; ?> <?php if ($attrBesatz) echo $this->__('with ') . $attrBesatz; ?></span>
+        </li>
+        <li class="price">
+            <?php echo Mage::helper('jewellery_catalog')->getUvpPriceHtml($_product); ?>
+            <?php if ($_loggedin) : ?><span class="ek-price"><strong><?php echo $this->getPriceHtml($_product, true) ?><span class="price-info">pro VPE</span></strong></span><?php endif; ?>
+        </li>
+    </ul>
+    <div class="wide-img"><span><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(245, 100); ?>" width="245" height="100" alt="<?php echo $attrNameLong; ?>" /></span></div>
+    <a rel="nofollow" href="<?php echo $this->getUrl('ajax/product/quickview/id/' . $_product->getId()) ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>" class="ajax button-link"><span class="magnifier"></span>Schnellansicht</a>
+</li>

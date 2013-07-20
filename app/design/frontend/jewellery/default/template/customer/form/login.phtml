@@ -1,0 +1,86 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="block">
+    <div class="inside">
+        <h1 class="title-h3"><?php echo $this->__('Login or Create an Account') ?></h1>
+
+        <div class="reg-box fl">
+            <div class="info-block">
+                <h4><?php echo $this->__('New Customers') ?></h4>
+
+                <p>Wenn Sie sich als Schmuckfachhändler anmelden, können Sie die EK-Preise einsehen und Schmuckware bestellen.</p>
+
+                <p>Sind Sie <a href="/information/fuer-schmuck-fachhaendler/" class="darklink" target="_self">Schmuckfachhändler</a>?</p>
+                <p>Sind Sie <a href="/information/fuer-endverbraucher" class="darklink">Privatperson</a>?</p>
+                <form action="<?php echo Mage::helper("jewellery")->getToRegisterUrl() ?>" method="post" id="toregister-form">
+                    <p><label class="checkbox-row"><input type="checkbox" id="is_dealer"/>Ja, ich bin Schmuckfachhändler</label></p>
+                    <input id="register_submit" type="submit" value="<?php echo $this->__('Create an Account') ?>" class="button-link"/>
+
+                 </form>
+            </div>
+        </div>
+        <div class="reg-box fr">
+            <div class="info-block">
+                <h4><?php echo $this->__('Registered Customers without Access') ?></h4>
+                <!--<p>Rufen Sie uns jetzt an und fordern Sie Ihre Zugangsdaten für unseren Shop ohne zusätzliche Registrierung.</p>-->
+
+				<p>
+					Bitte <a href="<?php echo Mage::getBaseUrl() . 'customer/account/firmlogin' ?>">autorisieren Sie sich als Bestandskunde</a> oder<br />
+					Rufen Sie uns an und fordern Sie Ihre<br />
+					Zugangsdaten für unseren Shop ohne zusätzliche<br />
+					Registrierung.
+				</p>
+
+				<input id="register_submit1" onclick="document.location.href = '<?php echo Mage::getBaseUrl() . 'customer/account/firmlogin' ?>'" type="button" value=" Als Kunde autorisieren" class="button-link"/>
+
+                <?php /*echo $this->getLayout()->createBlock('cms/block')->setBlockId('frelich_sidebar_contact_small')->toHtml() */?>
+            </div>
+        </div>
+        <div class="reg-box fl fullwidth">
+            <div class="info-block">
+
+                <div class="reg-box fl">
+                  <h4><?php echo $this->__('Registered Customers') ?></h4>
+                  <p><?php echo $this->__('If you have an account with us, please log in.') ?></p>
+                </div>
+                <div class="reg-box fr" style="width:47%;">
+                  <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+
+                    <input type="hidden" name="referer_url" value="<?php echo Mage::app()->getRequest()->getServer('HTTP_REFERER'); ?>" />
+
+                    <div>
+                        <label class="form-row"><?php echo $this->__('Customer Number') ?><input type="text" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="form-input-text input-text required-entry" title="<?php echo $this->__('Customer number') ?>" /></label>
+                        <br class="clear" />
+                        <label class="form-row"><?php echo $this->__('Password') ?><input type="password" name="login[password]" class="form-input-text input-text required-entry" id="pass" title="<?php echo $this->__('Password') ?>" /></label>
+                    </div>
+
+                    <br class="clear" />
+
+                    <div>
+                        <input type="submit" class="button-link" value="<?php echo $this->__('Login') ?>" name="send" id="send2"/>
+                    </div>
+                    <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>
+                </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script type="text/javascript">//<![CDATA[
+    $j("#content").addClass("register-page");
+
+    var dataForm = new VarienForm('login-form', true);
+
+    $j("#register_submit").click(function(){
+        if (!$j("a#is_dealer").hasClass("checked")) {
+            alert('<?php echo $this->__('You did not check the checkbox') ?>');
+            return false;
+        }
+    return true;
+    });
+//]]></script>

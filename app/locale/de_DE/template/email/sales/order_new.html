@@ -1,0 +1,131 @@
+<!--@subject Standard-Schmuck.de - Neue Bestellung Nr. {{var order.increment_id}} | KdNr.: {{var order.customer.customer_number}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$order.getCustomerName()":"Customer Name",
+"var store.getFrontendName()":"Store Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var order.increment_id":"Order Id",
+"var order.getCreatedAtFormated('long')":"Order Created At (datetime)",
+"var order.getBillingAddress().format('html')":"Billing Address",
+"var payment_html":"Payment Details",
+"var order.getShippingAddress().format('html')":"Shipping Address",
+"var order.getShippingDescription()":"Shipping Description",
+"layout handle=\"sales_email_order_items\" order=$order":"Order Items Grid",
+"var order.getEmailCustomerNote()":"Email Order Note"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; font:12px/1em Verdana, Arial, Helvetica, sans-serif; }
+p {margin-bottom: 0.3em}
+dt {clear: left; float: left; margin: 0 4px 0 0;}
+@-->
+
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+    <td align="center" valign="top" style="padding:20px 0 20px 0">
+        <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+            <!-- [ header starts here] -->
+            <tr>
+              <td>
+                <table  width="100%" style="border-bottom:1px solid #E0E0E0;">
+                  <tr>
+                  <td valign="bottom" width="38%"><a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/></a></td>
+                  <td align="center" valign="top"  width="24%">
+                    {{customVar code=office_hours}}
+                  </td>
+                  <td valign="bottom" width="38%">
+                      <p><strong>E-Mail:</strong> 
+                        <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a>
+                      <br />
+                        <strong>Telefon:</strong> {{config path='general/store_information/phone'}}
+                      </p>
+                      <p>
+                        <strong>Ihre Kunden Nr.: {{var order.customer.customer_number}}</strong>
+                      </p>
+                    </td>
+                    
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <!-- [ middle starts here] -->
+            <tr>
+                <td valign="top">
+                    <h2 style="font-size:20px; font-weight:normal; line-height:22px; margin:0 0 11px 0;"">Vielen Dank für Ihre Bestellung bei {{var store.getFrontendName()}}!</h2>                  
+                    <p style="font-size:12px; line-height:18px; margin:0;">
+                      Sie können Ihrer Bestellung auch  <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;">in Ihrem Kundenbereich</a> einsehen.
+                    </p>
+                    <p style="font-size:12px; line-height:18px; margin:0;">
+                      Sollten Sie Fragen zu Ihrem Kundenkonto oder andere Anfragen haben, senden Sie uns eine E-Mail oder rufen Sie uns an.
+                    </p>
+                    <p style="font-size:12px; line-height:18px; margin:0;">
+                      Nachfolgend finden Sie Ihre Bestellbestätigung. <br />
+                    </p>
+                    
+                    
+                  </td>
+            </tr>
+            <tr>
+                <td>
+                    <h2 style="font-size:18px; font-weight:normal; margin:0;">
+                      Ihre Bestellung Nr.{{var order.increment_id}} &nbsp;<small style="font-size:11px;">(ausgeführt am {{var order.getCreatedAtFormated('long')}})</small>
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                    {{depend order.getIsNotVirtual()}}
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th align="left" width="38%" bgcolor="#EAEAEA" style="font-size:12px; padding:4px 9px 6px 9px; line-height:1em;">Rechnungs- <br />&amp; Versandadresse:</th>
+                            <th width="10"></th>
+                            <th align="left" width="24%" bgcolor="#EAEAEA" style="font-size:12px; padding:4px 9px 6px 9px; line-height:1em;">Zahlungsmethode:</th>
+                            <th width="10"></th>
+                            <th align="left" width="38%" bgcolor="#EAEAEA" style="font-size:12px; padding:4px 9px 6px 9px; line-height:1em;">Versandart:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td valign="top" style="font-size:12px; padding:6px 8px 8px 8px; border-left:1px solid #EAEAEA; border-bottom:1px solid #EAEAEA; border-right:1px solid #EAEAEA;">
+                                {{var order.getBillingAddress().format('html')}}
+                            </td>
+                            <td>&nbsp;</td>
+                            <td valign="top" style="font-size:12px; padding:6px 8px 8px 8px; border-left:1px solid #EAEAEA; border-bottom:1px solid #EAEAEA; border-right:1px solid #EAEAEA;">
+                                {{var payment_html}}
+                            </td>
+                            <td>&nbsp;</td>
+                            <td valign="top" style="font-size:12px; padding:6px 8px 8px 8px; border-left:1px solid #EAEAEA; border-bottom:1px solid #EAEAEA; border-right:1px solid #EAEAEA;">
+                                {{var order.getShippingDescription()}}
+                                &nbsp;
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                  <br />
+                    {{/depend}}
+                    {{layout handle="sales_email_order_items" order=$order}}
+                    
+                    <p style="border:1px solid #BEBCB7; padding:8px 10px; background:#F8F7F5; margin:4px 8px;">
+                      <strong>Zusätzliche Angaben:</strong> &nbsp; <span style="font-size:14px; padding:8px 10px; background:#ffff00; margin:4px 8px;">{{var order.getEmailCustomerNote()}}</span>
+                    </p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;"><center><p style="font-size:12px; margin:0;">Vielen Dank, Ihr <strong>{{var store.getFrontendName()}} - Team</strong></p></center></td>
+            </tr>
+            <tr>
+                <td>
+                  {{customVar code=signature}}
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+</table>
+</div>
+</body>

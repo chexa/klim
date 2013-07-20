@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ *
+ * @category   AW
+ * @package    AW_Islider
+ * @copyright  Copyright (c) 2011 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/LICENSE-M1.txt
+ */
+?>
+<?php if ($this->getBlocks() && $this->getBlocks()->getSize()) : ?>
+    <?php echo $this->getBlocksHtml() ?>
+    <script type="text/javascript">
+        //<![CDATA[
+                                        
+        document.observe('dom:loaded', function () {
+            var aw_arp_popup=false;
+            $$('#map-popup').each(
+            function(item){
+                if(aw_arp_popup){ item.remove(); }
+                aw_arp_popup=true;
+            });
+        }
+    );
+        //]]>
+    </script>
+<?php endif; ?>

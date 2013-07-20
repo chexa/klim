@@ -1,0 +1,230 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Shipping>
+            <version>0.0.2</version>
+        </Jewellery_Shipping>
+    </modules>
+    
+    <global>
+
+        <models>
+
+            <jeshipping>
+                <class>Jewellery_Shipping_Model</class>
+            </jeshipping>
+
+
+            <jeshipping>
+                <class>Jewellery_Shipping_Model</class>
+                <resourceModel>jeshipping_mysql4</resourceModel>
+            </jeshipping>
+            <jeshipping_mysql4>
+                <class>Jewellery_Shipping_Model_Mysql4</class>
+                <entities>
+                    <method>
+                        <table>jeshipping_method</table>
+                    </method>
+                </entities>
+            </jeshipping_mysql4>
+
+            <shipping>
+                <rewrite>
+                    <rate_result>Jewellery_Shipping_Model_Rewrite_ShippingRateResult</rate_result>
+                </rewrite>
+            </shipping>
+
+        </models>
+
+        <blocks>
+            <jeshipping>
+                <class>Jewellery_Shipping_Block</class>
+            </jeshipping>
+        </blocks>
+
+        <helpers>
+            <jeshipping>
+                <class>Jewellery_Shipping_Helper</class>
+            </jeshipping>
+        </helpers>
+        
+        <resources>
+             <jeshipping_setup>
+                <setup>
+                    <module>Jewellery_Shipping</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </jeshipping_setup>
+            <jeshipping_write>
+                <connection><use>core_write</use></connection>
+            </jeshipping_write>
+            <jeshipping_read>
+                <connection><use>core_read</use></connection>
+            </jeshipping_read>
+        </resources>
+
+        <events>
+            <checkout_cart_save_after>
+                <observers>
+                    <jewellery_jewellery_model_observer>
+                        <type>singleton</type>
+                        <class>Jewellery_Shipping_Model_Observer</class>
+                        <method>checkout_cart_save_after</method>
+                    </jewellery_jewellery_model_observer>
+                </observers>
+          </checkout_cart_save_after>
+
+          <controller_action_postdispatch_checkout_cart_updatePost>
+                <observers>
+                    <jewellery_jewellery_model_observer>
+                        <type>singleton</type>
+                        <class>Jewellery_Shipping_Model_Observer</class>
+                        <method>controller_action_postdispatch_checkout_cart_updatePost</method>
+                    </jewellery_jewellery_model_observer>
+                </observers>
+          </controller_action_postdispatch_checkout_cart_updatePost>
+
+        </events>
+
+    </global>
+    
+    <frontend>
+        <routers>
+            <jeshipping>
+                <use>standard</use>
+                <args>
+                    <module>Jewellery_Shipping</module>
+                    <frontName>jeshipping</frontName>
+                </args>
+            </jeshipping>
+        </routers>
+
+        <layout>
+            <updates>
+                <jeshipping>
+                    <file>jeshipping.xml</file>
+                </jeshipping>
+            </updates>
+        </layout>
+        
+        <translate>
+            <modules>
+                <Jewellery_Shipping>
+                    <files>
+                        <default>Jewellery_Shipping.csv</default>
+                    </files>
+                </Jewellery_Shipping>
+            </modules>
+        </translate>
+    </frontend>
+
+    <admin>
+        <routers>
+            <jeshipping>
+                <use>admin</use>
+                <args>
+                    <module>Jewellery_Shipping</module>
+                    <frontName>jeshipping</frontName>
+                </args>
+            </jeshipping>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <translate>
+            <modules>
+                <Jewellery_Shipping>
+                    <files>
+                        <default>Jewellery_Shipping.csv</default>
+                    </files>
+                </Jewellery_Shipping>
+            </modules>
+        </translate>
+        
+        <layout>
+            <updates>
+                <shop>
+                    <file>jeshipping.xml</file>
+                </shop>
+            </updates>
+        </layout>
+
+
+		<menu>
+		    <sales>
+                <children>
+                    <jeshipping translate="title" module="jeshipping">
+                        <title>Deutsche Post Shipping Methods</title>
+                        <sort_order>300</sort_order>
+                        <action>jeshipping/adminhtml_method</action>
+                    </jeshipping>
+                </children>
+            </sales>
+		</menu>
+
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+                <admin>
+                    <children>
+            		    <sales>
+                            <children>
+                                <jeshipping translate="title">
+                                    <title>Deutsche Post Shipping Methods</title>
+                                    <sort_order>100</sort_order>
+                                </jeshipping>
+                            </children>
+                        </sales>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <jeshipping translate="title" module="jeshipping">
+                                            <title>Deutsche Post Shipping Methods</title>
+                                        </jeshipping>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                     </children>
+                </admin>
+			</resources>
+		</acl>
+
+
+    </adminhtml>
+
+
+
+    <default>
+        <carriers>
+            <deutschepost_simple>
+                <active>1</active>
+                <model>jeshipping/carrier_simple</model>
+                <title>Deutsche Post (Simple)</title>
+                <description></description>
+                <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+            </deutschepost_simple>
+
+            <deutschepost_express>
+                <active>1</active>
+                <model>jeshipping/carrier_express</model>
+                <title>Deutsche Post (Express)</title>
+                <description></description>
+                <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+            </deutschepost_express>
+
+            <deutschepost_intl>
+                <active>1</active>
+                <model>jeshipping/carrier_international</model>
+                <title>Deutsche Post (International)</title>
+                <description></description>
+                <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+            </deutschepost_intl>
+        </carriers>
+    </default>
+</config>

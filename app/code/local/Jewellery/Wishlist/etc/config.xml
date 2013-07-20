@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Wishlist>
+            <version>0.0.1</version>
+        </Jewellery_Wishlist>
+    </modules>
+
+    <frontend>
+        <routers>
+            <jewellery_wishlist>
+                <use>standard</use>
+                <args>
+                    <module>Jewellery_Wishlist</module>
+                    <frontName>jewellery_wishlist</frontName>
+                </args>
+            </jewellery_wishlist>
+
+            <wishlist>
+                <args>
+                    <modules>
+                        <Jewellery_Wishlist before="Mage_Wishlist">Jewellery_Wishlist</Jewellery_Wishlist>
+                    </modules>
+                </args>
+            </wishlist>
+        </routers>
+    </frontend>
+</config>

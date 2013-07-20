@@ -1,0 +1,35 @@
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    $attrNameLong = $_helper->productAttribute($_product, $_product->getNameLong(), 'name_long');
+	$images = $this->getGalleryImages() ;
+?>
+
+
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<div class="zoom-message">Klick ins Bild um zu vergrößern</div>
+<?php if ( sizeof($images) > 1 ) : ?> 
+	<div class="cntrZoom">
+		<div class="ad-back" onclick="example3_previous();" class="adControl"></div>
+		<div class="ad-forward" onclick="example3_next();" class="adControl"></div>
+	</div>
+<?php endif; ?>
+
+<ul id="example3" class="Zoomer">
+	<?php $it = 0; ?>
+     <?php foreach ($this->getGalleryImages() as $_image): ?>
+        <?php $imgLabel = $_image->getLabel() ? $_image->getLabel() : $attrNameLong ?>
+		<?php $it++; ?>
+         <li>
+			
+			<a  href='<?php echo $_image->getUrl() ; ?>'class='zoomImage'>
+				<img alt="<?php echo $imgLabel; ?>" title="<?php echo $imgLabel; ?>" class="etalage_thumb_image" src="<?php echo $_image->getUrl() ?>" />
+			</a>
+            <img alt="<?php echo $imgLabel; ?>" title="<?php echo $imgLabel; ?>" class="etalage_source_image" src="<?php echo $_image->getUrl() ?>" />
+        </li>
+    <?php endforeach; ?>
+
+</ul>
+ <?php endif; ?>
+
+ 

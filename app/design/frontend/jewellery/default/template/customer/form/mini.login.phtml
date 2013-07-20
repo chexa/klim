@@ -1,0 +1,47 @@
+<?php /* **************************************** ?>
+<div class="block block-login">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Login') ?></span></strong>
+    </div>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post">
+        <div class="block-content">
+            <label for="mini-login"><?php echo $this->__('Email:') ?></label><input type="text" name="login[username]" id="mini-login" class="input-text" />
+            <label for="mini-password"><?php echo $this->__('Password:') ?></label><input type="password" name="login[password]" id="mini-password" class="input-text" />
+            <div class="actions">
+                <button type="submit" class="button"><span><span><?php echo $this->__('Login') ?></span></span></button>
+            </div>
+        </div>
+    </form>
+</div>
+<?php **************************************** */ ?>
+
+<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="mini-login-form">
+    <div class="form-fields">
+        <div>
+            <label for="login"><?php echo $this->__('Customer Number') ?></label>
+            <input type="text" name="login[username]" id="login" class="input-text required-entry" />
+        </div>
+        <div>
+            <label for="pass"><?php echo $this->__('Password') ?></label>
+            <input type="password" name="login[password]" id="pass" class="input-text required-entry" />
+        </div>
+    </div>
+    <div class="user-buttons">
+        <a href="<?php echo Mage::helper('customer')->getLoginUrl() ?>" class="user-btn-link"><?php echo $this->__('Register') ?></a>
+        <input type="submit" value="Einloggen" />
+        <?php /* **************************************** ?>
+        <input type="submit" value="<?php echo $this->__('Login') ?>" />
+        <?php **************************************** */ ?>
+    </div>
+</form>
+<a href="<?php echo $this->getForgotPasswordUrl() ?>" class="remember-pass"><?php echo $this->__('Forgot Your Password?') ?></a>
+
+    <script type="text/javascript">
+    //<![CDATA[
+        var miniLoginForm = new VarienForm('mini-login-form', true);
+
+    Translator.add('Customer Number', '<?php echo $this->__('Customer Number') ?>');
+    Translator.add('Password', '<?php echo $this->__('Password') ?>');
+
+    //]]>
+    </script>

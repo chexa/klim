@@ -1,0 +1,9 @@
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php if($_product->isSaleable()): ?>
+    <a href="#" class="addtocart-btn" title="<?php echo $buttonTitle ?>" onclick="return productAddToCartForm.submit(this)"><span><?php echo $buttonTitle ?></span></a>
+    <?php echo $this->getChildHtml('', true, true) ?>
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_details_info_stock')->toHtml(); ?>
+<?php endif; ?>
+
+<p class="top-indent fr">Alle Preise zzgl. <a href="/kaufabwicklung/versandkosten/" target="_self">Versandkosten</a></p>

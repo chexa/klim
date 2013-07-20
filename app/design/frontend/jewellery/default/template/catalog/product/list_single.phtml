@@ -1,0 +1,36 @@
+<?php
+    $_product = $this->getProduct();
+    $_loggedin = Mage::helper('customer')->isLoggedIn();
+    $_helper = $this->helper('catalog/output');
+
+    $attrMaterial = $_helper->productAttribute($_product, $_product->getMaterial(), 'material');
+    $attrMaterial = ($attrMaterial) ? strtolower($attrMaterial) : '';
+
+
+$attrBearbeitungsart = $_helper->productAttribute($_product, $_product->getBearbeitungsart(), 'bearbeitungsart');
+    $attrBesatz = $_product->getAttributeText('besatz');//$_helper->productAttribute($_product, $_product->getBesatz(), 'besatz');
+
+    $attrName = $_helper->productAttribute($_product, $_product->getName(), 'name');
+    $attrNameLong = $_helper->productAttribute($_product, $_product->getNameLong(), 'name_long');
+?>
+<li>
+    <div>
+        <h3 class="img-wrap product-image">
+          <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(130, 185); ?>" width="130" height="185" alt="<?php echo $attrNameLong ?>" />
+        </h3>
+        <a rel="nofollow" href="<?php echo $this->getUrl('ajax/product/quickview/id/' . $_product->getId()) ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>" class="ajax button-link"><span class="magnifier"></span>Schnellansicht</a>
+        <a href="<?php echo $_product->getProductUrl() ?>" class="prod-item">
+            <span><?php echo $attrName ?></span>
+        </a>
+        <span class="material <?php echo $attrMaterial; ?>"><?php echo $_helper->productAttribute($_product, $_product->getMaterialListview(), 'material_listview');  ?></span>
+        <span class="prod-info">
+            <span class="price">
+                <?php echo Mage::helper('jewellery_catalog')->getUvpPriceHtml($_product); ?>
+                <?php if ($_loggedin) : ?>
+                    <strong><?php echo $this->getPriceHtml($_product, true) ?> <span class="price-info">pro VPE</span></strong>
+                <?php endif; ?>
+            </span>
+            <strong><?php if ($attrBearbeitungsart) echo $attrBearbeitungsart; ?> <?php if ($attrBesatz) echo $this->__('with ') . $attrBesatz; ?></strong>
+        </span>
+    </div>
+</li>

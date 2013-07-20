@@ -1,0 +1,51 @@
+<?php if (!Mage::registry('current_category')) return ?>
+<?php //$_categories = $this->getCurrentChildCategories() ?>
+<?php $_categories = $this->getTopChildCategories() ?>
+<?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
+<?php if($_count): ?>
+<ul id="left-nav">
+    <?php foreach ($_categories as $_category): ?>
+        <?php if($_category->getIsActive()): ?>
+            <?php if (!$_category->hasChildren()) : ?>
+                <li><a href="<?php echo $this->getCategoryUrl($_category) ?>"<?php if ($this->isCategoryActive($_category)): ?> class="current"<?php endif; ?>><?php echo $this->htmlEscape($_category->getName()) ?></a></li>
+            <?php else : ?>
+                <?php $_childCategories = $this->getCategoryChildCategories($_category); ?>
+                <li<?php if ($this->isCategoryActive($_category)): ?> class="submenu-act"<?php endif; ?>><a href="<?php echo $this->getCategoryUrl($_category) ?>"><?php echo $this->htmlEscape($_category->getName()) ?></a>
+                    <ul>
+                        <?php foreach ($_childCategories as $_childCategory) : ?>
+                            <li><a href="<?php echo $this->getCategoryUrl($_childCategory) ?>" <?php if ($this->isCategoryActive($_childCategory)) : ?> class="current"<?php endif; ?>><?php echo $this->htmlEscape($_childCategory->getName()) ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endforeach ?>
+</ul>
+<?php endif; ?>
+<?php /* ************************************* ?>
+
+<div class="block block-layered-nav">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Browse By') ?></span></strong>
+    </div>
+    <div class="block-content">
+        <dl id="narrow-by-list2">
+            <dt><?php echo $this->__('Category') ?></dt>
+            <dd>
+                <ol>
+                <?php foreach ($_categories as $_category): ?>
+                    <?php if($_category->getIsActive()): ?>
+                    <li>
+                        <a href="<?php echo $this->getCategoryUrl($_category) ?>"<?php if ($this->isCategoryActive($_category)): ?> class="current"<?php endif; ?>><?php echo $this->htmlEscape($_category->getName()) ?></a> (<?php echo $_category->getProductCount() ?>)
+                    </li>
+                    <?php endif; ?>
+                <?php endforeach ?>
+                </ol>
+            </dd>
+        </dl>
+        <script type="text/javascript">decorateDataList('narrow-by-list2')</script>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php ****************************** */ ?>

@@ -1,0 +1,28 @@
+    <div class="info-block">
+        <h3><?php echo $this->__('Contact Information') ?></h3>
+
+        <p>
+            <?php echo $this->htmlEscape($this->getCustomer()->getName()) ?><br />
+            <strong><?php echo $this->__('Email'); ?>: </strong><?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?><br />
+            <strong><?php echo $this->__('Customer Number'); ?>: </strong><?php echo $this->htmlEscape($this->getCustomer()->getCustomerNumber()); ?><br />
+
+            <a href="<?php echo $this->getUrl('customer/account/edit') ?>"><?php echo $this->__('Edit') ?></a>
+            <?php /* ?><a href="<?php echo $this->getChangePasswordUrl() ?>"><?php echo $this->__('Change Password') ?></a><?php */ ?>
+        </p>
+    </div>
+
+    <?php /* if( $this->isNewsletterEnabled() ): ?>
+    <div class="info-block">
+        <h3><?php echo $this->__('Newsletters') ?></h3>
+        <p>
+            <?php if( $this->getIsSubscribed() ): ?>
+                <?php echo $this->__("You are currently subscribed to 'General Subscription'.") ?>
+            <?php else: ?>
+                <?php echo $this->__('You are currently not subscribed to any newsletter.') ?>
+            <?php endif; ?>
+            <br/>
+            <a href="<?php echo $this->getUrl('newsletter/manage') ?>"><?php echo $this->__('Edit') ?></a>
+        </p>
+    </div>
+    <?php endif; */ ?>
+

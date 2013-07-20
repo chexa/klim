@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="removeItem">
+                <type>js</type>
+                <name>mage/adminhtml/wysiwyg/tiny_mce/setup.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/tiny_mce/jewellery_setup.js</name>
+            </action>
+        </reference>
+    </default>
+</layout>

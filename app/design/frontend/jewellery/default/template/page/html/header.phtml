@@ -1,0 +1,48 @@
+<?php /* ****************************************** ?>
+
+<div class="header-container">
+    <div class="header">
+        <?php if ($this->getIsHomePage()):?>
+        <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+        <?php else:?>
+        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+        <?php endif?>
+        <div class="quick-access">
+            <?php echo $this->getChildHtml('topSearch') ?>
+            <p class="welcome-msg"><?php echo $this->getWelcome()?></p>
+            <?php echo $this->getChildHtml('topLinks') ?>
+            <?php echo $this->getChildHtml('store_language') ?>
+        </div>
+        <?php echo $this->getChildHtml('topContainer'); ?>
+    </div>
+</div>
+<?php echo $this->getChildHtml('topMenu') ?>
+<?php ****************************************** */ ?>
+<div id="header">
+		<a href="<?php echo $this->getUrl('') ?>" class="logo" title="<?php echo $this->getLogoAlt() ?>"><img
+            src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>"/></a>
+					
+		<div class="user-box">
+            <?php if ($this->helper('customer')->isLoggedIn()) : ?>
+			<div class="cart-box">
+				<a href="<?php echo Mage::helper('checkout/url')->getCartUrl(); ?>" class="cart">
+					<span class="cart-title"><?php echo $this->__('Shopping Cart'); ?></span>
+					<span class="sum"><?php echo Mage::helper('checkout')->formatPrice(Mage::getSingleton('checkout/cart')->getQuote()->getSubtotal()); ?></span>
+				</a>
+				<div class="user-buttons">
+					<a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" class="user-btn-link account-btn-link"><?php echo $this->__('My Account'); ?></a>
+					<!-- <a href="<?php echo $this->helper('wishlist')->getListUrl();?>" class="user-btn-link"><?php echo $this->__('My Wishlist'); ?></a> -->
+					<a href="javascript:void(0);" id="quickOrderLink" class="user-btn-link"><?php echo $this->__('Quick Order'); ?></a>
+				</div>
+			</div>
+             <?php else : ?>
+            <?php echo $this->getChildHtml('mini_login') ?>
+            <?php endif; ?>
+
+		</div>
+		<div class="print-head">www.standard-schmuck.de</div>
+	</div><!--end header-->
+  <div id="top">
+		<?php if ($this->helper('customer')->isLoggedIn()) : ?><a href="<?php echo $this->helper('customer')->getLogoutUrl(); ?>" class="logout"><?php echo $this->__('Logout'); ?></a><?php endif; ?>
+        <?php echo $this->getChildHtml('topLinks') ?>
+	</div><!--end top-->

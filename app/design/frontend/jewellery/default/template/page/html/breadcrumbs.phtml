@@ -1,0 +1,26 @@
+<?php if($crumbs && is_array($crumbs)): ?>
+<div id="breadcrumbs" class="clearfix" style="overflow: visible;">
+    <ul class="breadcrumb-nav">
+        <li><?php echo $this->__('Sie sind hier'); ?>: </li>
+        <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+            <li class="<?php echo $_crumbName ?>">
+            <?php if ($_crumbInfo['link']): ?>
+
+                <?php if ($_crumbName == 'home') : ?>
+                    <span class="homepage"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
+                <?php else : ?>
+                    <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
+                <?php endif; ?>
+
+            <?php elseif($_crumbInfo['last']): ?>
+                <strong><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
+            <?php else: ?>
+                <strong><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
+            <?php endif; ?>
+
+            <?php if (!$_crumbInfo['last']) : ?><span>&gt;</span><?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

@@ -1,0 +1,24 @@
+<?php
+$doBr = false;
+
+$attributes = array('besonderheit', 'sonstige_angaben');
+
+foreach ($attributes as $attrCode) :
+
+	$attribute = $this->getProduct()->getResource()->getAttribute($attrCode);
+	$value = $attribute->getFrontend()->getValue($this->getProduct());
+
+	if ((string)$value == '') {
+		continue;
+	}	
+	
+	$doBr = true;
+?>
+<p><?php echo $attribute->getStoreLabel();?>: <?php echo $value; ?></p>
+<?php endforeach; ?>
+
+<?php $_description = $this->getProduct()->getDescription(); ?>
+<?php if ($_description): ?>
+	<?php if ($doBr) : ?><br/><?php endif; ?>
+    <p><?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_description, 'description') ?></p>
+<?php endif; ?>

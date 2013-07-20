@@ -1,0 +1,75 @@
+<?php
+/**
+ * Temlate for Mage_Customer_Block_Address_Book block
+ * @var $test Mage_Customer_Block_Address_Book
+ */
+?>
+<div class="inner-content">
+    <div class="block">
+        <div class="inside addresses">
+            <h1><?php echo $this->__('Billing Information') ?></h1>
+            <br />
+            <?php /* ?>
+            <div class="page-title title-buttons">
+                <input type="button" class="button-link" title="<?php echo $this->__('Add New Address') ?>" value="<?php echo $this->__('Add New Address') ?>" onclick="window.location='<?php echo $this->getAddAddressUrl() ?>';" />
+            </div>
+
+            <br/>
+
+            <h3><?php echo $this->__('Default Addresses') ?></h3>
+            <?php */ ?>
+
+            <div class="note-block fl">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('account_address_message')->toHtml(); ?>
+            </div>
+
+            <div class="info-block fr">
+                <h4><?php echo $this->__('Your Billing And Shipping Information') ?></h4>
+                <?php if($_pAddresses = Mage::getSingleton('customer/session')->getCustomer()->getDefaultShipping()): ?>
+                    <address>
+                        <?php echo $this->getAddressHtml(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddresses)) ?>
+                    </address>
+                <?php /* ?><p><a href="<?php echo $this->getAddressEditUrl(Mage::getSingleton('customer/session')->getCustomer()->getAddressById($_pAddresses)) ?>"><?php echo $this->__('Change Shipping Address') ?></a></p><?php */ ?>
+                <?php else: ?>
+                    <?php echo $this->__('You have no default shipping address in your address book.') ?>
+                <?php endif ?>
+            </div>
+
+            <br class="clear" />
+<?php /* ?>
+            <h3><?php echo $this->__('Additional Address Entries') ?></h3>
+
+            <?php $iterator = 0; if( $_pAddresses = $this->getAdditionalAddresses()): ?>
+
+                <?php foreach($_pAddresses as $_address): ?>
+                    <div class="info-block <?php echo ($iterator++ % 2 == 0) ? 'fl' : 'fr' ;?>">
+                        <address>
+                            <?php echo $this->getAddressHtml($_address) ?>
+                        </address>
+
+                        <p><a href="<?php echo $this->getUrl('customer/address/edit', array('id'=>$_address->getId())) ?>"><?php echo $this->__('Edit Address') ?></a> <span class="separator">|</span> <a href="#" class="link-remove" onclick="return deleteAddress('<?php echo $_address->getId() ?>');"><?php echo $this->__('Delete Address') ?></a></p>
+
+                    </div>
+
+                    <?php if ($iterator %2 == 0) : ?>
+                    <br class="clear" />
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+            <?php else : ?>
+                <p><?php echo $this->__('You have no additional address entries in your address book.') ?></p>
+            <?php endif ?>
+
+            <br class="clear" />
+<?php */ ?>
+            <div class="buttons-set">
+                <a class="button-link weiter-link fl" href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" title="<?php echo $this->__('Back') ?>"><span><?php echo $this->__('Back') ?></span></a>
+                <?php /* ?>
+                &nbsp;
+                <input type="button" class="button-link" title="<?php echo $this->__('Add New Address') ?>" value="<?php echo $this->__('Add New Address') ?>" onclick="window.location='<?php echo $this->getAddAddressUrl() ?>';" />
+                <?php */ ?>
+            </div>
+
+        </div>
+    </div>
+</div>

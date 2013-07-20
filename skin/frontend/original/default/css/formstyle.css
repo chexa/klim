@@ -1,0 +1,184 @@
+/*
+ * FormStyle - jQuery plugin 0.1.0
+ *
+ * Copyright (c) 2009 Wei Kin Huang, TimeDelimited.com
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ * 
+ * Icons (fugue) from http://www.pinvoke.com/
+ */
+ a.form-style.checkbox input, a.form-style.radio input, div.form-style.select select {
+	display:none;
+}
+
+/*------checkbox-------*/
+a.form-style.checkbox {
+	background: url(../images/graphic.png) -2px -620px;
+	display:-moz-inline-block;
+	display:inline-block;
+	height:15px;
+	line-height:15px;
+	padding-left:0;
+	width:16px;
+	/* float: left; */
+	margin: 0 8px 0 0;
+}
+.checkbox-row a.form-style.checkbox.checked {
+	background: url(../images/graphic.png) -20px -616px;
+}
+
+
+
+
+
+
+/*------radio button--------*/
+a.form-style.radio {
+	background:url(../images/graphic2.png) 0 -100px ;
+	display:-moz-inline-block;
+	display:inline-block;
+	height:14px;
+	line-height:14px;
+	padding-left:0;
+	width:14px;
+	margin: 0 4px 0 0;
+	float: left;
+}
+a.form-style.radio.checked {
+	background:url(../images/graphic2.png) 0 -77px ;
+}
+
+
+
+
+/*-------select------*/
+div.form-style.select {
+	border:1px solid #959595;
+	display:inline-block;
+	height:21px;
+	line-height:21px;
+	padding-left:0;
+	position:relative;
+	width:145px;
+	z-index:1000;
+	color: #747474;
+	font:12px 'M1pbold';
+}
+
+div.form-style.select a {
+	color: #747474;
+	display:block;
+	line-height:20px;
+	padding:0;
+	position:relative;
+	text-decoration:none;
+}
+
+div.form-style.select a.selector {
+	background-color:#f4f4f4;
+	display:block;
+	height:21px;
+	overflow:hidden;
+	padding-right:32px;
+	padding-left: 13px;
+	position:relative;
+}
+
+div.form-style.select a.expander {
+	background:url(../images/graphic2.png) no-repeat -333px -24px;
+	display:block;
+	padding:0;
+	position:absolute;
+	right:-1px;
+	top:-1px;
+	width:32px;
+	height:23px;
+}
+div.form-style.select a.expander:hover{
+	background:url(../images/graphic2.png) no-repeat -333px -51px;
+}
+
+
+div.form-style.select ul.options {
+	background-color:#f4f4f4;
+	border:1px solid #959595;
+	display:none;
+	left: -1px;
+	list-style:none;
+	margin:0!important;
+	overflow:auto;
+	padding:0;
+	position:absolute;
+	width:145px;
+	z-index:1000000;
+}
+
+
+div.form-style.select ul.options li, div.form-style.select ul.options li a {
+	display:block;
+	margin:0!important;
+}
+div.form-style.select ul.options a {
+	line-height:20px;
+	min-height:20px;
+	padding: 0 0 0 13px;
+}
+
+div.form-style.select ul.options a.even {
+	background-color:;
+}
+div.form-style.select ul.options a:hover {
+	background-color: #c0c0c0;
+}
+div.form-style.select ul.options a.selected {
+	background-color:
+}
+
+
+
+/*------file------*/
+
+
+.file-button{
+width: 370px; 
+height:20px;
+background: url(../images/graphic2.png) no-repeat 0 0;
+overflow: hidden;
+position: relative;
+}
+.file-button input.file-input {
+height: 20px;
+position: absolute; 
+top: 0; 
+right: 0;
+opacity: 0; 
+filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+cursor: pointer;
+_font-size: 200px;
+}
+.file-val {
+background: none;
+border:  none;
+height: 18px;
+left: 5px;
+line-height: 18px;
+padding: 0;
+position: absolute;
+top: 0;
+width: 250px;
+z-index: 2;
+color: #4f4f4f;
+}
+
+
+
+
+
+
+
+
+
+
+

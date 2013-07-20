@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_CatalogSearch>
+            <version>0.0.1</version>
+        </Jewellery_CatalogSearch>
+    </modules>
+
+    <global>
+        <rewrite>
+            <jewellery_catalogsearch_result_index>
+                <from><![CDATA[#^/catalogsearch/result/#]]></from>
+                <to>/jewellery_catalogsearch/result/</to>
+            </jewellery_catalogsearch_result_index>
+        </rewrite>
+    </global>
+
+
+    <frontend>
+
+	<routers>
+        <jewellery_catalogsearch>
+            <use>standard</use>
+            <args>
+                <module>Jewellery_CatalogSearch</module>
+                <frontName>jewellery_catalogsearch</frontName>
+            </args>
+        </jewellery_catalogsearch>
+    </routers>
+	
+        <layout>
+            <updates>
+                <jewellery_catalogsearch>
+                    <file>jewellery_catalogsearch.xml</file>
+                </jewellery_catalogsearch>
+            </updates>
+        </layout>
+
+    </frontend>
+
+
+</config>

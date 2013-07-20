@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<catalog_product_view>
+		<reference name="content">
+            <block type="auit_ppager/catalog_product_view_pager"	name="auit_seller_pager" before="product.info" 
+            		template="auit/ppager/catalog/product/view/pager.phtml">
+            </block>
+		</reference>
+	</catalog_product_view>
+</layout> 

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magenmagic_PromoBannerSlider>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Magenmagic_PromoBannerSlider>
+    </modules>
+</config>

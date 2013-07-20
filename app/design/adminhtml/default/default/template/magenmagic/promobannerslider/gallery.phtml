@@ -1,0 +1,173 @@
+<?php echo $this->getUploaderHtml() ?>
+
+<div class="imagesList" id="imagesList">
+    <?php echo $this->images; ?>
+</div>
+
+<input type="hidden" id="collection_id" name="collection_id" value="<?php echo Mage::app()->getRequest()->getParam("id"); ?>" />
+
+<script type="text/javascript">
+//<![CDATA[
+    var LexMainBanners = {};
+
+    LexMainBanners.Gallery = Class.create();
+    LexMainBanners.Gallery.prototype = {
+        uploader :null,
+        initialize : function (uploader)
+        {
+            this.uploader = uploader;
+            this.uploader.onFilesComplete = this.handleUploadComplete
+                                .bind(this);
+        },
+        handleUploadComplete : function (files)
+        {
+            var filesSize = files.length;
+            var iterator = 1;
+            files.each( function(item) {
+                if (!item.response.isJSON()) {
+                    try {
+                        console.log(item.response);
+                    } catch (e2) {
+                        alert(item.response);
+                    }
+                    return;
+                }
+                var response = item.response.evalJSON();
+                if (response.error) {
+                    return;
+                }
+
+                this.uploader.removeFile(item.id);
+
+                if ( iterator == filesSize )
+                {
+                    updateImages();
+                }
+
+                iterator++;
+            }.bind(this));
+        }
+    };
+
+    var <?php echo $this->getJsObjectName(); ?> = new LexMainBanners.Gallery(<?php echo $this->getUploader()->getJsObjectName(); ?>);
+
+    //update page list
+    function updateImages (page)
+    {
+
+        page = !page ? 0 : page;
+
+        var collectionId = $("collection_id").getAttribute("value");
+
+        new Ajax.Request("<?php echo $this->getUrl('*/*/getimages/') ?>",
+          {
+            method:'get',
+            parameters: {page_id: page, id : collectionId},
+            onSuccess: function(transport){
+                $('imagesList').innerHTML = transport.responseText;
+            }
+          });
+    }
+
+
+    document.observe('click', function(e){
+
+        var elem;
+
+        // Bind Show More Act
+        if (elem = e.findElement('#moreLinkBanners')) {
+            var page = elem.getAttribute("rel");
+            updateImages(page);
+        }
+
+        if (e.findElement('#UnCheckAllImages'))
+        {
+            $$('.chkItemInput').each(function (e) {
+                e.checked  = true;
+                e.click();
+            })
+        }
+
+        if (e.findElement('#CheckAllImages'))
+        {
+            $$('.chkItemInput').each(function (e) {
+                e.checked  = false;
+                e.click();
+            })
+        }
+
+        if (e.findElement('#deleteCurrent'))
+        {
+            var data = $('edit_form').serialize();
+
+            if ( $$('.chkItemInput:checked').length == 0 )
+            {
+                alert("No current items");
+                return false;
+            }
+
+            new Ajax.Request("<?php echo $this->getUrl('*/*/deleteimages/') ?>",
+              {
+                method:'get',
+                parameters: data,
+                onSuccess: function(transport){
+                    updateImages(1);
+                }
+              });
+        }
+
+        //addtocollection
+        if (e.findElement('#moveTo'))
+        {
+            var data = $('edit_form').serialize();
+
+            if ( $$('.chkItemInput:checked').length == 0 )
+            {
+                alert("No current items");
+                return false;
+            }
+
+            new Ajax.Request("<?php echo $this->getUrl('*/*/addtocollection/') ?>",
+              {
+                method:'get',
+                parameters: data,
+                onSuccess: function(transport){
+                    updateImages(1);
+                }
+              });
+        }
+
+        //addtocollection
+        if (elem = e.findElement('.removeOne'))
+        {
+            var IDitem = elem.getAttribute("rel");
+            var element = elem;
+
+            new Ajax.Request("<?php echo $this->getUrl('*/*/removefromcollection/') ?>",
+              {
+                method:'get',
+                parameters: {itemID : IDitem},
+                onSuccess: function(transport){
+                    element.up("li").remove();
+                }
+              });
+        }
+
+        //save links
+        if (elem = e.findElement('#saveLinks'))
+        {
+            var data = $('edit_form').serialize();
+            new Ajax.Request("<?php echo $this->getUrl('*/*/savelinks/') ?>",
+              {
+                method:'get',
+                parameters: data,
+                onSuccess: function(transport){
+                    updateImages(1);
+                }
+              });
+        }
+
+    });
+
+//]]>
+</script>

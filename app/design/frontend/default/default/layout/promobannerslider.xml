@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+          <action method="addJs"><script>magenmagic/promobannerslider/jquery-1.6.2.min.js</script></action>
+          <action method="addJs"><script>magenmagic/promobannerslider/fade/jquery-ui-1.8.18.custom.min.js</script></action>
+        </reference>
+    </default>
+    <promobannerslider_index_index>
+        <reference name="content">
+            <block type="promobannerslider/promobannerslider" name="promobannerslider" template="magenmagic/promobannerslider/promobannerslider.phtml" />
+        </reference>
+    </promobannerslider_index_index>
+</layout> 

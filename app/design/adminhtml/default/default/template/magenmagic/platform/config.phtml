@@ -1,0 +1,188 @@
+
+<style type="text/css">
+    #magenmagicinfo_inform_content table.form-list {display: none}
+    #magenMagic_exampleHTML, #magenmagicinfo_inform_content  {display: none}
+    #magenmagicinfo_inform_content { background-color: #ADADAD; color:#635F52}
+    #magenmagicinfo_inform_content h3 { color:#635F52;}
+    .extUl {list-style-type: disc; padding-left: 25px}
+
+    #magenmagicinfo_inform_content .form-list .field {
+    float: left;
+    width: 275px;
+    }
+
+    #magenmagicinfo_inform_content .form-list label {
+    float: left;
+    color: #111;
+    font-weight: bold;
+    position: relative;
+    z-index: 0;
+    }
+
+
+    #magenmagicinfo_inform_content .form-list .input-box {
+    display: block;
+    clear: both;
+    width: 260px;
+    padding-top:5px
+    }
+
+    #magenmagicinfo_inform_content .form-list input.input-text {
+    width: 254px;
+    }
+
+    #magenmagicinfo_inform_content input.input-text, #magenmagicinfo_inform_content textarea {
+    padding: 2px;
+    }
+
+    #magenmagicinfo_inform_content input.input-text, #magenmagicinfo_inform_content select, #magenmagicinfo_inform_content textarea {
+    background: white;
+    border: 1px solid #DDD;
+    }
+
+    #magenmagicinfo_inform_content .form-list label em {
+    float: right;
+    font-style: normal;
+    color: #EB340A;
+    position: absolute;
+    top: 0;
+    right: -8px;
+    }
+
+    #magenmagicinfo_inform_content #contactForm  .fieldset {
+    border: 1px solid #DDD;
+    background: #FEFEFE;
+    padding: 22px 25px 12px 33px;
+    margin: 28px 0 0;
+    }
+
+    #magenmagicinfo_inform_content .form-list li.wide textarea {
+        width: 529px;
+    }
+
+    #magenmagicinfo_inform_content .form-list textarea {
+        width: 254px;
+        height: 10em;
+    }
+
+    #magenmagicinfo_inform_content #contactForm .fieldset .legend {
+    float: left;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #FEFEFE;
+    background: #DEDEDE;
+    color: #333;
+    margin: -33px 0 0 -10px;
+    padding: 0 8px;
+    position: relative;
+    }
+
+    #magenmagicinfo_inform_content .buttons-set {
+    clear: both;
+    margin: 5px 0 0;
+    padding: 5px;
+    border: 1px solid #DDD;
+    background: white;
+    }
+
+
+    #magenmagicinfo_inform_content .buttons-set p.required {
+    margin: 0 0 5px;
+    }
+
+    #magenmagicinfo_inform_content p.required {
+    font-size: 10px;
+    text-align: right;
+    color: red;
+    }
+
+    #magenmagicinfo_inform_content .buttons-set button.button {
+    float: right;
+    }
+
+</style>
+<script type="text/javascript">
+    //document.getElementById().innerHTML = "";
+    Event.observe(window, 'load', function() {
+        var container       = $("magenmagicinfo_inform_content");
+        var htmlDiv         = $("magenMagic_exampleHTML");
+        container.innerHTML = htmlDiv.innerHTML;
+        container.style.display = "block";
+        htmlDiv.innerHTML   = "";
+
+          var myForm= new varienForm('config_edit_form', true);
+          Event.observe('config_edit_form', 'submit', function (el) {
+            if ( myForm.validator.validate() )
+            {
+                var data = $("config_edit_form").serialize();
+                new Ajax.Request('<?php echo Mage::helper("adminhtml")->getUrl("magenmagic_platform/adminhtml_platform/sendEmail/"); ?>', {
+                      method: 'post',
+                      parameters: data,
+                      onSuccess: function(transport){
+                          alert(transport.responseText);
+                      }
+                  });
+            }
+            el.stop();
+            return false;
+        });
+    });
+</script>
+
+<div id="magenMagic_exampleHTML">
+    <a href="http://www.magenmagic.com/" target="_blank"><img src="<?php echo Mage::getBaseUrl("media"); ?>\magenmagic\logo.gif" alt=""></a>
+    <h3 style="padding-bottom: 15px">Thank for being our customer</h3>
+    <p>Our main purpose is to provide exceptional service which helps you to increase your sales, whether it is customization of magento based website or one of our extensions. We had long ride to go before choosing magento development as our main specialization. In search of flexible platform for creating ecommerce marketing solutions Magen Magic was born from web-analysis department at the leading web-development company in Eastern Europe.</p>
+
+    <?php if ( count($this->installedModules) ) : ?>
+        <h3>Installed Extensions:</h3>
+        <ul class="extUl">
+        <?php foreach ($this->installedModules as $itemModule) : ?>
+            <li><?php echo $itemModule->name ? $itemModule->name : $itemModule->id; ?></li>
+        <?php endforeach; ?>
+        </ul>
+    <?php else : ?>
+        <h5>There are no modules installed from "MagenMagic".</h5>
+    <?php endif; ?>
+
+    <form action="#" id="contactForm" method="post">
+        <div class="fieldset">
+            <h2 class="legend">Contact Information</h2>
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <label for="name" class=""><em>*</em>Name</label>
+                        <div class="input-box">
+                            <input name="name" id="name" title="Name" value="" class="input-text required-entry" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="email" class=""><em>*</em>Email</label>
+                        <div class="input-box">
+                            <input name="email" id="email" title="Email" value="" class="input-text required-entry validate-email" type="text">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <label for="telephone">Telephone</label>
+                    <div class="input-box">
+                        <input name="telephone" id="telephone" title="Telephone" value="" class="input-text" type="text">
+                    </div>
+                </li>
+                <li class="wide">
+                    <label for="comment" class=""><em>*</em>Comment</label>
+                    <div class="input-box">
+                        <textarea name="comment" id="comment" title="Comment" class="required-entry input-text" cols="5" rows="3"></textarea>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <p class="required">* Required Fields</p>
+            <input type="text" name="hideit" id="hideit" value="" style="display:none !important;">
+            <button type="submit" title="Submit" id="sendMail" class="button"><span><span>Submit</span></span></button>
+            <br clear="all" />
+        </div>
+    </form>
+
+</div>

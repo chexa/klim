@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Contacts>
+            <version>0.0.1</version>
+        </Jewellery_Contacts>
+    </modules>
+
+    <frontend>
+        <routers>
+            <jewellery_contacts>
+                <use>standard</use>
+                <args>
+                    <module>Jewellery_Contacts</module>
+                    <frontName>jewellery_contacts</frontName>
+                </args>
+            </jewellery_contacts>
+
+
+            <contacts>
+                <args>
+                    <modules>
+                        <Jewellery_Contacts before="Mage_Contacts">Jewellery_Contacts</Jewellery_Contacts>
+                    </modules>
+                </args>
+            </contacts>
+        </routers>
+    </frontend>
+</config>

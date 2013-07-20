@@ -1,0 +1,147 @@
+<?php
+/**
+ * Product:     Advanced Permissions
+ * Package:     Aitoc_Aitpermissions_2.2.4_2.0.3_90233
+ * Purchase ID: xFF945pgbyDre0fKeBvM8FAv6R2a0C65GbaW0cwEpD
+ * Generated:   2011-07-05 15:42:56
+ * File path:   app/design/adminhtml/default/default/template/aitpermissions/permissions_advanced.phtml
+ * Copyright:   (c) 2011 AITOC, Inc.
+ */
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('aitpermissions')->__('Advanced Permissions') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+    
+        <!-- DISABLED SECTION -->
+        <span>
+            <input type="radio" name="access_scope" id="access_scope_disabled" 
+                      value="disabled" <?php if ('disabled' == $this->getScope()): ?>checked="checked"<?php endif; ?> onclick="javascript: aitpermissionsSetScope('disabled');" />
+            <label for="access_scope_disabled"><?php echo $this->__('Disabled'); ?></label>
+        </span>
+        <br />
+        <!-- DISABLED SECTION END -->
+        
+        <!-- STORES SECTION -->
+        <span>
+            <input type="radio" name="access_scope" id="access_scope_store" 
+                      value="store" <?php if ('store' == $this->getScope()): ?>checked="checked"<?php endif; ?> onclick="javascript: aitpermissionsSetScope('store');" />
+            <label for="access_scope_store"><?php echo $this->__('Limit Access to Store Views/Categories'); ?></label>
+        </span>
+        
+        <div id="aitpermissions_sett_block_stores" style="margin-top: 10px;">
+            <?php echo $this->getChildHtml('stores'); ?>
+        </div>
+        <br />
+        <!-- STORES SECTION END -->
+        
+        <!-- WEBSITES SECTION -->
+        <span>
+            <input type="radio" name="access_scope" id="access_scope_website" 
+                      value="website" <?php if ('website' == $this->getScope()): ?>checked="checked"<?php endif; ?> onclick="javascript: aitpermissionsSetScope('website');" />
+            <label for="access_scope_website"><?php echo $this->__('Limit Access to Websites'); ?></label>
+        </span>
+            
+        <div id="aitpermissions_sett_block_websites" style="margin-top: 10px;">
+            <?php echo $this->getChildHtml('websites'); ?>
+        </div>
+        <br />
+        <!-- WEBSITES SECTION END -->
+        
+    </fieldset>
+</div>
+
+<script type="text/javascript">
+aitpermissionsSetScope = function(scope)
+{
+    switch (scope)
+    {
+        case 'store':
+        $('aitpermissions_sett_block_websites').hide();
+        $('aitpermissions_sett_block_stores').show();
+        break;
+        
+        case 'website':
+        $('aitpermissions_sett_block_stores').hide();
+        $('aitpermissions_sett_block_websites').show();
+        break;
+        
+        case 'disabled':
+        $('aitpermissions_sett_block_stores').hide();
+        $('aitpermissions_sett_block_websites').hide();
+        break;
+    }
+}
+aitpermissionsSetScope('<?php echo $this->getScope(); ?>');
+
+roleForm.submit = function() 
+{
+    if (!($('access_scope_disabled').checked))
+    {
+        var selected = false;
+        var storesSelected = [];
+        var categoriesSelected = [];
+        
+        if ($('access_scope_store').checked)
+        {
+            $$('div.storeview-select').each(function(store)
+            {
+                var storeSelected = false;
+                store.select('input[type="checkbox"]').each(function(checkbox)
+                {
+                    selected = (selected || checkbox.checked);
+                    storeSelected = (storeSelected || checkbox.checked);
+                });
+                storesSelected[storesSelected.length] = storeSelected;
+            });
+
+            $$('div.store-categories-tree').each(function(tree)
+            {
+                var storeCategoriesSelected = false;
+                tree.select('input[type="checkbox"]').each(function(checkbox)
+                {
+                    storeCategoriesSelected = (storeCategoriesSelected || checkbox.checked);
+                });
+                categoriesSelected[categoriesSelected.length] = storeCategoriesSelected;
+            });
+        }
+
+        if ($('access_scope_website').checked)
+        {
+            selected = Boolean($F('website_switcher').length);
+        }
+        
+        if (!selected)
+        {
+            if (confirm('<?php echo Mage::helper('aitpermissions')->__('No store-views or websites are chosen for the Role. If you proceed the advanced permissions settings will be disabled for the Role. Are you sure?') ?>'))
+            {
+                $('access_scope_disabled').checked = 'checked';
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (selected && $('access_scope_store').checked)
+        {
+            var allow = true;
+            for (var i = 0; i < storesSelected.length; i++)
+            {
+                allow = (allow && (!storesSelected[i] || categoriesSelected[i]));
+            }
+
+            if (!allow)
+            {
+                alert('<?php echo Mage::helper('aitpermissions')->jsQuoteEscape(Mage::helper('aitpermissions')->__('Please, assign at least one category for each checked store.')) ?>');
+                return false;
+            }
+        }
+    }
+
+    if (this.validator.validate())
+    {
+        this._submit();
+    }
+}
+</script>

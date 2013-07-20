@@ -1,0 +1,163 @@
+#qOrderBg { opacity: 0.6;  filter:progid:DXImageTransform.Microsoft.Alpha(opacity=60); background: #000; width:100%; height:100%; position: fixed; z-index: 10001; top:0; left:0}
+#qOrderWindow { width:800px;  background: #fff; position: absolute; left:50%; margin-left: -400px; /*margin-top: -100px; top:50%;*/ top:10%; z-index: 10001}
+.qOrderWindowIn {}
+
+#qOrderWindow {
+  width:800px;
+  border:1px solid #aaa;
+  -webkit-box-shadow: 0px 0px 30px 0px #000; /* Saf3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+          box-shadow: 0px 0px 30px 0px #000; /* Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5 */
+		  
+}
+
+#qClose {
+    background: url(/skin/frontend/jewellery/default/images/graphic2.png) no-repeat 0px -119px;
+    float:right;
+    width:42px;
+    height:42px;
+    margin:7px;
+    text-indent: -10000px;
+    overflow: hidden;
+    position: absolute;
+    top: -30px;
+    right: -30px;
+	cursor:pointer;
+}
+
+#qSearchByArticul { width:175px; display: inline-block;}
+.qOrderWindowIn table { width:100%; vertical-align: middle; margin-top: 11px; margin-bottom: 3px;}
+.qOrderWindowIn table.qChooseTable { width:100%; vertical-align: middle; margin-top: 0}
+.qOrderWindowIn table td, .qOrderWindowIn table th { padding: 4px 10px 5px;  vertical-align: middle; text-align: left;}
+.qChooseRow { border-bottom: 1px solid #ccc; padding: 8px 4px; cursor: pointer}
+.qChooseRowImage { width:60px; float:left;}
+.qChooseRow img {border: 1px solid #C4C4C4;}
+.qChooseRowImage img { width:40px; margin-left: 6px}
+.qChooseRowTitle { float:left; width:90%;}
+.qChooseList {position: absolute; top:30px; left:0; border:6px solid #0075C4; background: #f1eff5; left: -1px; width:699px;}
+/*.qChooseRow:hover {  background: #d0d5fb}*/
+.qChooseRow:hover {  background: #d0d5fb;}
+.qOrderWindowIn  .inside { overflow:visible}
+
+
+.qOrderWindowIn .block { margin:0;}
+.qOrderWindowIn {  padding:30px 30px 30px 30px}
+* body .qSearchInputWrap .input-text, * body .qSearchInputWrap .input-btn { display:inline !important; zoom:1}
+* body #qSearchByArticul { display:inline !important; zoom:1}
+
+
+
+.qSearchTitle {
+  color: #FFFFFF;
+  font-size: 16px;
+  margin-left: 42px;
+  margin-top: 3px;
+}
+.qSearchInputWrap {
+  position: relative;
+  /*width: 987px;*/
+  height: 21px;
+  padding: 7px 0;
+  border: 1px solid #368ec8;
+  border-bottom-color: #4e7e9e;
+  z-index: 10000;
+  background: url(http://www.standard-schmuck.de/skin/frontend/jewellery/default/images/graphic1.png) repeat-x 0 -384px #ff0000;
+  text-align: center;
+  margin: 17px 0;
+}
+.qSearchInputWrap .input-text {
+background: url(http://www.standard-schmuck.de/skin/frontend/jewellery/default/images/graphic2.png) no-repeat 0 -24px;
+font-size: 16px;
+
+width: 175px;
+padding: 0 4px 0 8px;
+height: 22px;
+float: left;
+margin: 0 10px 0 0;
+*margin: 0 9px 0 0;
+*display: inline;
+zoom: 1;
+
+}
+#qToCartWrap {font: 14px/24px 'M1pmedium' !important; cursor:pointer}
+
+.qSearchInputWrap .input-text input{
+background: none;
+border: 0;
+width: 147px;
+*width: 146px;
+height: 22px;
+*height: 18px;
+font: 14px/20px 'M1pregular', Arial, sans-serif;
+color: #373737;
+}
+.qSearchInputWrap .input-btn{
+float: left;
+}
+.qSearchInputWrap .input-btn input {
+/*background: url(../images/graphic2.png) no-repeat 1px -51px;*/
+background: url(http://www.standard-schmuck.de/skin/frontend/jewellery/default/images/graphic2.png) no-repeat -116px -50px;
+width: 100px;
+height: 20px;
+*height: 18px;
+border: 0;
+padding: 0;
+cursor: pointer;
+color: #2f2f2f;
+color: #000;
+font: 13px/20px 'M1pbold', Arial, sans-serif;
+}
+.qSearchInputWrap .input-text, .qSearchInputWrap .input-btn{
+  display: inline-block;
+  clear: both;
+  float:none;
+}
+.qMImage { width:85px; float:left;}
+.qMInfo { width:115px; float:left;}
+.productColumn { width:200px}
+#qStartSearch { display: inline-block; margin-left: 0%}
+#qLoader {display: none; position: absolute; top:10px; right:14px; }
+.qSearchInputWrap { position: relative; }
+.qty-minus, .qty-plus {/* width:10px; height:10px;  display: inline-block;*/}
+#qToCart { display:none}
+#qLoader img { }
+#qLoaderBg {background: url("../img/loader.gif"); width:50px; position: absolute; height:50px; left: 50%; top:50%; margin: -25px 0 0 -25px; z-index: 10003}
+.qRemovePosition { cursor: pointer}
+
+.qOrderWindowIn dl{
+margin: 0 0 10px
+}
+.qOrderWindowIn dt{
+float: left;
+clear: left;
+margin: 0 4px 0 0
+}
+
+#qOrderNote .content{
+padding: 12px;
+border: 1px solid #fff;
+background: #0177c5 url(../../../../skin/frontend/jewellery/default/images/tooltip-bg.png) repeat-x;
+
+color: #fff;
+font-size:16px;
+margin: -1px 0 0 0;
+position:relative;
+z-index: 1001;
+
+-webkit-box-shadow: 0px 1px 1px #5c5c5c;
+-moz-box-shadow: 0px 1px 1px #5c5c5c;
+box-shadow: 0px 0px 1px #5c5c5c;
+}
+#qOrderNote .top{
+height: 12px;
+background: url(../../../../skin/frontend/jewellery/default/images/graphic.png) -135px -616px no-repeat;
+position:relative;
+font-size: 1px;
+z-index: 1002;
+}
+
+#qOrderNote{
+margin-bottom: 10px;
+position: relative;
+width: 712px;
+z-index:999;
+}

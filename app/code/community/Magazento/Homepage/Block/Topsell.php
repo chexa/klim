@@ -1,0 +1,113 @@
+<?php
+/*
+ *  Created on May 3, 2011
+ *  Author Ivan Proskuryakov - volgodark@gmail.com - Magazento.com
+ *  Copyright Proskuryakov Ivan. Magazento.com © 2011. All Rights Reserved.
+ *  Single Use, Limited Licence and Single Use No Resale Licence ["Single Use"]
+ */
+?>
+<?php
+
+class Magazento_Homepage_Block_Topsell extends Mage_Catalog_Block_Product_Abstract
+{
+    protected function _construct() {
+        parent::_construct();
+        $this->addData(array(
+            'cache_lifetime' => 86400,
+            'cache_tags' => array('magazentohomepage_home_topsell'),
+        ));
+    }
+        
+    protected function _beforeToHtml() {
+
+    $storeId = Mage::app()->getStore()->getId();
+
+    $sellDate = $this->getModel()->getSellDate($this->getModel()->getHomepageDaysLimit());
+
+    $collection = Mage::getResourceModel('reports/product_sold_collection')
+        ->addOrderedQty()
+        ->setStoreId($storeId)
+        ->addStoreFilter($storeId)
+        ->setDateRange($sellDate['startdate'], $sellDate['todaydate']) //
+        ->addUrlRewrite()
+        ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
+        ->setPageSize($this->getModel()->getTopsellCount())
+        ->setCurPage(1);
+
+        $catId = Mage::getStoreConfig('homepage/topsell/homecat');
+        if ($catId > 0) {
+            $category = $this->getModel()->getCategory($catId);
+            $collection->addCategoryFilter($category);
+        }
+
+        /**
+         * Add filter by configurables
+         * @author Nikita Chirkov
+         */
+        $_joinCondition = $collection->getConnection()->quoteInto('e.entity_id = super_link.product_id');
+        $collection->getSelect()->joinInner(
+            array('super_link' => $collection->getTable('catalog/product_super_link')),
+            $_joinCondition,
+            array('configurable_id' => 'super_link.parent_id')
+        );
+
+        $collection->getSelect()->reset(Zend_Db_Select::GROUP)->group('super_link.parent_id');
+
+        $this->setProductCollection($collection);
+        return parent::_beforeToHtml();
+    }
+
+    public function getTitle() {
+        return Mage::getStoreConfig('homepage/topsell/title') ;
+    }
+    public function getModel() {
+        return Mage::getModel('homepage/Data');
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                ->setDateRange($sellDate['startdate'], $sellDate['todaydate'])
+//                ->addAttributeToFilter('is_salable')
+//                ->addAttributeToFilter('visibility', array('in' => array(Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG, Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)))
+//                ->addAttributeToFilter('status', Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
+//                                ->addSaleableFilterToCollection()
+//                                ->addInStockFilterToCollection()
+//                                ->addUrlRewrite()
+////                                ->addCategoryFilter($currentCategory)
+//                                ->setPageSize($this->getModel()->getHomepageProductsLimit())
+//                                ->setCurPage(1)
+//                ->addOrderedQty()
+//                ->setOrder('ordered_qty', 'desc');
+//
+
+//            ->addAttributeToSelect(array('entity_id', 'name', 'price', 'small_image', 'short_description', 'description', 'type_id', 'status'))
+//            ->addOrderedQty()
+//            ->setStoreId($storeId)
+//            ->addStoreFilter($storeId)
+////            ->addCategoryFilter($currentCategory)
+//            ->setOrder('ordered_qty', 'desc')
+//                        ->setPageSize($this->getModel()->getHomepageProductsLimit())
+//                        ->setCurPage(1);
+//
+//                $collection= array();
+//                foreach ($rawcollection as $product) {
+////                    $addproduct = $product->getData('is_salable');
+//                    $collection[]=$product->getData();
+//                }
+//                var_dump($rawcollection);
+////
+//
+//                exit();

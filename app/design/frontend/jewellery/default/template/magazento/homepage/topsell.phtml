@@ -1,0 +1,21 @@
+<div class="nav-row clear">
+    <h2 class="title-h5">Aktuelle Bestseller</h2>
+<?php /* ?>    <a href="#" class="more">Mehr Bestseller</a><?php */ ?>
+</div>
+
+<?php $_products = $this->getProductCollection(); ?>
+<?php $_collectionSize = sizeof($_products); ?>
+<?php $_columnCount = Mage::getStoreConfig('homepage/options/count'); ?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+
+<div class="subcategory bestsellers">
+<ul class="prod-items">
+    <?php foreach ($_products->getItems() as $_product): ?>
+        <?php echo $this->getLayout()->createBlock('jewellery_catalog/product_single')
+            ->setTemplate('catalog/product/list_single.phtml')
+            ->setProduct(Mage::getModel('catalog/product')->load($_product->getConfigurableId()))
+            ->toHtml();
+        ?>
+    <?php endforeach ?>
+</ul>
+</div>

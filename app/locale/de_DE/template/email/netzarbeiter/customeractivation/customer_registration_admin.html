@@ -1,0 +1,88 @@
+<!--@subject Neue Registrierung über standard-schmuck.de @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$customer.name":"Customer Name"
+@-->
+<style type="text/css">
+body,td { color:#2f2f2f; font:12px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+</style>
+
+<div style="font:12px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="Magento"  style="margin-bottom:10px;" border="0"/></a></td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <br />
+                            <p>
+                                <strong>Sehr geehrtes {{var store.getFrontendName()}} Team</strong>,<br/>es liegt eine neue Registrierung vor.<br/>
+                            </p>
+
+                            <table  width="100%" style="border:1px solid #BEBCB7; padding:3px 10px; background:#C4c4c4;">
+                               <tr>
+                                <td><strong>Firma:&nbsp;</strong></td>
+                                <td>{{htmlescape var=$customer.address.company}}</td>
+                               </tr>
+                               <tr style="background:#ffffff;">
+                                <td><strong>Straße:&nbsp;</strong></td>
+                                <td>
+                                  {{htmlescape var=$customer.address.street_1}} {{htmlescape var=$customer.address.street_additional}}  
+                                </td>
+                               </tr>
+                               <tr>
+                                <td><strong>PLZ/Ort:&nbsp;</strong></td>
+                                <td>{{htmlescape var=$customer.address.postcode}} {{htmlescape var=$customer.address.city}}</td>
+                               </tr>
+                               <tr style="background:#ffffff;">
+                                <td><strong>Land/Bundesland:&nbsp;</strong></td>
+                                <td>{{htmlescape var=$customer.address.country}} {{htmlescape var=$customer.address.region}}</td>
+                               </tr>
+                               <tr>
+                                <td><strong>Ansprechpartner:&nbsp;</strong></td>
+                                <td>{{htmlescape var=$customer.name}}</td>
+                               </tr>
+                               <tr style="background:#ffffff;">
+                                <td><strong>E-Mail:&nbsp;</strong></td>
+                                <td>{{htmlescape var=$customer.email}}</td>
+                               </tr>
+                               <tr>
+                                <td><strong>Telefon:&nbsp;</strong></td>
+                                <td>{{htmlescape var=$customer.address.telephone}}</td>
+                               </tr>
+                               <tr style="background:#ffffff;">
+                                <td><strong>Nachricht:&nbsp;</strong></td>
+                                <td><i><strong>{{htmlescape var=$customer.getCustomerMessage()}}</strong></i></td>
+                               </tr>
+                               <tr>
+                                <td><strong>Gewerbeschein:&nbsp;</strong></td>
+                                <td>{{if customer.getLicensePath()}}im Anhang{{else}}wird per Fax nachgereicht{{/if}}</td>
+                               </tr>
+                            </table> 
+                            <p>
+                                Bitte prüfen Sie die Anmeldung und geben Sie diese ggf. im <a href="{{store url="adminhtml/customer"}}">Administrationsbereich</a> frei. Dazu gehen Sie bitte im  <a href="{{store url="adminhtml/customer"}}">Administrationsbereich</a> unter: 
+                                <br /><br />
+                                <strong class="#">Kunden</strong> &gt; <strong>Kunden verwalten</strong> &gt; <strong>{{var customer.getName()}}</strong> &gt; <strong>Benutzerkonto Information und Benutzerkonto aktiviert</strong>.
+                                <br /><br /><br /> 
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#EAEAEA" align="center" style="background:##66CC00; text-align:center; padding: 5px;"><center><strong>Bitte berücksichtigen Sie</strong> bei der Aktivierung des Accounts dem Kunden eine <strong>neue Kundennummer</strong> und ein <strong>Passwort</strong> im Shop zu vergeben!<br /></center></td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>

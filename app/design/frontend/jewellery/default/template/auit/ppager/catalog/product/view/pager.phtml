@@ -1,0 +1,92 @@
+<div class="nav-row" id="prod-nav">
+    <?php if ( $this->getTotalNum() > 0) :?>
+
+    <a class="link-prev" href="<?php echo $this->getBackItemUrl() ?>" title="<?php echo $this->getBackItemTitle() ?>"><? /*php echo $this->__('Back to overview'); */?><?php echo $this->getBackItemTitle() ?></a>
+
+    <ul class="pagination">
+        <?php if (!$this->isFirstItem()): ?>
+            <li class="prev">
+                <a href="<?php echo $this->getPreviousItemUrl() ?>" title="<?php echo $this->getPreviousItemTitle() ?>">
+                    <?php echo $this->getAnchorTextForPrevious() ?>
+                </a>
+            </li>
+        <?php endif;?>
+        <?php foreach ($this->getFrameItems() as $_item): ?>
+            <li class="page-<?php echo $_item ?>">
+            <?php if ($this->isItemCurrent($_item)): ?>
+                <b><span><?php echo $this->getItemTitle($_item)?></span></b>
+            <?php else: ?>
+                <a href="<?php echo $this->getItemUrl($_item) ?>" title="<?php echo $this->getItemTitle($_item)?>"><span><?php echo $this->getItemTitle($_item)?></span></a>
+            <?php endif;?>
+            </li>
+        <?php endforeach;?>
+        <?php if (!$this->isLastItem()): ?>
+            <li class="next">
+                <a href="<?php echo $this->getNextItemUrl() ?>" title="<?php echo $this->getNextItemTitle() ?>">
+                    <?php echo $this->getAnchorTextForNext() ?>
+                </a>
+            </li>
+        <?php endif;?>
+    </ul>
+    <p class="fr"><?php echo $this->__('Item %s of %s total', $this->getCurrentNum(), $this->getTotalNum()) ?></p>
+
+    <?php endif; ?>
+</div>
+
+<?php /* ?>
+
+<?php if ( $this->getTotalNum() > 0) :?>
+<div class="toolbar">
+    <div class="pager">
+        <div class="amount">
+			<a class="previous" href="<?php echo $this->getBackItemUrl() ?>" title="<?php echo $this->getBackItemTitle() ?>">
+				<?php if(!$this->getAnchorTextForPrevious()): ?>
+					<img src="<?php echo $this->getSkinUrl('images/i_pager-prev.gif') ?>" alt="<?php echo $this->__('Back') ?>" class="v-middle" />
+				<?php else: ?>
+                	<?php echo $this->getAnchorTextForPrevious() ?>
+                <?php endif;?>
+            </a>
+            <span><?php echo $this->__('Item %s of %s total', $this->getCurrentNum(), $this->getTotalNum()) ?></span>
+		</div>
+	    <div class="pages">
+	        <ol>
+	        <?php if (!$this->isFirstItem()): ?>
+	            <li class="previous">
+	                <a class="previous" href="<?php echo $this->getPreviousItemUrl() ?>" title="<?php echo $this->getPreviousItemTitle() ?>">
+	                    <?php if(!$this->getAnchorTextForPrevious()): ?>
+	                        <img src="<?php echo $this->getSkinUrl('images/i_pager-prev.gif') ?>" alt="<?php echo $this->__('Previous') ?>" class="v-middle" />
+	                    <?php else: ?>
+	                        <?php echo $this->getAnchorTextForPrevious() ?>
+	                    <?php endif;?>
+	                </a>
+	            </li>
+	        <?php endif;?>
+
+	        <?php foreach ($this->getFrameItems() as $_item): ?>
+	            <?php if ($this->isItemCurrent($_item)): ?>
+	                <li class="page current"><?php echo $_item?></li>
+	            <?php else: ?>
+	                <li class="page"><a href="<?php echo $this->getItemUrl($_item) ?>" title="<?php echo $this->getItemTitle($_item)?>"><?php echo $_item ?></a></li>
+	            <?php endif;?>
+	        <?php endforeach;?>
+
+	        <?php if (!$this->isLastItem()): ?>
+	            <li class="next">
+	                <a class="next" href="<?php echo $this->getNextItemUrl() ?>" title="<?php echo $this->getNextItemTitle() ?>">
+	                    <?php if(!$this->getAnchorTextForNext()): ?>
+	                        <img src="<?php echo $this->getSkinUrl('images/i_pager-next.gif') ?>" alt="<?php echo $this->__('Next') ?>" class="v-middle" />
+	                    <?php else: ?>
+	                        <?php echo $this->getAnchorTextForNext() ?>
+	                    <?php endif;?>
+	                </a>
+	            </li>
+	        <?php endif;?>
+	        </ol>
+
+	    </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<?php endif; ?>
+
+<?php */ ?>

@@ -1,0 +1,93 @@
+<div id="qOrderWindow">
+<div id="qClose"></div>
+<div class="qOrderWindowIn">
+<div class="block"><div class="inside">
+<div id="qLoader"><img src="<?php echo Mage::getBaseUrl() ?>/skin/frontend/jewellery/default/images/opc-ajax-loader.gif" alt=""></div>
+    
+	
+	
+	<h1>Bestellschein</h1>                
+       <?php echo $this->getLayout()->createBlock('cms/block')->setName('qDesc')->setBlockId('quickorder_info')->toHtml(); ?>
+	
+	<div class="qSearchInputWrap">
+          <span class="qSearchTitle">Artikelnummer eingeben</span>
+          <div class="input-text">
+           <input type="text" id="qSearchByArticul">
+          </div>
+          <div class="input-btn">
+           <input type="button" value="Suchen" id="qStartSearch">
+          </div>
+          
+        </div> 
+
+	<?php // echo Mage::getUrl('quickorder/index/addToCart'); ?>
+	<?php // echo Mage::helper('checkout/cart')->getAddUrl(); ?>
+	<?php // echo Mage::getUrl('jewellery_checkout/cart/add'); ?>
+	
+	<ul id="qMessage" style="display:none" class="messages">                  
+          <li class="notice-msg">                       
+            <ul>                      
+              <li>Artikel GP 129593 wurde zur Bestellliste hinzugefALgt.                   
+          </li>                
+        </ul>                
+        </li>                
+        </ul> 
+	
+    <form id="qForm"  action="<?php echo Mage::getUrl('quickorder/quickOrderCart/addFromQuickOrder'); ?>">
+        <table class="cart-table" id="qTable" style="display: none">
+            <thead>
+			<tr>
+				<td>&nbsp;</td>
+				<td class="cart-table-product"><?php echo $this->__('Product'); ?></td>
+				<td class="cart-table-availability"><?php echo $this->__('Availability'); ?></td>
+				<td class="align-center cart-table-price"><?php echo $this->__('Child Price'); ?></td>
+				<td class="cart-table-quantity"><?php echo $this->__('Quantity'); ?></td>
+				<td class="cart-table-delete"><?php echo $this->__('Delete'); ?></td>
+				<!--<td class="align-center cart-table-subtotal"><?php echo $this->__('Subtotal') ?></td> -->
+			</tr>
+			   
+              <!--  <tr>
+                    <th class='qSkuTd'><?php echo $this->__('SKU'); ?></th>
+                    <th class='productColumn'><?php echo $this->__('Product'); ?></th>
+                    <th><?php echo $this->__('Remove'); ?></th>
+                    <th><?php echo $this->__('Status'); ?></th>
+                    <th><?php echo $this->__('Quantity'); ?></th>
+                    <th><?php echo $this->__('Price'); ?></th>
+                </tr> -->
+            </thead>
+            <tbody>
+			<tr>						                       
+              <td colspan="6" class="thead-ind">&nbsp;</td>					                     
+            </tr> 
+            </tbody>
+        </table>
+		
+		  <ul class="order-info messages hide">                  
+          <li class="notice-msg">                    
+            <ul>                      
+              <li>                      
+              <span>Bitte wA¤hlen Sie mindestens einen Artikel aus und legen Sie diesen "in den Warenkorb"                       
+              </span>                  
+          </li>                
+        </ul>                
+        </li>                
+        </ul>
+		<!-- window.parent.document.forms.qForm.submit() -->
+		   <div id="qOrderNote" style="display:none">
+        <div class="top">&nbsp;</div>
+        <div class="content">
+          <p>Sie k&ouml;nnen <strong>weitere Artikel dieser Liste hinzuf&uuml;gen</strong> und anschlie&szlig;end alle Artikel im Warenkorb ablegen!</p>
+        </div>
+       </div>
+      
+		   <div id="qToCartWrap" onclick="qOrder.onSubmit();" style="display:none" class="weiter-btn fr checkout-btn">                                                                                                                                                                                                                                   
+          <input type="button" value="" id="qToCart" >in den Warenkorb                   
+          <span>                  
+          </span>                                                                             
+        </div>			    <br class="clear">	
+		
+        
+    </form>
+	</div>
+	</div>
+</div></div>

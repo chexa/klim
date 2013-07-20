@@ -1,0 +1,8 @@
+<div id="register-step" class="nav-row">
+	<span><?php echo $this->__("Sign up in 3 steps"); ?>:</span>
+	<ul>
+		<li<?php if ($this->getCurrentStep() == 1) : ?> class="current"<?php endif; ?>>1. <?php echo $this->__("Company Address"); ?></li>
+		<li<?php if ($this->getCurrentStep() == 2) : ?> class="current"<?php endif; ?>>2. <?php echo $this->__("Trade Certificate"); ?></li>
+		<li<?php if ($this->getCurrentStep() == 3) : ?> class="current"<?php endif; ?>>3. <?php echo $this->__("Registration Success"); ?></li>
+	</ul>
+</div>

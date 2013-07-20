@@ -1,0 +1,103 @@
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+    $currentCategory = Mage::registry("current_category");
+    $topCategory = Mage::helper('jewellery')->getTopCategory();
+
+    $isLoggedIn = Mage::helper('customer')->isLoggedIn();
+
+?>
+
+<div class="section-title">
+    <h1><span><?php echo $topCategory->getName(); ?></span></h1>
+</div>
+
+<?php if ($currentCategory->getLevel() == 2) : ?>
+    <div class="top-cat-title">
+        <p><?php echo $this->__('Overview'); ?></p>
+        <?php if ($categoryImageUrl = $topCategory->getImageUrl()) : ?>
+            <img src="<?php echo $categoryImageUrl; ?>" width="192" height="147" alt="" />
+        <?php endif; ?>
+    </div>
+<?php else : ?>
+    <div class="sub-cat-title">
+        <h2><?php echo $currentCategory->getName(); ?></h2> <?php //TODO: fix this; ?>
+        <p class="daily-rates"><?php echo $this->__('Daily rates'); ?></p>
+    </div>
+<?php endif; ?>
+
+<div class="inner-content subcategory">
+
+<?php if ($currentCategory->getLevel() == 2) : ?>
+    <?php $_categories = $currentCategory->getChildrenCategories() ?>
+    <?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
+    <?php if($_count): ?>
+        <ul class="prod-cat">
+        <?php foreach ($_categories as $_category) : ?>
+            <?php $_subCategory = Mage::getModel('catalog/category')->load($_category->getId()); ?>
+            <li>
+                <span class="prod-cat-title title-h3"><a href="<?php echo $_subCategory->getUrl(); ?>"><?php echo $_subCategory->getName(); ?></a></span>
+                <?php if ($_subCategory->getThumbnailUrl()) : ?><a href="<?php echo $_subCategory->getUrl(); ?>" class="cat-img"><img src="<?php echo $_subCategory->getThumbnailUrl(); ?>" alt="<?php echo $_subCategory->getName(); ?>" /></a><?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+
+<?php else : ?>
+
+    <?php echo $this->getToolbarHtml() ?>
+
+    <?php if(!$_productCollection->count()): ?>
+        <div class="block">
+	        <div class="inside text-box">
+                <p><?php echo $this->__('There are no products matching the selection.') ?></p>
+            </div>
+        </div>
+    <?php else: ?>
+
+            <ul class="prod-items-wide">
+                <?php foreach ($_productCollection as $_product): ?>
+                    <?php echo $this->getLayout()->createBlock('jewellery_catalog/product_single')
+                        ->setTemplate('catalog/product/list_single_wide.phtml')
+                        ->setProduct($_product)
+                        ->toHtml();
+                    ?>
+                <?php endforeach ?>
+            </ul>
+
+
+
+    <?php endif; // End collection count ?>
+
+    <div class="page-nav">
+    <?php
+       // manually get the toolbar block so we can do the page navigation
+        $toolbar = $this->getToolbarBlock();
+        $toolbar->setCollection($_productCollection);
+        if($toolbar->getCollection()->getSize() > 0) {
+            echo $toolbar->getPagerHtml();
+        }
+    ?>
+    </div>
+
+<?php endif; // End category level ?>
+
+
+<?php // Category Description ?>
+<?php if($_description=$currentCategory->getDescription()): ?>
+
+    <div class="block">
+        <div class="inside small-text">
+            <div class="toggle-box">
+                <div><?php echo $_helper->categoryAttribute($currentCategory, $_description, 'description') ?></div>
+            </div>
+            <span id="arrow" class="down-arrow"></span>
+        </div>
+    </div>
+<?php endif; ?>
+
+</div> <!-- end of inner-content block -->
+
+
+
+<script>$j("#content").addClass("inner-page");</script>

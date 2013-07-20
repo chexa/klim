@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jewellery_Checkout>
+            <version>0.0.1</version>
+        </Jewellery_Checkout>
+    </modules>
+
+    <default>
+    </default>
+
+    <global>
+        <blocks>
+            <checkout>
+                <rewrite>
+                    <!--<onepage>Jewellery_Jewellery_Block_Rewrite_CheckoutOnepage</onepage>-->
+                    <onepage>Jewellery_Checkout_Block_Onepage</onepage>
+                    <!--<onepage_billing>Jewellery_Jewellery_Block_Rewrite_CheckoutOnepageBilling</onepage_billing>-->
+                    <onepage_shipping>Jewellery_Checkout_Block_Onepage_Shipping</onepage_shipping>
+                    <onepage_shipping_method>Jewellery_Checkout_Block_Onepage_Shipping_Method</onepage_shipping_method>
+                    <onepage_payment>Jewellery_Checkout_Block_Onepage_Payment</onepage_payment>
+                    <cart_shipping>Jewellery_Checkout_Block_Cart_Shipping</cart_shipping>
+                    <onepage_stephelper>Jewellery_Checkout_Block_Onepage_Stephelper</onepage_stephelper>
+                </rewrite>
+            </checkout>
+        </blocks>
+
+        <events>
+            <checkout_type_onepage_save_order_after>
+                <observers>
+                    <jewellery_jewellery_model_observer>
+                        <type>singleton</type>
+                        <class>Jewellery_Checkout_Model_Observer</class>
+                        <method>checkout_type_onepage_save_order</method>
+                    </jewellery_jewellery_model_observer>
+                </observers>
+            </checkout_type_onepage_save_order_after>
+        </events>
+    </global>
+
+    <!--<global>
+        <routers>
+            <checkout>
+                <rewrite>
+                    <cart>
+                        <to>Jewellery_Checkout/cart</to>
+                        <override_actions>false</override_actions>
+                        <actions>
+                            <add>
+                                <to>Jewellery_Checkout/cart/add</to>
+                            </add>
+                        </actions>
+                    </cart>
+                </rewrite>
+            </checkout>
+        </routers>
+    </global>-->
+
+    <frontend>
+        <routers>
+            <jewellery_checkout>
+                <use>standard</use>
+                <args>
+                    <module>Jewellery_Checkout</module>
+                    <frontName>jewellery_checkout</frontName>
+                </args>
+            </jewellery_checkout>
+
+            <checkout>
+                <args>
+                    <modules>
+                        <Jewellery_Checkout before="Mage_Checkout">Jewellery_Checkout</Jewellery_Checkout>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+    </frontend>
+
+
+</config>

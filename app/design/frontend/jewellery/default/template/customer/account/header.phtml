@@ -1,0 +1,11 @@
+
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('account_left_upper')->toHtml(); ?>
+
+<div class="block w489 fr">
+    <div class="inside text-box welcome-text">
+        <?php /* ?><h1><?php echo $this->__('Hello %s %s!', $this->getCustomer()->getPrefix(), $this->getCustomer()->getLastname()); ?></h1> <?php */ ?>
+        <h1><?php echo 'Guten Tag!' ?></h1>
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('account_right_upper')->toHtml(); ?>
+        <br class="clear" />
+    </div>
+</div>

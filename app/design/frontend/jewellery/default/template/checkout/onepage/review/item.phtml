@@ -1,0 +1,65 @@
+<?php
+    $_item = $this->getItem();
+    $rowClass = (Mage::getSingleton('jewellery/session')->getCartItemPosition() % 2 === 0) ? 'even' : '';
+    $jSession = Mage::getSingleton('jewellery/session');
+    $invData = Mage::helper('jewellery_catalog')->getInventoryData($this->getProduct());
+?>
+
+<tr class="<?php echo $rowClass; ?>">
+    <td><?php if ($this->hasProductUrl()):?><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="product-image"><?php endif;?><img src="<?php echo $this->getProductThumbnail()->resize(57,57); ?>" width="57" height="57" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?></td>
+    <td>
+        <?php if ($this->hasProductUrl()):?>
+            <a href="<?php echo $this->getProductUrl() ?>"><?php echo $this->htmlEscape($this->getProductName()) ?></a>
+        <?php else: ?>
+            <?php echo $this->htmlEscape($this->getProductName()) ?>
+        <?php endif; ?>
+
+        <?php echo $this->getProduct()->getSku(); ?>
+
+        <?php if ($_options = $this->getOptionList()):?>
+        <dl class="item-options">
+            <?php foreach ($_options as $_option) : ?>
+            <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
+            <dt><?php echo $this->htmlEscape($_option['label']) ?></dt>
+            <dd<?php if (isset($_formatedOptionValue['full_view'])): ?> class="truncated"<?php endif; ?>><?php echo $_formatedOptionValue['value'] ?>
+                <?php if (isset($_formatedOptionValue['full_view'])): ?>
+                <div class="truncated_full_value">
+                    <dl class="item-options">
+                        <dt><?php echo $this->htmlEscape($_option['label']) ?></dt>
+                        <dd><?php echo $_formatedOptionValue['full_view'] ?></dd>
+                    </dl>
+                </div>
+                <?php endif; ?>
+            </dd>
+            <?php endforeach; ?>
+        </dl>
+        <?php endif;?>
+
+        <?php if (($vpe = $this->helper('catalog/output')->productAttribute($this->getProduct(), $this->getProduct()->getVerpackungseinheitVe(), 'verpackungseinheit_ve')) > 1) : ?>
+        <dl class="item-options">
+            <dt><?php echo $this->__('Unit'); ?>: </dt>
+            <dd><?php echo $this->__('%d Pieces', $vpe); ?></dd>
+        </dl>
+        <?php endif; ?>
+
+    </td>
+
+    <td><span class="lager <?php echo $invData['status']; ?>" title="<?php echo $this->__($invData['status']); ?>"></span></td>
+
+    <td class="amount"><?php echo $this->getQty(); ?></td>
+
+    <td class="align-center">
+        <span class="cart-price">
+            <?php echo $this->helper('checkout')->formatPrice($_item->getCalculationPrice()) ?>
+        </span>
+    </td>
+
+    <td class="align-center">
+        <span class="cart-price">
+            <?php echo $this->helper('checkout')->formatPrice($_item->getRowTotal()) ?>
+        </span>
+    </td>
+
+    <td>&nbsp;</td>
+
+</tr>

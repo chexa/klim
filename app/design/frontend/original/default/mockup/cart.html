@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+
+<!-- Mirrored from standardschmuck.maxfroehlich.de/HTML-Templates/cart.html by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 13 Jul 2011 07:35:50 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MF SHOP</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="css/navigation.css" media="all" />
+<link rel="stylesheet" type="text/css" href="css/formstyle.css" media="all" />
+<link rel="stylesheet" type="text/css" href="css/jquery.ad-gallery.css" media="all" />
+
+<link rel="stylesheet" type="text/css" href="css/fonts.css" media="all" />
+
+<link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
+
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+<script type="text/javascript" src="js/login-form.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+
+<script type="text/javascript" src="js/jquery.formstyle-0.1.0.js"></script>
+<script type="text/javascript" src="js/jquery.ad-gallery.js"></script>
+<script type="text/javascript" src="js/jquery.tinyTips.js"></script>
+
+<script type="text/javascript" src="js/jquery.bgiframe.min.js"></script>
+<!--[if lte IE 6]>
+	<script src="js/png.js"></script>
+	<script>
+		DD_belatedPNG.fix('img,.menu li,.logout,.cart,.product-type .current a,.pagination a,.weiter-link span,.delete-link,.weiter-btn span, .tooltip .top ');
+	</script>
+<![endif]-->
+
+
+</head>
+<body>
+<div id="wrap">
+	<div id="content" class="inner-page">
+
+		<div class="inner-content">
+			
+			<div class="block">
+				<div class="inside">
+					<form action="#">
+						<h1>Warenkorb</h1>
+						<div class="weiter-btn fr left-indent"><input type="submit" value="" />Bestellung abschliessen<span></span></div>
+						<a href="#" class="button-link weiter-link fr"><span>Weiter einkaufen</span></a>
+						
+						<table class="cart-table">
+							<thead>
+							<tr>
+								<td>Bild</td>
+								<td>Artikel</td>
+								<td>Löschen</td>
+								<td>Verfügbarkeit</td>
+								<td>Menge</td>
+								<td class="align-center">Stückpreis</td>
+								<td class="align-center">Gesamtpreis</td>
+							</tr>
+							</thead>
+							<tr>
+								<td colspan="7" class="thead-ind">&nbsp;</td>
+							</tr>
+							<tr class="even">
+								<td><a href="#"><img src="content-img/cart-img.jpg" width="57" height="52" alt="" /></a></td>
+								<td><a href="#">Buchstabenanhänger</a> BA56487</td>
+								<td class="delete"><a href="#" class="delete-link"></a></td>
+								<td><span class="lager auf-lager" title="auf-lager"></span></td>
+								<td class="amount">
+									<select>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+									</select>
+								</td>
+								<td class="align-center">99,00€</td>
+								<td class="align-center">99,00€</td>
+							</tr>
+							<tr>
+								<td><a href="#"><img src="content-img/cart-img.jpg" width="57" height="52" alt="" /></a></td>
+								<td><a href="#">Buchstabenanhänger</a> BA56487</td>
+								<td class="delete"><a href="#" class="delete-link"></a></td>
+								<td><span class="lager auf-lager" title="auf-lager"></span></td>
+								<td class="amount">
+									<select>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+									</select>
+								</td>
+								<td class="align-center">99,00€</td>
+								<td class="align-center">99,00€</td>
+							</tr>
+							<tr class="even">
+								<td><a href="#"><img src="content-img/cart-img.jpg" width="57" height="52" alt="" /></a></td>
+								<td><a href="#">Buchstabenanhänger</a> BA56487</td>
+								<td class="delete"><a href="#" class="delete-link"></a></td>
+								<td><span class="lager auf-lager" title="auf-lager"></span></td>
+								<td class="amount">
+									<select>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+									</select>
+								</td>
+								<td class="align-center">99,00€</td>
+								<td class="align-center">99,00€</td>
+							</tr>
+						</table>
+						
+						<div class="info-block versand">
+							<div>
+								<div class="versand-title"><span class="title-h5">Versand</span></div>
+								<label><input type="radio" name="versand" checked />versichert 5,80€</label>
+								<label><input type="radio" name="versand"/>unversichert 5,80€</label>
+								<label><input type="radio" name="versand" />per Anschreiben 5,50€</label>
+							</div>
+							<div>
+								<div class="versand-title"><span class="title-h5">Expressversand</span>
+								<p>Bestellung bis 14.30, Zustellung bis 8.00 am nächsten Tag</p>
+								</div>
+								<label><input type="radio" name="versand" />versichert 14,80€</label>
+								<label><input type="radio" name="versand" />unversichert 18,80€</label>
+								<label><input type="radio" name="versand" />per Anschreiben 20,50€</label>
+							</div>
+						</div>
+						
+						<dl class="cart-sum">
+							<dt>Summe netto:</dt><dd>300,00€</dd>
+							<dt>Versandkosten:</dt><dd>7,50€</dd>
+							<dt>19% USt.</dt><dd>58,00€</dd>
+							<dt class="gesamt">Gesamt brutto</dt><dd class="gesamt">400,00€</dd>
+						</dl>
+						<div class="weiter-btn fr"><input type="submit" value="" />Bestellung abschliessen<span></span></div>
+
+						<br class="clear" />
+					</form>
+				</div>
+			</div>
+			
+			
+		</div>
+
+		<div class="inner-side">
+			<div class="block">
+				<div class="inside-light">
+					<ul class="default-list">
+						<li><span class="title-h5 dark-title">Ihre Sicherheit bei uns</span>
+						Keine Speicherung persönlicher 
+						Daten im Onlineshop.
+						</li>
+						<li><span class="title-h5 dark-title">Rückgabe</span>
+						Innerhalb 14 Tage können Sie 
+						die Ware kostenlos an uns zurück senden.
+						</li>
+						<li><span class="title-h5 dark-title">Sie haben Fragen oder  haben etwas vergessen?</span></li>
+					</ul>
+					
+
+					<dl class="contact">
+						<dt>Max Fröhlich </dt>
+							<dd>+49 (0)201 820 820</dd>
+						<dt>Flume</dt>
+							<dd>+49 (0)201 189 9101</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div id="breadcrumbs">
+			<ul class="breadcrumb-nav">
+				<li>Sie sind hier: </li>
+				<li><a href="#">Startseite</a></li>
+				<li>Anhanger</li>
+			</ul>
+		</div>
+		<div id="main-nav">
+			<ul class="menu">
+				<li><a href="#">Anhanger</a>
+					<ul>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Ketten / Armbander</a>
+					<ul>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Ohrschmuck</a>
+					<ul>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Farbsteinschmuck</a>
+					<ul>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Sonstiges</a>
+					<ul>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+						<li><a href="#">Munzfassungen (58)</a></li>
+						<li><a href="#">Sternzeichen (200)</a></li>
+						<li><a href="#">Medalions (99)</a></li>
+						<li><a href="#">Motivanhanger (26)</a></li>
+					</ul>
+				</li>
+			</ul>
+			
+			<form class="search-form" action="#">
+					<div class="input-text"><input type="text" value="Produktname, Art. Nr."  onblur="if (this.value == '') {this.value = 'Produktname, Art. Nr.';}" onfocus="if (this.value == 'Produktname, Art. Nr.') {this.value = '';}" /></div>
+					<div class="input-btn"><input type="submit" value="Suchen " /></div>
+			</form>
+		</div><!--end main-nav-->
+	</div><!--end content-->
+	<div id="footer">
+		<ul class="footer-nav">
+			<li><a href="#">Über uns</a>
+				<ul>
+					<li><a href="#">Unternehmen </a></li>
+					<li><a href="#">Schmuck-Qualitat</a></li>
+					<li><a href="#">Kontakt</a></li>
+					<li><a href="#">AGB </a></li>
+					<li><a href="#">Datenschutz</a></li>
+					<li><a href="#">Impressum</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Kaufabwicklung</a>
+				<ul>
+					<li><a href="#">Unternehmen </a></li>
+					<li><a href="#">Schmuck-Qualitat</a></li>
+					<li><a href="#">Kontakt</a></li>
+					<li><a href="#">AGB </a></li>
+					<li><a href="#">Datenschutz</a></li>
+					<li><a href="#">Impressum</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Information</a>
+				<ul>
+					<li><a href="#">Unternehmen </a></li>
+					<li><a href="#">Schmuck-Qualitat</a></li>
+					<li><a href="#">Kontakt</a></li>
+					<li><a href="#">AGB </a></li>
+					<li><a href="#">Datenschutz</a></li>
+					<li><a href="#">Impressum</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Service</a>
+				<ul>
+					<li><a href="#">Unternehmen </a></li>
+					<li><a href="#">Schmuck-Qualitat</a></li>
+					<li><a href="#">Kontakt</a></li>
+					<li><a href="#">AGB </a></li>
+					<li><a href="#">Datenschutz</a></li>
+					<li><a href="#">Impressum</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Top Kategorien</a>
+				<ul>
+					<li><a href="#">Unternehmen </a></li>
+					<li><a href="#">Schmuck-Qualitat</a></li>
+					<li><a href="#">Kontakt</a></li>
+					<li><a href="#">AGB </a></li>
+					<li><a href="#">Datenschutz</a></li>
+					<li><a href="#">Impressum</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Tags</a>
+				<ul>
+					<li><a href="#">Unternehmen </a></li>
+					<li><a href="#">Schmuck-Qualitat</a></li>
+					<li><a href="#">Kontakt</a></li>
+					<li><a href="#">AGB </a></li>
+					<li><a href="#">Datenschutz</a></li>
+					<li><a href="#">Impressum</a></li>
+				</ul>
+			</li>
+		</ul>
+		<p class="copy">©2010 – 2011 Max Fröhlich Schmuckgroßhandel GmbH</p>
+	</div><!--end footer-->
+	<div id="header">
+		<a href="#" class="logo"><img src="images/logotypes.png" width="391" height="47" alt="" /></a>
+		<div class="user-box">
+			<div class="cart-box">
+				<a href="#" class="cart">
+					<span class="cart-title">Warenkorb</span>
+					<span class="sum">230,00 €</span>
+				</a>
+				<div class="user-buttons">
+					<a href="#" class="user-btn-link">Mein Account</a>
+					<a href="#" class="user-btn-link">Merkliste</a>
+				</div>
+			</div>
+		</div>
+		<div class="print-head">www.standard-schmuck.de</div>
+	</div><!--end header-->
+	<div id="top">
+		<a href="#" class="logout">Logout</a>
+		<ul class="user-menu">
+			<li><a href="#">Kontakt</a></li>
+			<li><a href="#">Hilfe</a></li>
+		</ul>
+	</div><!--end top-->
+</div><!--end wrap-->
+</body>
+
+<!-- Mirrored from standardschmuck.maxfroehlich.de/HTML-Templates/cart.html by HTTrack Website Copier/3.x [XR&CO'2010], Wed, 13 Jul 2011 07:35:51 GMT -->
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<layout>
+    <promobannerslider_adminhtml_promobannerslider_index>
+        <reference name="content">
+            <block type="promobannerslider/adminhtml_promobannerslider" name="promobannerslider" />
+        </reference>
+    </promobannerslider_adminhtml_promobannerslider_index>
+
+    <promobannerslider_adminhtml_promobannerslider_edit>
+        <block type="promobannerslider/adminhtml_promobannerslider" name="images_list" template="magenmagic/promobannerslider/images_list.phtml"/>
+    </promobannerslider_adminhtml_promobannerslider_edit>
+
+    <promobannerslider_adminhtml_promobannerslider_getimages>
+        <block type="promobannerslider/adminhtml_promobannerslider" name="images_list" template="magenmagic/promobannerslider/images_list.phtml"/>
+    </promobannerslider_adminhtml_promobannerslider_getimages>
+
+      <adminhtml_system_config_edit>
+        <reference name="content">
+            <block type="promobannerslider/adminhtml_info" name="promobannerslider_info"  template="magenmagic/promobannerslider/info.phtml" />
+        </reference>
+    </adminhtml_system_config_edit>
+
+</layout>
