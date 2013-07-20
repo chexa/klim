@@ -28,7 +28,7 @@
 
 <div class="inner-content subcategory">
 
-<?php if ($currentCategory->getLevel() == 2) : ?>
+<?php if ($currentCategory->getLevel() == 3) : ?>
     <?php $_categories = $currentCategory->getChildrenCategories() ?>
     <?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
     <?php if($_count): ?>
