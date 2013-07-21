@@ -1467,7 +1467,7 @@ border: 1px solid #a6a6a6;
 }
  
 
-.top-cat-title h2, .sub-cat-title h2, .top-cat-title p  {
+.top-cat-title h2, .sub-cat-title h2, .top-cat-title p,  .top-cat-title h1, .sub-cat-title h1 {
 color: #fff;
 font: 33px 'M1pregular';
 text-shadow: 1px 1px 1px #1784c2;
@@ -1483,13 +1483,13 @@ margin: 73px 0 7px 0;
 background: url(../images/sub-cat-title.jpg) no-repeat;
 position: relative;
 }
-.sub-cat-title h2{
+.sub-cat-title h2, .sub-cat-title h1{
 text-align:left;
 padding: 0 0 0 37px;
 line-height: 73px;
 }
 
-.top-cat-title h2, .top-cat-title p {
+.top-cat-title h2, .top-cat-title p, .top-cat-title h1 {
 float:right;
 }
 .top-cat-title img{

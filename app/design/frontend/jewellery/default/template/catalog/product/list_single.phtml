@@ -15,9 +15,9 @@ $attrBearbeitungsart = $_helper->productAttribute($_product, $_product->getBearb
 ?>
 <li>
     <div>
-        <h3 class="img-wrap product-image">
+        <strong class="img-wrap product-image">
           <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(130, 185); ?>" width="130" height="185" alt="<?php echo $attrNameLong ?>" />
-        </h3>
+        </strong>
         <a rel="nofollow" href="<?php echo $this->getUrl('ajax/product/quickview/id/' . $_product->getId()) ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>" class="ajax button-link"><span class="magnifier"></span>Schnellansicht</a>
         <a href="<?php echo $_product->getProductUrl() ?>" class="prod-item">
             <span><?php echo $attrName ?></span>
