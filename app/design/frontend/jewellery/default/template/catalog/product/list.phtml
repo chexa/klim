@@ -9,10 +9,14 @@
 ?>
 
 <div class="section-title">
-    <h1><span><?php echo $topCategory->getName(); ?></span></h1>
+    <?php if ($categoryImageUrl = $topCategory->getThumbnailUrl()) : ?>
+        <div class="innerSectionTitleContent"><img class="selectionTitleImage" src="<?php echo $categoryImageUrl; ?>" alt="" /></div>
+    <?php else : ?>
+        <strong><span><?php echo $topCategory->getName(); ?></span></strong>
+    <?php endif; ?>
 </div>
 
-<?php if ($currentCategory->getLevel() == 2) : ?>
+<?php if ($currentCategory->getLevel() == 3) : ?>
     <div class="top-cat-title">
         <p><?php echo $this->__('Overview'); ?></p>
         <?php if ($categoryImageUrl = $topCategory->getImageUrl()) : ?>

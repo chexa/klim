@@ -1429,7 +1429,7 @@ background: url(../images/section-title.jpg) 0 0 no-repeat;
 border: 1px solid #a6a6a6;
 position:relative;
 }
-.section-title h1{
+.section-title h1, .section-title strong, .section-title .innerSectionTitleContent {
 color: #fff;
 font: 40px/40px 'M1pregular';
 text-shadow: 1px 1px 1px #1784c2;
@@ -1443,13 +1443,16 @@ vertical-align:middle;
 
 
 
-.section-title h1 span{
+.section-title h1 span, .section-title strong span{
 *display:inline-block;
 margin-top: expression((73-parseInt(offsetHeight)/2) <0 ? '0' : 73-(parseInt(offsetHeight)/2) +'px') ;
 }
 .cms-magento-shop-programmierung .section-title h1,
+.cms-magento-shop-programmierung .section-title strong,
 .cms-webdesign-webprogrammierung .section-title h1,
-.cms-enable-cookies .section-title h1 {
+.cms-webdesign-webprogrammierung .section-title strong,
+.cms-enable-cookies .section-title h1,
+.cms-enable-cookies .section-title strong {
   display:none;
 }
 
@@ -1516,7 +1519,7 @@ float: right;
   height: 57px;
 }
 
-.catalogsearch-result-index .section-title h1 {
+.catalogsearch-result-index .section-title h1, .catalogsearch-result-index .section-title strong {
   font: 25px/36px 'M1pregular';
   height: 57px;
 }
@@ -3663,3 +3666,5 @@ width: 190px;
 }
 
 .blockUnderCategoryTitle { float:left; width:738px}
+
+.selectionTitleImage { max-width:100%; margin: 0 auto;}
