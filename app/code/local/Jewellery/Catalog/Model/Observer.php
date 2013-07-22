@@ -20,7 +20,7 @@ class Jewellery_Catalog_Model_Observer
         $keywords = $product->getMetaKeyword();
 
         $sku = $product->getSku();
-        $keywords = $keywords.",".str_replace("/", "", $sku);
+        $keywords = $keywords . "," . str_replace("/", " ", $sku) . "," . str_replace("/", "", $sku);
         $product->setMetaKeyword($keywords);
 
         Mage::helper('jewellery_catalog')->buildRecommendedPrice($product);
