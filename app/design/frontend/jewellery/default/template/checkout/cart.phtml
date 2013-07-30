@@ -27,6 +27,23 @@
 				    <a href="<?php echo $this->getContinueShoppingUrl() ?>" class="button-link weiter-link fl"><span><?php echo $this->__('Continue Shopping') ?></span></a>
                 <?php endif; ?>
 
+                <br clear="all" />
+
+                <div id="cartQuickOrder">
+                    <?php echo $this->getLayout()->createBlock("quickorder/quickorderForm")->toHtml(); ?>
+                </div>
+
+                <!--<div class="qSearchInputWrap">
+                    <span class="qSearchTitle">Artikelnummer eingeben</span>
+                    <div class="input-text">
+                        <input type="text" class="qSearchByArticul">
+                    </div>
+                    <div class="input-btn">
+                        <input type="button" value="Suchen" id="qStartSearch">
+                    </div>
+
+                </div>-->
+
         		<table class="cart-table">
 					<thead>
 					<tr>
@@ -54,6 +71,7 @@
                     <?php endforeach ?>
 				</table>
 
+                <?php Mage::getSingleton('checkout/session')->unsetData('newProducts'); ?>
                 <?php echo $this->getChildHtml('shipping'); ?>
 
     			

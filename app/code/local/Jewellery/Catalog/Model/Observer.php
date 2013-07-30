@@ -20,7 +20,25 @@ class Jewellery_Catalog_Model_Observer
         $keywords = $product->getMetaKeyword();
 
         $sku = $product->getSku();
-        $keywords = $keywords.",".str_replace("/", "", $sku);
+        $prepareSku = function (&$keywords, $replacedSku) {
+            $keywords = preg_replace('/\,' . preg_quote($replacedSku) . '\,/', ',', $keywords);
+            $keywords = preg_replace('/^' . preg_quote($replacedSku) . '/', '', $keywords);
+            $keywords = preg_replace('/' . preg_quote($replacedSku) . '$/', '', $keywords);
+            $keywords = preg_replace('/^\,/', '', $keywords);
+            $keywords = preg_replace('/\,$/', '', $keywords);
+            $keywords = preg_replace('/(\,){2}/', '', $keywords);
+        };
+
+        $sku1 = str_replace("/", " ", $sku);
+        $sku2 = str_replace("/", "", $sku);
+
+        $prepareSku($keywords, $sku1);
+        if ($sku1 != $sku2) {
+            $prepareSku($keywords, $sku2);
+            $sku1 = $sku1 . "," . $sku2;
+        }
+
+        $keywords = $keywords . "," . $sku1;
         $product->setMetaKeyword($keywords);
 
         Mage::helper('jewellery_catalog')->buildRecommendedPrice($product);

@@ -9,26 +9,35 @@
 ?>
 
 <div class="section-title">
-    <h1><span><?php echo $topCategory->getName(); ?></span></h1>
+    <?php if ($categoryImageUrl = $topCategory->getThumbnailUrl()) : ?>
+        <div class="innerSectionTitleContent"><img class="selectionTitleImage" src="<?php echo $categoryImageUrl; ?>" alt="" /></div>
+    <?php else : ?>
+        <strong><span><?php echo $topCategory->getName(); ?></span></strong>
+    <?php endif; ?>
 </div>
 
-<?php if ($currentCategory->getLevel() == 2) : ?>
+<?php if ($currentCategory->getLevel() == 3) : ?>
     <div class="top-cat-title">
-        <p><?php echo $this->__('Overview'); ?></p>
-        <?php if ($categoryImageUrl = $topCategory->getImageUrl()) : ?>
+       <!-- <p><?php /*echo $this->__('Overview'); */?></p>-->
+        <h1><?php echo $currentCategory->getName(); ?></h1>
+        <?php if ($categoryImageUrl = $currentCategory->getImageUrl()) : ?>
             <img src="<?php echo $categoryImageUrl; ?>" width="192" height="147" alt="" />
         <?php endif; ?>
     </div>
+<?php elseif ($currentCategory->getLevel() == 2) : ?>
+    <div class="top-cat-title">
+        <h1>Schmuck-Kollektion <?php echo $currentCategory->getName(); ?></h1>
+    </div>
 <?php else : ?>
     <div class="sub-cat-title">
-        <h2><?php echo $currentCategory->getName(); ?></h2> <?php //TODO: fix this; ?>
+        <h1><?php echo $currentCategory->getName(); ?></h1>
         <p class="daily-rates"><?php echo $this->__('Daily rates'); ?></p>
     </div>
 <?php endif; ?>
 
 <div class="inner-content subcategory">
 
-<?php if ($currentCategory->getLevel() == 2) : ?>
+<?php if ($currentCategory->getLevel() == 3) : ?>
     <?php $_categories = $currentCategory->getChildrenCategories() ?>
     <?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
     <?php if($_count): ?>
@@ -45,7 +54,9 @@
 
 <?php else : ?>
 
-    <?php echo $this->getToolbarHtml() ?>
+    <?php if ($currentCategory->getLevel() != 2) {
+        echo $this->getToolbarHtml();
+    } ?>
 
 	<?php
 		$block = $this->getLayout()->getBlock('muenzfassungen_info');
