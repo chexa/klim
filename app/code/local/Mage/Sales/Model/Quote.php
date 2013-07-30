@@ -609,7 +609,19 @@ class Mage_Sales_Model_Quote extends Mage_Core_Model_Abstract
             }
         }
 
-        if ()
+        if ($newProducts = Mage::getSingleton('checkout/session')->getData('newProducts')) {
+            $up = array();
+            $down = array();
+            foreach ($items as $item) {
+                if (in_array($item->getData('product_id'), $newProducts)) {
+                    $up[] = $item;
+                } else {
+                    $down[] = $item;
+                }
+            }
+
+            $items = array_merge($up, $down);
+        }
 
         return $items;
     }
