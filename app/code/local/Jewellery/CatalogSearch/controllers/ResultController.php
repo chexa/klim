@@ -48,7 +48,7 @@ class Jewellery_CatalogSearch_ResultController extends Mage_CatalogSearch_Result
 		$catalogSearch = clone Mage::helper('catalogsearch');
 		$paramName = $catalogSearch->getQueryParamName();
 		$nativeQueryText = $this->getRequest()->getParam($paramName);
-		$this->getRequest()->setParam($paramName, '\'' . $nativeQueryText . '\'');
+		$this->getRequest()->setParam($paramName, '\'"' . $nativeQueryText . '"\'');
 
         $query = $catalogSearch->getQuery();
         /* @var $query Mage_CatalogSearch_Model_Query */
@@ -67,6 +67,7 @@ class Jewellery_CatalogSearch_ResultController extends Mage_CatalogSearch_Result
 			Mage::helper('catalogsearch')->cleanQueryText();
 
 			$this->getRequest()->setParam($paramName, $nativeQueryText);
+            $catalogSearch->setQueryText($nativeQueryText);
 			$query2 = Mage::helper('catalogsearch')->getQuery();
 
 			if (sizeof($resultsProduct->getItems()) == 0) {

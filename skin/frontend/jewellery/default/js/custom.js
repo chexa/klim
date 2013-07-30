@@ -179,6 +179,13 @@ function hideLoadWindow ()
 	
 	$j(window).load(function() {
 
+        $j('#search_mini_form').submit(function () {
+            var val = $j(this).find('.input-text input').val();
+            if (val.length > 0 && val != 'Produktsuche') {
+                showLoadWindow();
+            }
+        });
+
 		$j('#update_cart_form').submit(function () {
 			changeQty = false;
 			showLoadWindow();
@@ -189,7 +196,7 @@ function hideLoadWindow ()
 		changeQty = false;
 		showLoadWindow();
 	})
-	
+
 	$j('.checkout-btn').click(function () {
 		window.onbeforeunload = null;
 		changeQty = false;

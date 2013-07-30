@@ -109,6 +109,11 @@ class Mage_CatalogSearch_Helper_Data extends Mage_Core_Helper_Abstract
         return false;
     }
 
+    public function setQueryText($queryText)
+    {
+        $this->_queryText = $queryText;
+    }
+
     /**
      * Retrieve search query text
      *
