@@ -2,10 +2,16 @@
     $_item = $this->getItem();
     $rowClass = (Mage::getSingleton('jewellery/session')->getCartItemPosition() % 2 === 0) ? 'even' : '';
     $jSession = Mage::getSingleton('jewellery/session');
+    $cSession = Mage::getSingleton('checkout/session');
+    $newArray = $cSession->getData('newProducts');
+    if (! $newArray) {
+        $newArray = array();
+    }
+
     $invData = Mage::helper('jewellery_catalog')->getInventoryData($this->getProduct());
 ?>
 
-<tr class="<?php echo $rowClass; ?>">
+<tr class="<?php echo $rowClass; echo in_array($this->getProduct()->getId(), $newArray) ? ' new-product-item' : ''; ?>">
     <td><?php if ($this->hasProductUrl()):?><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="product-image"><?php endif;?><img src="<?php echo $this->getProductThumbnail()->resize(57,57); ?>" width="57" height="57" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?></td>
     <td>
         <?php if ($this->hasProductUrl()):?>

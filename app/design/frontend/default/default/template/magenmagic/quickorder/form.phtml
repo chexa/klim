@@ -1,13 +1,13 @@
-<div id="qOrderWindow"><div class="qOrderWindowIn">
+<div class="qOrderWindow"><div class="qOrderWindowIn">
     
     <div class='qSearchInputWrap'>
-        <input type="text" id="qSearchByArticul" />
-        <input type="button" id="qStartSearch" value="Search" />
-        <div id="qLoader"><img src="<?php echo Mage::getBaseUrl("js") ?>/magenmagic/quickorder/img/loader.gif" alt=""></div>
+        <input type="text" class="qSearchByArticul" />
+        <input type="button" class="qStartSearch" value="Search" />
+        <div class="qLoader"><img src="<?php echo Mage::getBaseUrl("js") ?>/magenmagic/quickorder/img/loader.gif" alt=""></div>
     </div>
 
     <form action="<?php echo Mage::getUrl('quickorder/index/addToCart'); ?>">
-        <table id="qTable" style="display: none">
+        <table class="qTable" style="display: none">
             <thead>
                 <tr>
                     <th class='qSkuTd'><?php echo $this->__('SKU'); ?></th>
@@ -21,6 +21,6 @@
             <tbody>
             </tbody>
         </table>
-        <input id="qToCart" type="submit" value="<?php echo $this->__('Add To Cart'); ?>" />
+        <input class="qToCart" type="submit" value="<?php echo $this->__('Add To Cart'); ?>" />
     </form>
 </div></div>

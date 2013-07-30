@@ -33,6 +33,7 @@ class Magenmagic_Quickorder_QuickOrderCartController extends Jewellery_Checkout_
 		
 		$iterator = 0;
 		$this->_getSession()->setNoCartRedirect(true);
+        $newProducts = array();
 		foreach( $products as $item=>$val )
 		{
 			$iterator++;
@@ -47,23 +48,24 @@ class Magenmagic_Quickorder_QuickOrderCartController extends Jewellery_Checkout_
 			if ( !$productID ) continue;
 			$request->setParam("product", $productID);
 			$request->setParam("qty", array($item=>$val));
+            $newProducts[] = $item;
 			
 		   $attributes = $this->_getConfigurableAttributes($product);
 		   $superAttrHtml = '';
 		   foreach ($attributes as $_a)
 		   {
-				$_aFunc = 'get' . ucfirst($_a['code']);	
+				$_aFunc = 'get' . ucfirst($_a['code']);
 				$super_attribute[$item][$_a['id']] = $product->$_aFunc();
 		   }
-		   
+
+
 		   $request->setParam("super_attribute", $super_attribute);
 		   parent::addAction();
-		   
-		} 
-		
-		
+		}
 
-		
+        $this->_getSession()->unsetData('newProducts');
+        $this->_getSession()->setData('newProducts', $newProducts);
+
 		//exit;
 	
 	}

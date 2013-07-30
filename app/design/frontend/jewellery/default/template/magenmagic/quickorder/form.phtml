@@ -1,21 +1,22 @@
-<div id="qOrderWindow">
-<div id="qClose"></div>
+<div class="qOrderWindow">
+<div class="qClose"></div>
 <div class="qOrderWindowIn">
 <div class="block"><div class="inside">
-<div id="qLoader"><img src="<?php echo Mage::getBaseUrl() ?>/skin/frontend/jewellery/default/images/opc-ajax-loader.gif" alt=""></div>
+<div class="qLoader"><img src="<?php echo Mage::getBaseUrl() ?>/skin/frontend/jewellery/default/images/opc-ajax-loader.gif" alt=""></div>
     
 	
-	
+	<div class="contentQ">
 	<h1>Bestellschein</h1>                
        <?php echo $this->getLayout()->createBlock('cms/block')->setName('qDesc')->setBlockId('quickorder_info')->toHtml(); ?>
+    </div>
 	
 	<div class="qSearchInputWrap">
           <span class="qSearchTitle">Artikelnummer eingeben</span>
           <div class="input-text">
-           <input type="text" id="qSearchByArticul">
+           <input type="text" class="qSearchByArticul">
           </div>
           <div class="input-btn">
-           <input type="button" value="Suchen" id="qStartSearch">
+           <input type="button" value="Suchen" class="qStartSearch">
           </div>
           
         </div> 
@@ -24,7 +25,7 @@
 	<?php // echo Mage::helper('checkout/cart')->getAddUrl(); ?>
 	<?php // echo Mage::getUrl('jewellery_checkout/cart/add'); ?>
 	
-	<ul id="qMessage" style="display:none" class="messages">                  
+	<ul class="qMessage" style="display:none" class="messages">
           <li class="notice-msg">                       
             <ul>                      
               <li>Artikel GP 129593 wurde zur Bestellliste hinzugefALgt.                   
@@ -33,8 +34,8 @@
         </li>                
         </ul> 
 	
-    <form id="qForm"  action="<?php echo Mage::getUrl('quickorder/quickOrderCart/addFromQuickOrder'); ?>">
-        <table class="cart-table" id="qTable" style="display: none">
+    <div class="qForm"  action="<?php echo Mage::getUrl('quickorder/quickOrderCart/addFromQuickOrder'); ?>">
+        <table class="cart-table qTable"  style="display: none">
             <thead>
 			<tr>
 				<td>&nbsp;</td>
@@ -66,28 +67,29 @@
           <li class="notice-msg">                    
             <ul>                      
               <li>                      
-              <span>Bitte wA¤hlen Sie mindestens einen Artikel aus und legen Sie diesen "in den Warenkorb"                       
+              <span>Bitte wAï¿½hlen Sie mindestens einen Artikel aus und legen Sie diesen "in den Warenkorb"                       
               </span>                  
           </li>                
         </ul>                
         </li>                
         </ul>
 		<!-- window.parent.document.forms.qForm.submit() -->
-		   <div id="qOrderNote" style="display:none">
+		   <div class="qOrderNote" style="display:none">
         <div class="top">&nbsp;</div>
         <div class="content">
           <p>Sie k&ouml;nnen <strong>weitere Artikel dieser Liste hinzuf&uuml;gen</strong> und anschlie&szlig;end alle Artikel im Warenkorb ablegen!</p>
         </div>
        </div>
       
-		   <div id="qToCartWrap" onclick="qOrder.onSubmit();" style="display:none" class="weiter-btn fr checkout-btn">                                                                                                                                                                                                                                   
-          <input type="button" value="" id="qToCart" >in den Warenkorb                   
+		   <div style="display:none" class="qToCartWrap weiter-btn fr checkout-btn">
+          <input type="button" value="" class="qToCart" >in den Warenkorb
           <span>                  
-          </span>                                                                             
-        </div>			    <br class="clear">	
+          </span>
+
+        </div>			    <br class="clear clearDisplay">
 		
-        
-    </form>
+
+    </div>
 	</div>
 	</div>
 </div></div>
