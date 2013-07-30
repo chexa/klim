@@ -37,10 +37,10 @@
 
 <div class="inner-content subcategory">
 
-<?php if ($currentCategory->getLevel() == 3) : ?>
-    <?php $_categories = $currentCategory->getChildrenCategories() ?>
-    <?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
-    <?php if($_count): ?>
+<?php $_categories = $currentCategory->getChildrenCategories() ?>
+<?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
+
+<?php if ($_count) : ?>
         <ul class="prod-cat">
         <?php foreach ($_categories as $_category) : ?>
             <?php $_subCategory = Mage::getModel('catalog/category')->load($_category->getId()); ?>
@@ -50,7 +50,6 @@
             </li>
         <?php endforeach; ?>
         </ul>
-    <?php endif; ?>
 
 <?php else : ?>
 
