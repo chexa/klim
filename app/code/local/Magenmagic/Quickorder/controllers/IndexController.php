@@ -104,7 +104,13 @@ class Magenmagic_Quickorder_IndexController extends Mage_Core_Controller_Front_A
        foreach ( $collection as $item )
        {
            $tmpProduct = $pModel->load( $item['entity_id'] );
+		   if (! $tmpProduct->isSaleable() || ! $tmpProduct->isAvailable() || ! $tmpProduct->getIsInStock()) continue;
+
            $invData = Mage::helper('quickorder')->getInventoryData($tmpProduct);
+		   $stockItem = Mage::getModel('cataloginventory/stock_item')->loadByProduct($tmpProduct);
+
+		   if ($stockItem->getQty() < 7) continue;
+
 		   $itemBlock->setItem($tmpProduct);
            //$productArray[$iterator]["name"]            = $tmpProduct->getName();
            //$productArray[$iterator]["image"]           = (string) $itemBlock->getProductThumbnail()->resize(57,57);
@@ -113,6 +119,7 @@ class Magenmagic_Quickorder_IndexController extends Mage_Core_Controller_Front_A
            //$productArray[$iterator]["in_stock"]        = $tmpProduct->getIsInStock();
            //$productArray[$iterator]["price"]           = number_format($catalogHelper->productAttribute($tmpProduct, $tmpProduct->getPrice(), 'price'), 2, ',', '');
            //$productArray[$iterator]["status"]          = '<span class="lager '.$invData['status'].'" title="'.$view->__($invData['status']).'"></span>';
+           //$productArray[$iterator]["status"]          = $invData['status'];
            //$productArray[$iterator]["htmlQuantity"]    = Mage::helper('quickorder')->getHtmlQuantity($tmpProduct);
 		   $itemBlock->setDefaultTemplate();
 		   $productArray[$iterator]["html"]            = $itemBlock->toHtml();

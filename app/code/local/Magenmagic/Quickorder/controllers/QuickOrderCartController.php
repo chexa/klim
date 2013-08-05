@@ -6,7 +6,9 @@ include_once "Jewellery".DS."Checkout".DS."controllers".DS."CartController.php";
 
 class Magenmagic_Quickorder_QuickOrderCartController extends Jewellery_Checkout_CartController
 {
-  
+
+	protected $_newProducts = array();
+
 	protected function _getConfigurableAttributes($product)
     {
 		$_attributes = $product->getTypeInstance(true)->getConfigurableAttributes($product);
@@ -26,14 +28,16 @@ class Magenmagic_Quickorder_QuickOrderCartController extends Jewellery_Checkout_
 	{
 		$request  = $this->getRequest();
 		$products = $request->getParam("qty");
+		/*if ($request->getParam('ajax') == 1) {
+			$this->_getSession()->setNoCartRedirect(true);
+		}*/
 		$request->setParam("qty", null);
 		if ( !count($products) ) return false;
 		
 		$super_attribute = array();
-		
+
 		$iterator = 0;
-		$this->_getSession()->setNoCartRedirect(true);
-        $newProducts = array();
+
 		foreach( $products as $item=>$val )
 		{
 			$iterator++;
@@ -45,10 +49,10 @@ class Magenmagic_Quickorder_QuickOrderCartController extends Jewellery_Checkout_
 			if ( ! count( $parentIds ) ) continue;
 			$product = Mage::getModel('catalog/product')->load($parentIds[0]);
 			$productID = $product->getId();
-			if ( !$productID ) continue;
+			if ( !$productID || ! $product->isAvailable() ) continue;
 			$request->setParam("product", $productID);
 			$request->setParam("qty", array($item=>$val));
-            $newProducts[] = $item;
+            $this->_newProducts[] = $item;
 			
 		   $attributes = $this->_getConfigurableAttributes($product);
 		   $superAttrHtml = '';
@@ -64,10 +68,49 @@ class Magenmagic_Quickorder_QuickOrderCartController extends Jewellery_Checkout_
 		}
 
         $this->_getSession()->unsetData('newProducts');
-        $this->_getSession()->setData('newProducts', $newProducts);
+        $this->_getSession()->setData('newProducts', $this->_newProducts);
 
 		//exit;
 	
 	}
+
+    protected function _goBack()
+    {
+        $request  = $this->getRequest();
+        $isAjax = $request->getParam("ajax") == 1;
+		if ($isAjax) {
+			$responseData = array();
+			$responseData['success'] = true;
+			$response = $this->getResponse();
+			$response->setHeader('HTTP/1.1 200 OK','');
+			$response->setHeader('Content-type', 'application/json');
+
+			$cartBlock = $this->getLayout()->createBlock('checkout/cart');
+			$items = $cartBlock->getItems();
+			$html = '';
+			$newItem = null;
+			foreach ($items as $item) {
+				if (\in_array($item->getProduct()->getId(), $this->_newProducts)) {
+					$item->isNewProduct = true;
+					$newItem = $item;
+					$html .= $cartBlock->getItemHtml($item);
+				}
+			}
+
+			$this->_getSession()->unsSuccess();
+			$totalBlock = $this->getLayout()->createBlock('checkout/cart_totals');
+
+			$responseData['html'] = $html;
+			$responseData['totals'] = $totalBlock->renderTotals() . $totalBlock->renderTotals('footer');
+			//$responseData['totals'] = $totalBlock->getHtml();
+			$responseData['id'] = $newItem ? $newItem->getId() : null;
+
+			$response->setBody(Mage::helper('core')->jsonEncode($responseData));
+			$response->sendResponse();
+			exit;
+		}
+
+        parent::_goBack();
+    }
   
 }

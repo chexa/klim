@@ -203,6 +203,7 @@ class Mage_Checkout_Block_Cart_Item_Renderer extends Mage_Core_Block_Template
      */
     public function getDeleteUrl()
     {
+		return "/aaa";
         return $this->getUrl(
             'checkout/cart/delete',
             array(

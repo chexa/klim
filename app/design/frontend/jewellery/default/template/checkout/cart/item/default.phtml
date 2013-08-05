@@ -11,7 +11,7 @@
     $invData = Mage::helper('jewellery_catalog')->getInventoryData($this->getProduct());
 ?>
 
-<tr class="<?php echo $rowClass; echo in_array($this->getProduct()->getId(), $newArray) ? ' new-product-item' : ''; ?>">
+<tr class="<?php echo $rowClass; echo (in_array($this->getProduct()->getId(), $newArray) || $_item->isNewProduct) ? ' new-product-item' : ''; echo $_item->isNewProduct ? ' newProductFromAjax ' : ''; ?>">
     <td><?php if ($this->hasProductUrl()):?><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="product-image"><?php endif;?><img src="<?php echo $this->getProductThumbnail()->resize(57,57); ?>" width="57" height="57" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?></td>
     <td>
         <?php if ($this->hasProductUrl()):?>
@@ -49,8 +49,7 @@
         <?php endif; ?>
 
     </td>
-
-    <td class="delete"><a href="<?php echo $this->getDeleteUrl()?>" class="delete-link"></a></td>
+    <td class="delete"><a href="<?php echo $this->getDeleteUrl($_item->isNewProduct === true)?>" class="delete-link"></a></td>
 
     <td><span class="lager <?php echo $invData['status']; ?>" title="<?php echo $this->__($invData['status']); ?>"></span></td>
 

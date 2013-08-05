@@ -6,6 +6,7 @@ function qOrder() {
     this.data = false;
     this.q = false;
     this.mainElement = false;
+    this.addImmediately = false;
     this.closeWindowOnSubmit = true;
     this.getEl = function (elClass, selectAll) {
         if (selectAll !== true) {
@@ -16,6 +17,9 @@ function qOrder() {
     };
     this.setMainElement = function (el) {
         this.mainElement = el;
+    };
+    this.setAddImmediately = function (el) {
+        this.addImmediately = el;
     };
     this.getMainElement = function () {
         return this.mainElement;
@@ -53,8 +57,9 @@ function qOrder() {
     };
     this.sendSearchRequest = function (value) {
         var self = this;
-        self.q = value;
+        this.q = value;
         this.indicatorShow();
+        console.log(111123);
 
         var div = document.createElement("div");
         div.innerHTML = value;
@@ -130,6 +135,11 @@ function qOrder() {
         elem.insert({ after: chooseList});
         $j('body').toggleClass('ieFix');
         self.chooseRowClickObserve();
+
+        if ($j(chooseList).closest('#cartQuickOrder').size() > 0) {
+            $j(chooseList).css('max-height', $j('#content .inner-content').height() - 450);
+        }
+
     };
     this.chooseItem = function (data) {
         var self = this;
@@ -195,10 +205,73 @@ function qOrder() {
         this.getEl('.qChooseRow', true).each(function (element) {
             element.observe("click", function () {
                 var data = element.down('.qRowData').value;
-                self.chooseItem(data.parseQuery());
+                if (! self.addImmediately) {
+                    self.chooseItem(data.parseQuery());
+                } else {
+                    self.submitFormByAjax(data.parseQuery());
+                }
             });
         });
     };
+    this.showGeneralLoader = function () {
+        if ($j('#wait-overlay').size() == 0) {
+            $j('body').append('<div id="wait-overlay"></div>');
+        }
+
+        if ($j('#loading').size() == 0) {
+            $j('body').append('<div id="loading">Ihre Daten werden verarbeitet...</div>');
+        }
+
+        $j('#wait-overlay').css({
+            width:		$j(window).width(),
+            height:		$j(document).height(),
+            opacity:  0.6
+        }).fadeIn(400);
+
+        $j('#loading').show();
+    };
+    this.hideGeneralLoader = function () {
+        $j('#wait-overlay, #loading').hide();
+    };
+    this.submitFormByAjax = function (data) {
+        var url = this.getEl('.qForm').getAttribute('action');
+        var self = this;
+
+        var obj = {};
+        obj['qty[' + data.id + ']'] = 1;
+        obj['ajax'] = 1;
+
+        this.showGeneralLoader();
+
+        new Ajax.Request(url,
+            {
+                parameters : obj,
+                onSuccess: function (response) {
+                    var jsonObject = response.responseJSON;
+                    self.hideGeneralLoader();
+                    self.removeChooseList();
+                    if (jsonObject.success == true) {
+                        var el = $j('#qty-cart' + jsonObject.id);
+                        if (jsonObject.id && el.size() > 0) {
+                            el.closest('tr').remove();
+                        }
+
+                        $j('.cart-sum').html('');
+                        $j('.cart-sum').html(jsonObject.totals);
+
+                        $j('.cart-table').find('tbody').prepend(jsonObject.html);
+
+                        $j('.newProductFromAjax .update-cart').attr('onclick', 'changeQty = false; '+ $j('.newProductFromAjax .update-cart').attr('onclick'));
+                        initDeletClickInCart();
+                    }
+                },
+                onFailure: function () {
+                    self.removeChooseList();
+                    self.hideGeneralLoader();
+                    alert('Error');
+                }
+            });
+    }
     this.bindRemoveEvent = function (element, sku) {
         var self = this;
         this.getEl(element, true).each(function (el) {
@@ -258,6 +331,9 @@ function initQuickOrder() {
     this.setCloseWindowOnSubmit = function (el) {
         this.getObj().setCloseWindowOnSubmit(el);
     };
+    this.setAddImmediately = function (el) {
+        this.getObj().setAddImmediately(el);
+    };
     this.getObj = function () {
       return this.obj;
     };
@@ -277,6 +353,7 @@ function initQuickOrder() {
                 if (e.keyCode != 13) return false;
                 if (element.value.replace(/\s+/, "").length == 0) return false;
                 self.getObj().sendSearchRequest(element.value);
+                e.preventDefault();
             });
         });
 
@@ -396,6 +473,6 @@ function initQuickOrder() {
             var initQo2 = new initQuickOrder();
             initQo2.initActions($('cartQuickOrder'));
             initQo2.setCloseWindowOnSubmit(false);
-
+            initQo2.setAddImmediately(true);
         }
     });

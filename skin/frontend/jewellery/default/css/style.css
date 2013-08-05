@@ -3668,3 +3668,7 @@ width: 190px;
 .blockUnderCategoryTitle { float:left; width:738px}
 
 .selectionTitleImage { max-width:100%; margin: 0 auto;}
+
+.new-product-item td {background: green !important}
+
+#cartQuickOrder .qChooseList { width: 684px; overflow:auto }
