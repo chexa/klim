@@ -3669,6 +3669,9 @@ width: 190px;
 
 .selectionTitleImage { max-width:100%; margin: 0 auto;}
 
-.new-product-item td {background: green !important}
+
+.cart-table .new-product-item td {
+    background-color: #C1EA9D;
+}
 
 #cartQuickOrder .qChooseList { width: 684px; overflow:auto }
