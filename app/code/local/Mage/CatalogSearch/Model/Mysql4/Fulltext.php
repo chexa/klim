@@ -323,7 +323,7 @@ class Mage_CatalogSearch_Model_Mysql4_Fulltext extends Mage_Core_Model_Mysql4_Ab
             $stringHelper = Mage::helper('core/string');
             /* @var $stringHelper Mage_Core_Helper_String */
 
-			$queryText = str_replace("/", "", $queryText);
+			//$queryText = str_replace("/", "", $queryText);
             $bind = array(
                 ':query' => $queryText
             );
@@ -349,13 +349,24 @@ class Mage_CatalogSearch_Model_Mysql4_Fulltext extends Mage_Core_Model_Mysql4_Ab
             }
             if ($searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_FULLTEXT
                 || $searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_COMBINE) {
-                $fulltextCond = 'MATCH (`s`.`data_index`) AGAINST (:query IN BOOLEAN MODE)';
+                //$fulltextCond = 'MATCH (`s`.`data_index`) AGAINST (:query IN BOOLEAN MODE)';
+				$queryText = preg_quote($queryText);
+				$strCmp = array();
+				$strCmp[] = "'^{$queryText}\\\|'";
+				$strCmp[] = "'^{$queryText}$'";
+
+				$strCmp[] = "'\\\|{$queryText}$'";
+
+				$strCmp[] = "'\\\|{$queryText}\\\|'";
+
+               // $fulltextCond = 'MATCH (`s`.`data_index`) AGAINST (:query IN BOOLEAN MODE)';
+                $fulltextCond = ' `s`.`data_index` RLIKE ' . \implode(' OR `s`.`data_index` RLIKE ', $strCmp);
             }
             if ($searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_COMBINE && $likeCond) {
                 $separateCond = ' OR ';
             }
 
-            $sql = sprintf("INSERT INTO `{$this->getTable('catalogsearch/result')}` "
+         /*   $sql = sprintf("INSERT INTO `{$this->getTable('catalogsearch/result')}` "
                 . "(SELECT STRAIGHT_JOIN '%d', `s`.`product_id`, MATCH (`s`.`data_index`) "
                 . "AGAINST (:query IN BOOLEAN MODE) FROM `{$this->getMainTable()}` AS `s` "
                 . "INNER JOIN `{$this->getTable('catalog/product')}` AS `e` "
@@ -366,8 +377,21 @@ class Mage_CatalogSearch_Model_Mysql4_Fulltext extends Mage_Core_Model_Mysql4_Ab
                 $separateCond,
                 $likeCond,
                 $query->getStoreId()
-            );
+            );*/
 
+
+			$sql = sprintf("INSERT INTO `{$this->getTable('catalogsearch/result')}` "
+				. "(SELECT STRAIGHT_JOIN '%d', `s`.`product_id`, "
+				. " MATCH (`s`.`data_index`) AGAINST (:query IN BOOLEAN MODE) FROM `{$this->getMainTable()}` AS `s` "
+				. "INNER JOIN `{$this->getTable('catalog/product')}` AS `e` "
+				. "ON `e`.`entity_id`=`s`.`product_id` WHERE (%s%s%s) AND `s`.`store_id`='%d')"
+				. " ON DUPLICATE KEY UPDATE `relevance`=VALUES(`relevance`)",
+				$query->getId(),
+				$fulltextCond,
+				$separateCond,
+				$likeCond,
+				$query->getStoreId()
+			);
 
             $this->_getWriteAdapter()->query($sql, $bind);
 

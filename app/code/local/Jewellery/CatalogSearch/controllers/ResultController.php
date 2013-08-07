@@ -48,15 +48,17 @@ class Jewellery_CatalogSearch_ResultController extends Mage_CatalogSearch_Result
 		$catalogSearch = clone Mage::helper('catalogsearch');
 		$paramName = $catalogSearch->getQueryParamName();
 		$nativeQueryText = $this->getRequest()->getParam($paramName);
-		$this->loadLayout();
-		$this->getRequest()->setParam($paramName, '\'"' . $nativeQueryText . '"\'');
 
-        $query = $catalogSearch->getQuery();
+		$this->getRequest()->setParam($paramName, '' . $nativeQueryText . '');
+		$query = $catalogSearch->getQuery();
+
         /* @var $query Mage_CatalogSearch_Model_Query */
         $query->setStoreId(Mage::app()->getStore()->getId());
-		
         if ($query->getQueryText()) {
-          	$this->_handleQuery($query);
+			$this->_handleQuery($query);
+
+			$this->getRequest()->setParam($paramName, $nativeQueryText);
+			$this->loadLayout();
 
 			$this->_initLayoutMessages('catalog/session');
 			$this->_initLayoutMessages('checkout/session');
@@ -66,11 +68,10 @@ class Jewellery_CatalogSearch_ResultController extends Mage_CatalogSearch_Result
 
 			Mage::helper('catalogsearch')->cleanQueryText();
 
-			$this->getRequest()->setParam($paramName, $nativeQueryText);
-            $catalogSearch->setQueryText($nativeQueryText);
-			$query2 = Mage::helper('catalogsearch')->getQuery();
+         /*   $catalogSearch->setQueryText($nativeQueryText);
+			$query2 = Mage::helper('catalogsearch')->getQuery();*/
 
-			if (sizeof($resultsProduct->getItems()) == 0) {
+		/*	if (sizeof($resultsProduct->getItems()) == 0) {
 				$this->_handleQuery($query2);
 
 				$resultsProduct =  $resultBlock->getProductCollection();
@@ -92,7 +93,7 @@ class Jewellery_CatalogSearch_ResultController extends Mage_CatalogSearch_Result
 						$resultsProduct->addItem($item);
 					}
 				}*/
-			}
+			/*}*/
 
 			$resultBlock->setCollection($resultsProduct);
 
