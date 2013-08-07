@@ -53,10 +53,20 @@
 
     <td><span class="lager <?php echo $invData['status']; ?>" title="<?php echo $this->__($invData['status']); ?>"></span></td>
 
+	<?php 
+		if (! $_item->isNewProduct) {
+			$func1 = "javascript:del('qty-cart{$_item->getId()}')";
+			$func2 = "javascript:add('qty-cart{$_item->getId()}')";
+		} else {
+			$func1 = "javascript:addToCartM(this)";
+			$func2 = "javascript:addToCartP(this)";
+		}
+	?>
+
     <td class="amount">
-        <span class="qty-minus" onClick="javascript:del('qty-cart<?php echo $_item->getId() ?>')"></span>
+        <span class="qty-minus" onClick="<?php echo $func1 ?>"></span>
         <input size="1" value="<?php echo $this->getQty(); ?>"  name="cart[<?php echo $_item->getId() ?>][qty]" id="qty-cart<?php echo $_item->getId() ?>" class="product-qty" />
-        <span class="qty-plus" onClick="javascript:add('qty-cart<?php echo $_item->getId() ?>')"></span>
+        <span class="qty-plus" onClick="<?php echo $func2 ?>"></span>
         <span class="update-cart" onClick="updateCartForm.submit()" title="<?php echo $this->__('Update Shopping Cart') ?>"></span>
 <?php /* ?>        
         <select name="cart[<?php echo $_item->getId() ?>][qty]" onchange="updateCartForm.submit()">

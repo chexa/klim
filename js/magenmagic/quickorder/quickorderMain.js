@@ -59,7 +59,7 @@ function qOrder() {
         var self = this;
         this.q = value;
         this.indicatorShow();
-        console.log(111123);
+       // console.log(111123);
 
         var div = document.createElement("div");
         div.innerHTML = value;

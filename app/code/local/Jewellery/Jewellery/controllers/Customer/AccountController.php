@@ -678,6 +678,13 @@ class Jewellery_Jewellery_Customer_AccountController extends Mage_Customer_Accou
     {
         $email = $this->getRequest()->getPost('email');
         $customerNumber = $this->getRequest()->getPost('customer_number');
+
+		$customerIsActive = Mage::helper('customer')->getCustomer()->getIsActive();
+		if ((int) $customerIsActive === 0) {
+			$this->getResponse()->setRedirect(Mage::getUrl('*/*/forgotpassword'));
+			return;
+		}
+
         if ($email || $customerNumber) {
             // if email was entered
             if ($email) {

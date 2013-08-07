@@ -97,7 +97,9 @@ class Magenmagic_Quickorder_QuickOrderCartController extends Jewellery_Checkout_
 				}
 			}
 
-			$this->_getSession()->unsSuccess();
+			//Mage::getSingleton('checkout/session')->unsSuccess();
+  			Mage::getSingleton("checkout/session")->getMessages(true);
+ 			
 			$totalBlock = $this->getLayout()->createBlock('checkout/cart_totals');
 
 			$responseData['html'] = $html;
@@ -107,6 +109,7 @@ class Magenmagic_Quickorder_QuickOrderCartController extends Jewellery_Checkout_
 
 			$response->setBody(Mage::helper('core')->jsonEncode($responseData));
 			$response->sendResponse();
+
 			exit;
 		}
 

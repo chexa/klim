@@ -335,7 +335,8 @@ class Mage_CatalogSearch_Model_Mysql4_Fulltext extends Mage_Core_Model_Mysql4_Ab
 
             if ($searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_LIKE
                 || $searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_COMBINE) {
-                $words = $stringHelper->splitWords($queryText, true, $query->getMaxQueryWords());
+                //$words = $stringHelper->splitWords($queryText, true, $query->getMaxQueryWords());
+				$words = array($queryText);
                 $likeI = 0;
                 foreach ($words as $word) {
                     $like[] = '`s`.`data_index` LIKE :likew' . $likeI;
@@ -366,6 +367,7 @@ class Mage_CatalogSearch_Model_Mysql4_Fulltext extends Mage_Core_Model_Mysql4_Ab
                 $likeCond,
                 $query->getStoreId()
             );
+
 
             $this->_getWriteAdapter()->query($sql, $bind);
 
