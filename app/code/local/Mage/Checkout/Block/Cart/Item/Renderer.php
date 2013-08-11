@@ -39,6 +39,7 @@ class Mage_Checkout_Block_Cart_Item_Renderer extends Mage_Core_Block_Template
     protected $_productUrl = null;
     protected $_productThumbnail = null;
 
+
     /**
      * Set item for render
      *
@@ -201,15 +202,19 @@ class Mage_Checkout_Block_Cart_Item_Renderer extends Mage_Core_Block_Template
      *
      * @return string
      */
-    public function getDeleteUrl()
+    public function getDeleteUrl($useDefaultCartUrl = false)
     {
-		return "/aaa";
+		$arr = array(
+			'id' => $this->getItem()->getId()
+		);
+
+		if (! $useDefaultCartUrl) {
+			$arr[Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED] = $this->helper('core/url')->getEncodedUrl();
+		}
+
         return $this->getUrl(
             'checkout/cart/delete',
-            array(
-                'id'=>$this->getItem()->getId(),
-                Mage_Core_Controller_Front_Action::PARAM_NAME_URL_ENCODED => $this->helper('core/url')->getEncodedUrl()
-            )
+			$arr
         );
     }
 

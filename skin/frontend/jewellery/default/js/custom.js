@@ -553,27 +553,29 @@ function hideLoadWindow ()
 		$j('body').append('<div id="wait-overlay"></div>');
 		$j('body').append('<div id="loading">Ihre Daten werden verarbeitet...</div>');
 		$j('#wait-overlay, #loading').hide();
-		
-		$j('.delete-link').click(function(){
-		if (  confirm('Der Artikel wird aus dem Warenkorb entfernen!') ) {
-			window.onbeforeunload = null;
-			$j('#wait-overlay').css({
-									width:		$j(window).width(),
-									height:		$j(document).height(),
-									opacity:  0.6
-								}).fadeIn(400);
-								
-			$j('#loading').show();
-			}
-			else
-			{
-				return false;
-			}
-		});
+
+        initDeletClickInCart();
 		
  });
  
+function initDeletClickInCart() {
+    $j('.delete-link').click(function(){
+        if (  confirm('Der Artikel wird aus dem Warenkorb entfernen!') ) {
+            window.onbeforeunload = null;
+            $j('#wait-overlay').css({
+                width:		$j(window).width(),
+                height:		$j(document).height(),
+                opacity:  0.6
+            }).fadeIn(400);
 
+            $j('#loading').show();
+        }
+        else
+        {
+            return false;
+        }
+    });
+}
 
 function clickFaxCheckbox() {
     $j('#als-datei').hide();

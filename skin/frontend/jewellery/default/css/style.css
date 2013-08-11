@@ -3668,3 +3668,10 @@ width: 190px;
 .blockUnderCategoryTitle { float:left; width:738px}
 
 .selectionTitleImage { max-width:100%; margin: 0 auto;}
+
+
+.cart-table .new-product-item td {
+    background-color: #C1EA9D;
+}
+
+#cartQuickOrder .qChooseList { width: 684px; overflow:auto }
