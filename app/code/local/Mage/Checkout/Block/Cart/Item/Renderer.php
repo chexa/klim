@@ -152,6 +152,18 @@ class Mage_Checkout_Block_Cart_Item_Renderer extends Mage_Core_Block_Template
         return $product->getUrlModel()->getUrl($product);
     }
 
+	public function getQuickViewUrl()
+	{
+		$parentIds = Mage::getResourceSingleton('catalog/product_type_configurable')
+			->getParentIdsByChild($this->getProduct()->getId());
+		if (\count($parentIds)) {
+			return Mage::getBaseUrl() . 'ajax/product/quickview/id/' . \current($parentIds);
+		} else {
+			return null;
+		}
+
+	}
+
     /**
      * Get item product name
      *

@@ -3410,7 +3410,7 @@ margin:1px 0 2px 5px;
 }
 
 
-#wait-overlay {
+#wait-overlay, .loadOvl {
 width:100%;
 background:#000;
 position: absolute; 
@@ -3419,6 +3419,8 @@ left: 0;
 z-index: 10000;
 overflow: hidden;
 }
+
+.loadOvl {z-index:10005; width:100%; display:none}
 
 #loading, #ajax-preloader {
 background: #fff url(../images/opc-ajax-loader.gif) no-repeat 15px 30px;
@@ -3488,13 +3490,20 @@ margin-bottom: 10px;
  .retailerpopup #popup-ok-button {
     left: 322px;
     width: 150px;
- } 
- 
+ }
+
 .quick-view-content .inner-content {
-  padding: 30px 30px 10px 30px;
-  background-color: #fff;;
+    padding: 30px 30px 10px 30px;
+    background-color: #fff;;
+
 }
-#quick-window  { top:0; }
+
+.qoWrap {
+    width: 800px;
+    margin: 0 auto;
+}
+
+#quick-window  { top:0; background-color:#fff }
 #quick-window .product-img-box{width:230px; float:left}
 #quickview-close, #popup-close{
     background: url(../images/graphic2.png) no-repeat 0px -119px;
@@ -3508,7 +3517,7 @@ margin-bottom: 10px;
     top: -30px;
     right: -30px;
 }
-#quickview-header{width:800px;}
+#quickview-header{width:100%;}
 
 /*#ajax-preloader{
     opacity:0.8;
@@ -3675,3 +3684,8 @@ width: 190px;
 }
 
 #cartQuickOrder .qChooseList { width: 684px; overflow:auto }
+
+.qvPrevNext {cursor: pointer; position: absolute; top:290px; border:1px solid red; width:20px; height:30px;}
+.qvStrPrev { left:5px;}
+.qvStrNext { right:5px;}
+#quick-window.quick-window-elem-arrows { width:830px;}

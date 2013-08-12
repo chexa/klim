@@ -2,23 +2,69 @@ $j = jQuery.noConflict();
 var ProductInfo = Class.create();
 ProductInfo.prototype = {
     settings: {
-        'loadingMessage': 'Artikel wird geladen ...'
+        'loadingMessage': 'Artikel wird geladen ...',
+        'products' : {
+            1: 101,
+            2: 102,
+            3: 103,
+            4: 104,
+            5: 105
+        },
+        'currentProduct' : 2,
+        'initElements' : true
     },
-    
+
+    hasArrows : function ()
+    {
+        return Object.keys(this.settings.products).length > 0;
+    },
+
+    getCurrentProductNum: function ()
+    {
+        return this.settings.currentProduct;
+    },
+
+    setCurrentProductNum: function (num)
+    {
+        this.settings.currentProduct = num;
+    },
+
+    setProducts: function (obj)
+    {
+        this.settings.products = obj;
+    },
+
+    getProducts: function (obj)
+    {
+        return this.settings.products;
+    },
+
     initialize: function(selector, x_image, settings)
     {
         Object.extend(this.settings, settings);
         this.createWindow();
 
         var that = this;
-        $$(selector).each(function(el, index){
-            el.observe('click', that.loadInfo.bind(that));
-        })
-        $$(x_image).each(function(el, index){
-            el.observe('mouseover', that.showButton);
-            el.observe('mouseout', that.hideButton);
-        })
-        
+        var products = {};
+        if (this.settings.initElements) {
+            $$(selector).each(function(el, index){
+                el.observe('click', that.loadInfo.bind(that));
+                el.observe('click', function () {
+                    that.setCurrentProductNum(index);
+                });
+                products[index] = el.href;
+            })
+            $$(x_image).each(function(el, index){
+                el.observe('mouseover', that.showButton);
+                el.observe('mouseout', that.hideButton);
+            })
+        } else {
+            products = this.settings.products;
+            this.setCurrentProductNum(this.settings.currentProduct);
+        }
+
+        that.setProducts(products);
+
     },
     
     createLoader: function()
@@ -42,7 +88,9 @@ ProductInfo.prototype = {
     
     destroyLoader: function()
     {
-        $('ajax-preloader').remove();
+        if ( $('ajax-preloader')) {
+            $('ajax-preloader').remove();
+        }
     },
     
     showButton: function(e)
@@ -77,17 +125,87 @@ ProductInfo.prototype = {
     
     createWindow: function()
     {
-        var qWindow = new Element('div', {id: 'quick-window', className:'quick-window-elem'});
+        var that = this;
+        var className = 'quick-window-elem' + (this.hasArrows() ? ' quick-window-elem-arrows' : '');
+        var qWindow = new Element('div', {id: 'quick-window', 'class': className});
         qWindow.innerHTML = '<div id="quickview-header"><a href="javascript:void(0)" id="quickview-close">close</a></div><div class="quick-view-content"></div>';
+        //if (this.hasNextStr()) {
+            qWindow.innerHTML += '<div class="qvStrNext qvPrevNext"></div>';
+        //}
+
+        //if (this.hasPrevStr()) {
+            qWindow.innerHTML += '<div class="qvStrPrev qvPrevNext"></div>';
+        //}
+
         document.body.appendChild(qWindow);
         $('quickview-close').observe('click', this.hideWindow.bind(this));
+
+        $$('.qvPrevNext').each(function (el) {
+            el.observe('click', that.bindPrevNext.bind(that))
+        })
 		try
 		{
 			$('wait-overlay').observe('click', this.hideWindow.bind(this));         
 		} catch (err) {};
         
     },
-    
+
+    bindPrevNext : function (el)
+    {
+        this.showLoading();
+        var that = this;
+        var isNext = el.target.className.indexOf('qvStrNext') != -1;
+        var prodNum = 1;
+        if (isNext) {
+            prodNum = this.settings.products[this.getCurrentProductNum() + 1] ? (this.getCurrentProductNum() + 1) : 1;
+        } else {
+            prodNum = this.settings.products[this.getCurrentProductNum() - 1] ? (this.getCurrentProductNum() - 1) : Object.keys(this.settings.products).length;
+        }
+
+        //this.setCurrentProductNum(prodNum);
+
+        new Ajax.Request(this.settings.products[prodNum], {
+            onSuccess: function(response) {
+                $('quick-window').remove();
+                var newProd = new ProductInfo('', '', {
+                    initElements : false,
+                    products : that.getProducts(),
+                    currentProduct : prodNum
+                });
+                newProd.hideLoading();
+                newProd.fillContent(response.responseText, 'aa');
+            }
+        });
+
+    },
+
+    showLoading: function ()
+    {
+        var ovl = new Element('div', {'class': 'loadOvl'});
+        ovl.setStyle({'filter' : 'alpha(opacity=60)'});
+        ovl.setStyle({
+            width:		$j(window).width() + 'px',
+            height:		$j(document).height() + 'px',
+            opacity:  0.6,
+            display : 'block'
+        });
+
+        document.body.appendChild(ovl);
+
+        $('loading').setStyle({
+            display: 'block'
+        });
+    },
+
+    hideLoading: function ()
+    {
+        $$('.loadOvl')[0].remove();
+
+        $('loading').setStyle({
+            display: 'none'
+        });
+    },
+
     showWindow: function()
     {
         /*$('quick-window').setStyle({
@@ -231,31 +349,29 @@ ProductInfo.prototype = {
             el.style.display = 'none';
         })
 
-        new Ajax.Request(e.element().href, {
+        var el = e.element();
+        while (! el.href) {
+            el = el.up();
+        }
+
+        new Ajax.Request(el.href, {
             onSuccess: function(response) {
-			  
-			var div = document.createElement('div');
-			/*var content = '';
-			div.appendChild(that.createJS('jquery.magnify-1.0.2.js'));
-			div.appendChild(that.createJS('jquery.imageZoom.js'));
-			div.appendChild(that.createJS('jquery.bgiframe.min.js'));
-			div.appendChild(that.createJS('scp_product_extension.js'));
-			
-			var responseDIV = document.createElement('div');
-			responseDIV.innerHTML = response.responseText;
-			div.appendChild(responseDIV);*/
-			
-			div.innerHTML = response.responseText;
-			          // 1 pageTracker._trackPageview('http://www.standard-schmuck.de/zahnstocher');
-			          //Diese Aufruf liefert die URL für den Quickview
-                pageTracker._trackPageview(e.element().href);
-                
-                that.clearContent();
-				//that.destroyLoader();
-                that.setContent(div);
-               // that.showWindow();
+                that.fillContent(response.responseText, e.element().href);
             }
-        }); 
+        });
+    },
+
+    fillContent: function (text, href)
+    {
+        var that = this;
+        var div = document.createElement('div');
+        div.innerHTML = text;
+        div.className = 'qoWrap';
+        // 1 pageTracker._trackPageview('http://www.standard-schmuck.de/zahnstocher');
+        //Diese Aufruf liefert die URL für den Quickview
+        pageTracker._trackPageview(href);
+        that.clearContent();
+        that.setContent(div);
     }
 }
 

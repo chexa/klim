@@ -9,10 +9,16 @@
     }
 
     $invData = Mage::helper('jewellery_catalog')->getInventoryData($this->getProduct());
+	$quickUrl = $this->getQuickViewUrl();
 ?>
 
 <tr class="<?php echo $rowClass; echo (in_array($this->getProduct()->getId(), $newArray) || $_item->isNewProduct) ? ' new-product-item' : ''; echo $_item->isNewProduct ? ' newProductFromAjax ' : ''; ?>">
-    <td><?php if ($this->hasProductUrl()):?><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="product-image"><?php endif;?><img src="<?php echo $this->getProductThumbnail()->resize(57,57); ?>" width="57" height="57" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?></td>
+    <td>
+			<?php if ($this->hasProductUrl() && $quickUrl):?>
+				<a href="<?php echo $quickUrl ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="product-image ajax"><?php endif;?>
+						<img src="<?php echo $this->getProductThumbnail()->resize(57,57); ?>" width="57" height="57" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" />
+				<?php if ($this->hasProductUrl() && $quickUrl):?></a><?php endif;?>
+	</td>
     <td>
         <?php if ($this->hasProductUrl()):?>
             <a href="<?php echo $this->getProductUrl() ?>"><?php echo $this->htmlEscape($this->getProductName()) ?></a>
