@@ -632,7 +632,7 @@ Element.addMethods({
 
 var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
-if (!("console" in window) || !("firebug" in console) && !is_chrome)
+if (!("console" in window) || !("firebug" in console) && ! is_chrome)
 {
     var names = ["log", "debug", "info", "warn", "error", "assert", "dir", "dirxml",
     "group", "groupEnd", "time", "timeEnd", "count", "trace", "profile", "profileEnd"];

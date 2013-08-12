@@ -3,20 +3,19 @@ var ProductInfo = Class.create();
 ProductInfo.prototype = {
     settings: {
         'loadingMessage': 'Artikel wird geladen ...',
-        'products' : {
-            1: 101,
-            2: 102,
-            3: 103,
-            4: 104,
-            5: 105
-        },
-        'currentProduct' : 2,
+        'products' : {},
+        'currentProduct' : 1,
         'initElements' : true
     },
 
+	getProductsLength: function ()
+	{
+		return Object.keys(this.settings.products).length;
+	},
+
     hasArrows : function ()
     {
-        return Object.keys(this.settings.products).length > 0;
+        return this.getProductsLength() > 1;
     },
 
     getCurrentProductNum: function ()
@@ -42,8 +41,6 @@ ProductInfo.prototype = {
     initialize: function(selector, x_image, settings)
     {
         Object.extend(this.settings, settings);
-        this.createWindow();
-
         var that = this;
         var products = {};
         if (this.settings.initElements) {
@@ -52,7 +49,7 @@ ProductInfo.prototype = {
                 el.observe('click', function () {
                     that.setCurrentProductNum(index);
                 });
-                products[index] = el.href;
+                products[index] = {href: el.href, src: el.up().select('img')[0].src, title: el.up().select('img')[0].alt};
             })
             $$(x_image).each(function(el, index){
                 el.observe('mouseover', that.showButton);
@@ -63,7 +60,9 @@ ProductInfo.prototype = {
             this.setCurrentProductNum(this.settings.currentProduct);
         }
 
+
         that.setProducts(products);
+		that.createWindow();
 
     },
     
@@ -96,7 +95,6 @@ ProductInfo.prototype = {
     showButton: function(e)
     {
         el = this;
-		//console.log(el);
         while (el.tagName != 'P' && el.up) { 
 		    el = el.up();
         }
@@ -106,7 +104,6 @@ ProductInfo.prototype = {
 				display: 'block'
 			})
 		}
-        
     },
     
     hideButton: function(e)
@@ -129,13 +126,10 @@ ProductInfo.prototype = {
         var className = 'quick-window-elem' + (this.hasArrows() ? ' quick-window-elem-arrows' : '');
         var qWindow = new Element('div', {id: 'quick-window', 'class': className});
         qWindow.innerHTML = '<div id="quickview-header"><a href="javascript:void(0)" id="quickview-close">close</a></div><div class="quick-view-content"></div>';
-        //if (this.hasNextStr()) {
+        if (this.hasArrows()) {
             qWindow.innerHTML += '<div class="qvStrNext qvPrevNext"></div>';
-        //}
-
-        //if (this.hasPrevStr()) {
             qWindow.innerHTML += '<div class="qvStrPrev qvPrevNext"></div>';
-        //}
+        }
 
         document.body.appendChild(qWindow);
         $('quickview-close').observe('click', this.hideWindow.bind(this));
@@ -162,9 +156,7 @@ ProductInfo.prototype = {
             prodNum = this.settings.products[this.getCurrentProductNum() - 1] ? (this.getCurrentProductNum() - 1) : Object.keys(this.settings.products).length;
         }
 
-        //this.setCurrentProductNum(prodNum);
-
-        new Ajax.Request(this.settings.products[prodNum], {
+        new Ajax.Request(that.settings.products[prodNum].href, {
             onSuccess: function(response) {
                 $('quick-window').remove();
                 var newProd = new ProductInfo('', '', {
@@ -173,10 +165,9 @@ ProductInfo.prototype = {
                     currentProduct : prodNum
                 });
                 newProd.hideLoading();
-                newProd.fillContent(response.responseText, 'aa');
+                newProd.fillContent(response.responseText, that.settings.products[prodNum].href);
             }
         });
-
     },
 
     showLoading: function ()
@@ -208,16 +199,10 @@ ProductInfo.prototype = {
 
     showWindow: function()
     {
-        /*$('quick-window').setStyle({
-            top:  document.viewport.getScrollOffsets().top + 50 + 'px',
-            left:  document.body.clientWidth/2 - $('quick-window').getWidth()/2 + 'px',
-            display: 'block'
-        });*/
         var elem = $j('.quick-view-content:first');
         var elemWrap = $j('#quick-window:first');
 
         var bScroll = $j(window).scrollTop() + 30;
-       // console.log(bScroll);
         
         elem.show();
         elemWrap.show();
@@ -235,9 +220,9 @@ ProductInfo.prototype = {
         that.showWindow();
         that.destroyLoader();
 		var iterator = 0;
-		$j('.quick-view-content img').load(function () {
+		$j('.quick-view-content .ajaxFORM img').load(function () {
 		iterator++;
-			if ( $j('.quick-view-content img').length  == iterator ) 
+			if ( $j('.quick-view-content .ajaxFORM img').length  == iterator )
 			{
 					$j('.quick-view-content .lager').tinyTips('', 'title');
 					$j('.quick-view-content .Zoomer').attr('id', 'qZoomer'); 
@@ -269,47 +254,7 @@ ProductInfo.prototype = {
 				})
 				
 			}
-		
-			
 		})
-			
-	/*	 $j('.quick-view-content .ad-gallery').adGallery({
-			effect: 'fade',
-			thumb_opacity: 0.5,
-			display_next_and_prev: false,
-			callbacks: {
-						afterImageVisible: function(){
-
-                                $j(".quick-view-content .ad-image a").imageZoom({speed:800});
-                                new ProductInfo('.quick-view-content .ajax', '.quick-view-content .product-image', {});
-                                $j('.quick-view-content .ad-image-main').append('<div id="zmImage" class="zoom-message">Klick, um Bild zu vergrößern</div>');
-									
-								
-							/*	$j(".quick-view-content .ad-image a").magnify({
-									hideEvent: 'mouseout',
-									showEvent:'mouseover',
-									lensWidth: 100,
-									lensHeight: 80,
-									stageCss: { width: '488px', height: '290px', border: '1px solid #9a9a9a'},
-									
-									onAfterShow: function(){
-											$j(".mousetrap").bind('mouseover',function(){
-												$j('#zmImage').fadeIn(500);
-											});
-									},
-									onAfterHide: function(){$j('.quick-view-content #stage').hide(); $j('#zmImage').hide();}
-							   
-							   }); */
-					/*		$j(".mousetrap").live('click',function(){
-									$j(".quick-view-content .ad-image a").trigger('click');
-								});
-							
-							$j(".quick-view-content .ad-image a").imageZoom({speed:800});
-
-							
-					   }
-					}
-		 }); */
 
     },
     
@@ -372,7 +317,67 @@ ProductInfo.prototype = {
         pageTracker._trackPageview(href);
         that.clearContent();
         that.setContent(div);
-    }
+		that.drawSlider();
+		that.initCarousel();
+    },
+
+	drawSlider: function () {
+		var html = '';
+		html += '<div class="qbSlider"><a class="prev nextPrev qArrows qArrowsL"></a><div class="qbSliderIn">' +
+			'<ul>';
+
+		for (var i = 0; i < this.getProductsLength(); i++) {
+			html += this.drawSliderItem(this.getProducts()[i]);
+		}
+
+		html += '</ul>' +
+			'</div><a class="next nextPrev qArrows"></a></div>';
+
+		$$('.quick-view-content')[0].select('.inner-content')[0].insert(html);
+	},
+
+	drawSliderItem: function (data)
+	{
+		var html = '';
+		html += '<li><img src="' + data.src + '" alt="' + data.title + '" title="' + data.title + '" /></li>'
+		return html;
+	},
+
+	initCarousel: function ()
+	{
+		var that = this;
+		$j(".qbSlider .qbSliderIn").jCarouselLite({
+			btnNext: ".qbSlider .next",
+			btnPrev: ".qbSlider .prev",
+			visible: 6,
+			start: this.getCurrentProductNum()
+		});
+
+		console.log(this.getCurrentProductNum());
+
+		var first = $j(".qbSlider .qbSliderIn");
+		$j('.qbSlider li').eq(that.getCurrentProductNum()).addClass('activeItemInView');
+
+		$j('.qbSlider li').click(function () {
+			that.showLoading();
+			var num = $j(this).attr('rel');
+			new Ajax.Request(that.settings.products[num].href, {
+				onSuccess: function(response) {
+					$('quick-window').remove();
+					var newProd = new ProductInfo('', '', {
+						initElements : false,
+						products : that.getProducts(),
+						currentProduct : num
+					});
+					newProd.hideLoading();
+					newProd.fillContent(response.responseText, that.settings.products[num].href);
+				}
+			});
+			return false;
+		})
+
+	}
+
 }
 
 Event.observe(window, 'load', function() {

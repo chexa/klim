@@ -16,6 +16,7 @@
             <action method="addCss"><stylesheet>css/jquery.ad-gallery.css</stylesheet></action>
             <action method="addItem"><type>skin_js</type><name>js/jquery.magnify-1.0.2.js</name><params/></action>
             <action method="addItem"><type>skin_js</type><name>js/jquery.imageZoom.js</name><params/></action>
+
             <action method="addItem"><type>skin_js</type><name>js/jquery.bgiframe.min.js</name><params/></action>
 
             <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>

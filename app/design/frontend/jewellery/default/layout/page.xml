@@ -69,8 +69,8 @@ Default layout, loads most of the pages
                  <action method="addItem"><type>skin_js</type><name>js/jquery.tinyTips.js</name><params/></action>
                  <action method="addCss"><stylesheet>css/jquery.ad-gallery.css</stylesheet></action>
                 <action method="addItem"><type>skin_js</type><name>js/jquery.magnify-1.0.2.js</name><params/></action>
-                <action method="addItem"><type>skin_js</type><name>js/jquery.imageZoom.js</name><params/></action>
                 <action method="addItem"><type>skin_js</type><name>js/jquery.bgiframe.min.js</name><params/></action>
+                <action method="addItem"><type>skin_js</type><name>js/jcarousellite_1.0.1.pack.js</name><params/></action>
                  <action method="addItem"><type>skin_js</type><name>js/lightbox.js</name><params/></action>
                  <action method="addItem"><type>skin_js</type><name>js/quickview.js</name></action>
                 
