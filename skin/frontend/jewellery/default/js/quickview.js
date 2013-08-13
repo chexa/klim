@@ -151,9 +151,9 @@ ProductInfo.prototype = {
         var isNext = el.target.className.indexOf('qvStrNext') != -1;
         var prodNum = 1;
         if (isNext) {
-            prodNum = this.settings.products[this.getCurrentProductNum() + 1] ? (this.getCurrentProductNum() + 1) : 1;
+            prodNum = this.settings.products[that.getCurrentProductNum() + 1] ? (that.getCurrentProductNum() + 1) : 1;
         } else {
-            prodNum = this.settings.products[this.getCurrentProductNum() - 1] ? (this.getCurrentProductNum() - 1) : Object.keys(this.settings.products).length;
+            prodNum = this.settings.products[that.getCurrentProductNum() - 1] ? (that.getCurrentProductNum() - 1) : Object.keys(that.settings.products).length;
         }
 
         new Ajax.Request(that.settings.products[prodNum].href, {
@@ -250,7 +250,10 @@ ProductInfo.prototype = {
 					});
 					
 						$j('#qZoomer').find('img').load(function () {
-							$j('#qZoomer a').imageZoom({speed:800});
+							if ($j('#qZoomer a').imageZoom) {
+								$j('#qZoomer a').imageZoom({speed:800});
+							}
+
 				})
 				
 			}
@@ -353,14 +356,12 @@ ProductInfo.prototype = {
 			start: this.getCurrentProductNum()
 		});
 
-		console.log(this.getCurrentProductNum());
-
 		var first = $j(".qbSlider .qbSliderIn");
 		$j('.qbSlider li').eq(that.getCurrentProductNum()).addClass('activeItemInView');
 
 		$j('.qbSlider li').click(function () {
 			that.showLoading();
-			var num = $j(this).attr('rel');
+			var num = parseInt($j(this).attr('rel'));
 			new Ajax.Request(that.settings.products[num].href, {
 				onSuccess: function(response) {
 					$('quick-window').remove();

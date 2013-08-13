@@ -4778,18 +4778,18 @@ a.ajax span.magnifier {
 .qvPrevNext {
     cursor: pointer;
     position: absolute;
-    top: 290px;
-    border: 1px solid red;
+    top: 286px;
     width: 20px;
     height: 30px;
 }
 
 .qvStrPrev {
-    left: 5px;
+    left: 12px;
+    top: 284px;
 }
 
 .qvStrNext {
-    right: 5px;
+    right: 13px;
 }
 
 #quick-window.quick-window-elem-arrows {
@@ -4815,14 +4815,14 @@ a.ajax span.magnifier {
     display: block;
 }
 
-.qArrows {
+.qArrows, .qvPrevNext {
     cursor: pointer;
     background: url(../images/arrow-quickview.png) no-repeat;
     width: 20px;
     height: 39px;
 }
 
-.qArrowsL {
+.qArrowsL, .qvStrPrev {
     background-position: 0 bottom;
 }
 
