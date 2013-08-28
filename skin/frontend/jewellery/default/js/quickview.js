@@ -49,7 +49,8 @@ ProductInfo.prototype = {
                 el.observe('click', function () {
                     that.setCurrentProductNum(index);
                 });
-                products[index] = {href: el.href, src: el.up().select('img')[0].src, title: el.up().select('img')[0].alt};
+		var src = el.up().select('img')[0].readAttribute('rel') ? el.up().select('img')[0].readAttribute('rel') : el.up().select('img')[0].src; 
+                products[index] = {href: el.href, src: src, title: el.up().select('img')[0].alt};
             })
             $$(x_image).each(function(el, index){
                 el.observe('mouseover', that.showButton);
@@ -153,7 +154,7 @@ ProductInfo.prototype = {
         if (isNext) {
             prodNum = this.settings.products[that.getCurrentProductNum() + 1] ? (that.getCurrentProductNum() + 1) : 1;
         } else {
-            prodNum = this.settings.products[that.getCurrentProductNum() - 1] ? (that.getCurrentProductNum() - 1) : Object.keys(that.settings.products).length;
+            prodNum = this.settings.products[that.getCurrentProductNum() - 1] ? (that.getCurrentProductNum() - 1) : Object.keys(that.settings.products).length - 1;
         }
 
         new Ajax.Request(that.settings.products[prodNum].href, {
@@ -320,8 +321,11 @@ ProductInfo.prototype = {
         pageTracker._trackPageview(href);
         that.clearContent();
         that.setContent(div);
+	if (that.getProductsLength() > 1) {
 		that.drawSlider();
 		that.initCarousel();
+	}
+		
     },
 
 	drawSlider: function () {
@@ -353,10 +357,17 @@ ProductInfo.prototype = {
 			btnNext: ".qbSlider .next",
 			btnPrev: ".qbSlider .prev",
 			visible: 6,
-			start: this.getCurrentProductNum()
+			circular : this.getProductsLength() > 6,
+			start: this.getProductsLength() > 6 ? this.getCurrentProductNum() : 0
 		});
 
+		if (that.getProductsLength() < 7) {
+			$j('.qbSlider .next').hide();
+			$j('.qbSlider .prev').hide();
+		}
+
 		var first = $j(".qbSlider .qbSliderIn");
+		$j('.qbSlider li').removeClass('activeItemInView');
 		$j('.qbSlider li').eq(that.getCurrentProductNum()).addClass('activeItemInView');
 
 		$j('.qbSlider li').click(function () {

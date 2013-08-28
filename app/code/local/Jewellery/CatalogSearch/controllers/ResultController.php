@@ -49,7 +49,7 @@ class Jewellery_CatalogSearch_ResultController extends Mage_CatalogSearch_Result
 		$paramName = $catalogSearch->getQueryParamName();
 		$nativeQueryText = $this->getRequest()->getParam($paramName);
 
-		$this->getRequest()->setParam($paramName, '' . $nativeQueryText . '');
+		//$this->getRequest()->setParam($paramName, '' . $nativeQueryText . '');
 		$query = $catalogSearch->getQuery();
 
         /* @var $query Mage_CatalogSearch_Model_Query */
@@ -95,7 +95,7 @@ class Jewellery_CatalogSearch_ResultController extends Mage_CatalogSearch_Result
 				}*/
 			/*}*/
 
-			$resultBlock->setCollection($resultsProduct);
+			//$resultBlock->setCollection($resultsProduct);
 
 			if ( sizeof($resultsProduct->getItems()) == 1 )
 			{

@@ -335,8 +335,8 @@ class Mage_CatalogSearch_Model_Mysql4_Fulltext extends Mage_Core_Model_Mysql4_Ab
 
             if ($searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_LIKE
                 || $searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_COMBINE) {
-                //$words = $stringHelper->splitWords($queryText, true, $query->getMaxQueryWords());
-				$words = array($queryText);
+                $words = $stringHelper->splitWords($queryText, true, $query->getMaxQueryWords());
+				//$words = array($queryText);
                 $likeI = 0;
                 foreach ($words as $word) {
                     $like[] = '`s`.`data_index` LIKE :likew' . $likeI;
@@ -350,7 +350,41 @@ class Mage_CatalogSearch_Model_Mysql4_Fulltext extends Mage_Core_Model_Mysql4_Ab
             if ($searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_FULLTEXT
                 || $searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_COMBINE) {
                 //$fulltextCond = 'MATCH (`s`.`data_index`) AGAINST (:query IN BOOLEAN MODE)';
-				$queryText = preg_quote($queryText);
+
+				$words = $stringHelper->splitWords($queryText, true, $query->getMaxQueryWords());
+				$likeI = 0;
+
+				foreach ($words as $queryText) {
+					$queryText = preg_quote($queryText);
+
+					$strCmp = array();
+					$charters = array('\\\|', " ");
+
+					$ch = $charters[0];
+					$strCmp[] = "'^{$queryText}{$ch}'";
+					$strCmp[] = "'^{$queryText}$'";
+					$strCmp[] = "'{$ch}{$queryText}$'";
+					$strCmp[] = "'{$ch}{$queryText}{$ch}'";
+
+					$ch = $charters[1];
+					$strCmp[] = "'^{$queryText}{$ch}'";
+					$strCmp[] = "'^{$queryText}$'";
+					$strCmp[] = "'{$ch}{$queryText}$'";
+					$strCmp[] = "'[{$ch}|{$charters[0]}]{$queryText}[{$ch}|{$charters[0]}]'";
+
+					// $fulltextCond = 'MATCH (`s`.`data_index`) AGAINST (:query IN BOOLEAN MODE)';
+					$like[] = ' (`s`.`data_index` RLIKE ' . \implode(' OR `s`.`data_index` RLIKE ', $strCmp) . ' )';
+
+					//$like[] = '`s`.`data_index` LIKE :likew' . $likeI;
+					//$bind[':likew' . $likeI] = $word;
+					//$likeI ++;
+				}
+
+				if ($like) {
+					$likeCond = '(' . join(' AND ', $like) . ')';
+				}
+
+			/*	$queryText = preg_quote($queryText);
 				$strCmp = array();
 				$strCmp[] = "'^{$queryText}\\\|'";
 				$strCmp[] = "'^{$queryText}$'";
@@ -360,8 +394,9 @@ class Mage_CatalogSearch_Model_Mysql4_Fulltext extends Mage_Core_Model_Mysql4_Ab
 				$strCmp[] = "'\\\|{$queryText}\\\|'";
 
                // $fulltextCond = 'MATCH (`s`.`data_index`) AGAINST (:query IN BOOLEAN MODE)';
-                $fulltextCond = ' `s`.`data_index` RLIKE ' . \implode(' OR `s`.`data_index` RLIKE ', $strCmp);
+                $fulltextCond = ' `s`.`data_index` RLIKE ' . \implode(' OR `s`.`data_index` RLIKE ', $strCmp);*/
             }
+
             if ($searchType == Mage_CatalogSearch_Model_Fulltext::SEARCH_TYPE_COMBINE && $likeCond) {
                 $separateCond = ' OR ';
             }

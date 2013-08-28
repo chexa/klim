@@ -76,7 +76,12 @@ function qOrder() {
                     var dataLength = jsonObject.length;
 
                     if (dataLength == 1) {
-                        self.chooseItem(self.data[0]);
+			if (self.addImmediately) {
+				self.submitFormByAjax(self.data[0]);
+			} else {
+				self.chooseItem(self.data[0]);
+			}
+                        
                     }
                     else if (dataLength > 0) {
                         self.showChooseForm();
@@ -251,9 +256,9 @@ function qOrder() {
                     self.hideGeneralLoader();
                     self.removeChooseList();
                     if (jsonObject.success == true) {
-                        var el = $j('#qty-cart' + jsonObject.id);
-                        if (jsonObject.id && el.size() > 0) {
-                            el.closest('tr').remove();
+                        var el = $j('input[name="cart[' + jsonObject.id + '][qty]"]');
+                        if (el.size() > 0) {
+				$j(el).closest('tr').remove();
                         }
 
                         $j('.cart-sum').html('');

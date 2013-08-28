@@ -4800,7 +4800,7 @@ a.ajax span.magnifier {
     position: relative;
 }
 
-.qbSlider li { width: 123px; cursor:pointer}
+.qbSlider li { width: 123px !important; cursor:pointer}
 .qbSlider li.activeItemInView, .qbSlider li:hover {
     border: 1px solid #c4c4c4 !important; width : 121px !important; height: 183px !important;
 }

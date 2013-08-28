@@ -43,6 +43,9 @@ class Jewellery_Jewellery_Block_Rewrite_CatalogProductList extends Mage_Catalog_
                 }
             }
             $this->_productCollection = $layer->getProductCollection();
+			$count = (int) Mage::getStoreConfig('catalog/frontend/grid_per_page')
+				? (int) Mage::getStoreConfig('catalog/frontend/grid_per_page') : 64;
+            $this->_productCollection->setPageSize($count);
 
             /**
              * Jewellery: add material filter to collection
